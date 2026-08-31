@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charSet="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Government of Jharkhand | Citizen Service Portal</title>
+    <meta name="description" content="Government of Jharkhand citizen service portal for reporting public issues, tracking progress, and connecting communities with solutions." />
+    <meta name="application-name" content="Government of Jharkhand" />
+    <meta name="keywords" content="government of jharkhand,public challenges,university collaboration,community needs,Jharkhand,SIH" />
+    <meta name="theme-color" content="#1d4d2c" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.svg" />
+    <style>
+      :root {
+        --saffron: #ff9933;
+        --saffron-deep: #e77700;
+        --saffron-soft: #fff1e0;
+        --green: #138808;
+        --green-deep: #0d6a13;
+        --green-soft: #eaf9ee;
+        --navy: #0d2f5d;
+        --navy-soft: #ebf3ff;
+        --teal: #0e6b5d;
+        --teal-soft: #eaf8f5;
+        --deep-green: #123d31;
+        --stone: #f5f1ea;
+        --panel: #ffffff;
+        --ink: #173b33;
+        --muted: #49625d;
+        --coral: #ff6b6b;
+        --coral-soft: #ffe5e5;
+        --purple: #7c3aed;
+        --purple-soft: #f3e8ff;
+        --orange: #f97316;
+        --cyan: #06b6d4;
+        --amber: #f59e0b;
+        --rose: #f43f5e;
+      }
+
+      body {
+        background: url('./jharkhand-map.svg') fixed center/cover no-repeat,
+                    #f5f5f1;
+        position: relative;
+        background-attachment: fixed;
+      }
+      
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+          radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.04) 0%, transparent 50%),
+          radial-gradient(circle at 80% 70%, rgba(249, 115, 22, 0.04) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .gov-topbar {
+        background: linear-gradient(90deg, #ff9933 0%, #ff9933 33.33%, #fff 33.33%, #fff 66.66%, #138808 66.66%, #138808 100%);
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+        height: 8px;
+      }
+      .gov-brand { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; overflow: hidden; background: url('./jharkhand-seal.svg') center/cover no-repeat; border: 1px solid rgba(19, 136, 8, 0.3); box-shadow: 0 0 8px rgba(19, 136, 8, 0.2); }
+      .gov-brand::before { content: ""; }
+      .gov-brand::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.2) 0%, transparent 70%); pointer-events: none; }
+      .brand strong { color: #0d3b2f; }
+      .brand small { color: #355c52; }
+      .hero-copy h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 4.3vw, 5rem);
+        line-height: 0.94;
+        letter-spacing: -0.065em;
+        color: #0d3b2f;
+      }
+      .wobble {
+        display: inline-block;
+        animation: none;
+      }
+      .highlight {
+        position: relative;
+        display: inline-block;
+        margin-left: 0.08em;
+        padding: 0.08em 0.22em 0.12em;
+        border-radius: 0.24em;
+        background: linear-gradient(90deg, rgba(255,153,51,0.38) 0%, rgba(255,255,255,0.96) 50%, rgba(19,136,8,0.38) 100%);
+        box-shadow: inset 0 0 0 1px rgba(15, 74, 61, 0.12);
+        color: #0d3b2f;
+        font-weight: 900;
+        letter-spacing: -0.045em;
+        border: 1px solid rgba(9, 64, 50, 0.08);
+        transform: translateY(-1px);
+      }
+      .highlight::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, rgba(255,153,51,0.18), rgba(255,255,255,0.70), rgba(19,136,8,0.18));
+        pointer-events: none;
+      }
+      .highlight {
+        backdrop-filter: blur(1px);
+      }
+      .gov-banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: #eef3ee;
+        color: #123d31;
+        border-bottom: 1px solid rgba(18, 61, 49, 0.12);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 800;
+        padding: 9px 14px;
+      }
+      .gov-banner .dot { width: 8px; height: 8px; border-radius: 50%; background: #138808; box-shadow: 0 0 0 4px rgba(19,136,8,0.12); }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: #f9faf8;
+        border-bottom: 1px solid rgba(18, 61, 49, 0.12);
+        backdrop-filter: blur(8px);
+        box-shadow: none;
+      }
+      .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 16px 0;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+        text-decoration: none;
+      }
+      .brand:hover,
+      .brand:focus,
+      .brand:visited {
+        text-decoration: none;
+      }
+      .brand strong,
+      .brand small {
+        display: block;
+        text-decoration: none;
+      }
+      .brand strong {
+        font-size: 1.05rem;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+      }
+      .brand small {
+        font-size: 0.72rem;
+        opacity: 0.8;
+        text-decoration: none;
+      }
+      .nav-links,
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+      }
+      .nav-links a,
+      .header-actions a {
+        color: #1e3d35;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.96rem;
+      }
+      .header-actions {
+        margin-left: auto;
+      }
+      .hero {
+        padding: 46px 0 30px;
+        background: linear-gradient(180deg, #faf9f6 0%, #f2f6f4 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: 5%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(249, 115, 22, 0.05) 1px, transparent 1px);
+        background-size: 30px 30px;
+        pointer-events: none;
+      }
+      
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 10%;
+        left: 5%;
+        width: 250px;
+        height: 250px;
+        background: linear-gradient(45deg, rgba(6, 182, 212, 0.04) 25%, transparent 25%, transparent 75%, rgba(6, 182, 212, 0.04) 75%, rgba(6, 182, 212, 0.04)), 
+                    linear-gradient(45deg, rgba(6, 182, 212, 0.04) 25%, transparent 25%, transparent 75%, rgba(6, 182, 212, 0.04) 75%, rgba(6, 182, 212, 0.04));
+        background-size: 40px 40px;
+        background-position: 0 0, 20px 20px;
+        pointer-events: none;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 28px;
+        align-items: center;
+      }
+      .hero-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #1d6a4d;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .hero-copy h1 {
+        margin: 0;
+      }
+      .hero-copy p {
+        margin: 0;
+        color: #365850;
+        font-size: 1.06rem;
+        line-height: 1.7;
+        max-width: 620px;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 2px;
+      }
+      .help-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #1d6a4d;
+        font-weight: 700;
+      }
+      .connection-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,248,246,0.94));
+        border: 1px solid rgba(18, 61, 49, 0.12);
+        border-radius: 24px;
+        padding: 22px;
+        box-shadow: 0 12px 30px rgba(17, 48, 41, 0.08);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .connection-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.03) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .connection-top {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .connection-top span {
+        color: #1a6c4e;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .connection-top strong {
+        font-size: clamp(1.4rem, 2.3vw, 2rem);
+        color: #123d31;
+      }
+      .path-line {
+        height: 2px;
+        background: linear-gradient(90deg, rgba(255,153,51,0.9), rgba(19,136,8,0.8));
+        margin-bottom: 18px;
+        border-radius: 999px;
+      }
+      .people-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .people-grid > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 18px 14px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(247,250,249,0.9));
+        border: 1px solid rgba(22, 70, 60, 0.08);
+        border-radius: 18px;
+        text-align: center;
+      }
+      .person-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        position: relative;
+        z-index: 1;
+      }
+      .person-icon.citizen { 
+        background: linear-gradient(135deg, rgba(255, 153, 51, 0.20), rgba(255, 107, 107, 0.10));
+        color: #c65400;
+        border: 2px solid rgba(255, 153, 51, 0.30);
+      }
+      .person-icon.student { 
+        background: linear-gradient(135deg, rgba(19, 136, 8, 0.20), rgba(34, 197, 94, 0.10));
+        color: #15803d;
+        border: 2px solid rgba(19, 136, 8, 0.30);
+      }
+      .person-icon.industry { 
+        background: linear-gradient(135deg, rgba(12, 81, 122, 0.20), rgba(6, 182, 212, 0.10));
+        color: #0c5282;
+        border: 2px solid rgba(12, 81, 122, 0.30);
+      }
+      .solution-pill {
+        margin-top: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(255,153,51,0.12), rgba(255,255,255,0.86), rgba(19,136,8,0.12));
+        color: #17402d;
+        border: 1px solid rgba(22, 70, 60, 0.08);
+        font-weight: 700;
+      }
+      .trust-strip {
+        background: linear-gradient(90deg, rgba(13,47,93,0.96) 0%, rgba(14,107,93,0.94) 25%, rgba(19,136,8,0.92) 50%, rgba(124, 58, 237, 0.88) 75%, rgba(249, 115, 22, 0.90) 100%);
+        border-top: 1px solid rgba(22, 70, 60, 0.06);
+        border-bottom: 1px solid rgba(22, 70, 60, 0.06);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .trust-strip::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+          repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 4px),
+          repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 4px);
+        pointer-events: none;
+      }
+      .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        padding: 20px 0;
+      }
+      .trust-grid > div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255,255,255,0.14);
+        backdrop-filter: blur(4px);
+      }
+      .trust-grid strong {
+        font-size: clamp(1.3rem, 2vw, 2rem);
+        color: #fff;
+      }
+      .trust-grid span {
+        color: rgba(255,255,255,0.82);
+        font-weight: 700;
+      }
+      .challenges-section,
+      .how-section,
+      .impact-banner {
+        padding: 50px 0;
+        position: relative;
+      }
+      
+      .challenges-section::before {
+        content: "";
+        position: absolute;
+        top: 5%;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none;
+      }
+      
+      .how-section::before {
+        content: "";
+        position: absolute;
+        bottom: 10%;
+        left: -100px;
+        width: 350px;
+        height: 350px;
+        background: 
+          linear-gradient(45deg, rgba(124, 58, 237, 0.05) 25%, transparent 25%, transparent 75%, rgba(124, 58, 237, 0.05) 75%, rgba(124, 58, 237, 0.05)),
+          linear-gradient(45deg, rgba(124, 58, 237, 0.05) 25%, transparent 25%, transparent 75%, rgba(124, 58, 237, 0.05) 75%, rgba(124, 58, 237, 0.05));
+        background-size: 50px 50px;
+        background-position: 0 0, 25px 25px;
+        pointer-events: none;
+      }
+      .section-heading,
+      .center-heading {
+        margin-bottom: 22px;
+      }
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 18px;
+      }
+      .section-heading h2,
+      .center-heading h2,
+      .impact-inner h2 {
+        margin: 8px 0 0;
+        color: #123d31;
+        font-size: clamp(2rem, 3vw, 3rem);
+        line-height: 1.1;
+      }
+      .section-kicker {
+        color: #1a6c4e;
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+      .live-data-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        background: #edf7f0;
+        border: 1px solid rgba(22, 70, 60, 0.08);
+        border-radius: 999px;
+        color: #17402d;
+        font-weight: 700;
+      }
+      .live-data-badge span {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #138808;
+        box-shadow: 0 0 0 4px rgba(19, 136, 8, 0.12);
+      }
+      .filter-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      .search-box {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff;
+        border: 1px solid rgba(22, 70, 60, 0.08);
+        border-radius: 14px;
+        padding: 0 14px;
+        min-height: 48px;
+      }
+      .search-box input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #1a3c32;
+        font: inherit;
+      }
+      .category-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .category-list button {
+        border: 2px solid rgba(22, 70, 60, 0.15);
+        background: linear-gradient(135deg, #f9f9f9 0%, #f4f8f5 100%);
+        color: #173c33;
+        padding: 9px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      
+      .category-list button:hover {
+        border-color: rgba(22, 70, 60, 0.25);
+        background: linear-gradient(135deg, #f0f8f5 0%, #e8f5f1 100%);
+        transform: translateY(-2px);
+      }
+      
+      .category-list button.active {
+        background: linear-gradient(135deg, #ff9933 0%, #23a251 100%);
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 8px 16px rgba(19, 120, 80, 0.2);
+      }
+      .challenge-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+      .challenge-card {
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(180deg, #ffffff 0%, #f9fdfb 100%);
+        border: 2px solid rgba(22, 70, 60, 0.10);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 18px 30px rgba(14, 41, 32, 0.08);
+        position: relative;
+        transition: all 0.3s ease;
+      }
+      
+      .challenge-card:nth-child(1) {
+        background: linear-gradient(135deg, #fffaf5 0%, #fff 50%, #fff6f0 100%);
+        border-color: rgba(255, 153, 51, 0.15);
+      }
+      
+      .challenge-card:nth-child(1)::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, rgba(255, 153, 51, 0.1) 1px, transparent 1px);
+        background-size: 15px 15px;
+        pointer-events: none;
+      }
+      
+      .challenge-card:nth-child(2) {
+        background: linear-gradient(135deg, #f5faf7 0%, #fff 50%, #f0f9f5 100%);
+        border-color: rgba(19, 136, 8, 0.15);
+      }
+      
+      .challenge-card:nth-child(2)::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(45deg, rgba(19, 136, 8, 0.08) 25%, transparent 25%, transparent 75%, rgba(19, 136, 8, 0.08) 75%, rgba(19, 136, 8, 0.08));
+        background-size: 20px 20px;
+        pointer-events: none;
+      }
+      
+      .challenge-card:nth-child(3) {
+        background: linear-gradient(135deg, #f0f8ff 0%, #fff 50%, #f5f0ff 100%);
+        border-color: rgba(124, 58, 237, 0.15);
+      }
+      
+      .challenge-card:nth-child(3)::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      
+      .challenge-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 48px rgba(14, 41, 32, 0.12);
+        border-color: rgba(22, 70, 60, 0.25);
+      }
+      .challenge-visual {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 18px;
+        min-height: 120px;
+      }
+      .challenge-visual.water { 
+        background: linear-gradient(135deg, rgba(90,197,255,0.25), rgba(36,140,205,0.12));
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .challenge-visual.water::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(90deg, transparent 0px, transparent 10px, rgba(6, 182, 212, 0.1) 10px, rgba(6, 182, 212, 0.1) 12px);
+        pointer-events: none;
+      }
+      
+      .challenge-visual.farm { 
+        background: linear-gradient(135deg, rgba(58,168,92,0.25), rgba(255,204,92,0.15));
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .challenge-visual.farm::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: 
+          linear-gradient(45deg, rgba(34, 197, 94, 0.08) 25%, transparent 25%, transparent 75%, rgba(34, 197, 94, 0.08) 75%, rgba(34, 197, 94, 0.08)),
+          linear-gradient(45deg, rgba(34, 197, 94, 0.08) 25%, transparent 25%, transparent 75%, rgba(34, 197, 94, 0.08) 75%, rgba(34, 197, 94, 0.08));
+        background-size: 25px 25px;
+        background-position: 0 0, 12px 12px;
+        pointer-events: none;
+      }
+      
+      .challenge-visual.learn { 
+        background: linear-gradient(135deg, rgba(93,104,255,0.15), rgba(255,153,51,0.15));
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .challenge-visual.learn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none;
+      }
+      .challenge-icon {
+        display: inline-flex;
+        width: 52px;
+        height: 52px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.75);
+        color: #123d31;
+      }
+      .priority {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(20, 61, 49, 0.07);
+        border-radius: 999px;
+        padding: 8px 10px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .priority span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #138808;
+      }
+      .category-tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.7);
+        border: 1px solid rgba(18,61,49,0.08);
+        font-weight: 700;
+      }
+      .challenge-body {
+        padding: 18px 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        flex: 1;
+      }
+      .location {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #345d57;
+        font-weight: 700;
+      }
+      .challenge-body h3 {
+        margin: 0;
+        color: #153f37;
+        font-size: clamp(1.4rem, 2vw, 2rem);
+      }
+      .challenge-body p {
+        margin: 0;
+        line-height: 1.7;
+        color: #49625d;
+      }
+      .challenge-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        color: #345d57;
+        font-weight: 600;
+      }
+      .challenge-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .card-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+      }
+      .support,
+      .open-challenge {
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+      .support {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #ff9933 0%, #138808 100%);
+        color: #fff;
+        padding: 11px 16px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(19, 120, 80, 0.15);
+      }
+      
+      .support:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(19, 120, 80, 0.25);
+      }
+      
+      .support::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+        animation: shimmer 3s infinite;
+        pointer-events: none;
+      }
+      
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+      .open-challenge {
+        width: 44px;
+        background: #eff6f2;
+        color: #173c33;
+      }
+      .center-heading {
+        text-align: center;
+      }
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 24px;
+      }
+      .steps-grid article {
+        background: linear-gradient(180deg, #ffffff 0%, #f7faf8 100%);
+        border: 2px solid rgba(22, 70, 60, 0.08);
+        border-radius: 22px;
+        padding: 22px 20px;
+        box-shadow: 0 12px 25px rgba(13, 41, 32, 0.06);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .steps-grid article:nth-child(1) { 
+        background: linear-gradient(135deg, #fff6ec 0%, #fff 50%, #ffeef5 100%);
+        border-color: rgba(255, 153, 51, 0.20);
+      }
+      
+      .steps-grid article:nth-child(1)::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(255, 153, 51, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      
+      .steps-grid article:nth-child(2) { 
+        background: linear-gradient(135deg, #eefaf3 0%, #fff 50%, #f0fff9 100%);
+        border-color: rgba(19, 136, 8, 0.20);
+      }
+      
+      .steps-grid article:nth-child(2)::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(19, 136, 8, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      
+      .steps-grid article:nth-child(3) { 
+        background: linear-gradient(135deg, #edf5ff 0%, #fff 50%, #f5ebff 100%);
+        border-color: rgba(124, 58, 237, 0.20);
+      }
+      
+      .steps-grid article:nth-child(3)::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      
+      .steps-grid article:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(13, 41, 32, 0.12);
+      }
+      .steps-grid article span {
+        display: inline-block;
+        color: #1b7d5d;
+        font-size: 0.84rem;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        margin-bottom: 12px;
+      }
+      .step-icon {
+        width: 54px;
+        height: 54px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        background: linear-gradient(135deg, rgba(255,153,51,0.15), rgba(19,136,8,0.15));
+        color: #173f38;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 1;
+        border: 2px solid rgba(22, 70, 60, 0.10);
+      }
+      
+      .steps-grid article:nth-child(1) .step-icon {
+        background: linear-gradient(135deg, rgba(255, 153, 51, 0.25), rgba(255, 107, 107, 0.15));
+        border-color: rgba(255, 153, 51, 0.25);
+      }
+      
+      .steps-grid article:nth-child(2) .step-icon {
+        background: linear-gradient(135deg, rgba(19, 136, 8, 0.25), rgba(34, 197, 94, 0.15));
+        border-color: rgba(19, 136, 8, 0.25);
+      }
+      
+      .steps-grid article:nth-child(3) .step-icon {
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.25), rgba(59, 130, 246, 0.15));
+        border-color: rgba(124, 58, 237, 0.25);
+      }
+      .steps-grid h3 {
+        margin: 0 0 10px;
+        color: #123d31;
+      }
+      .steps-grid p {
+        margin: 0;
+        color: #48625d;
+        line-height: 1.7;
+      }
+      .impact-banner {
+        background: linear-gradient(135deg, rgba(255,153,51,0.15) 0%, rgba(14,107,93,0.12) 25%, rgba(19,136,8,0.15) 50%, rgba(124, 58, 237, 0.10) 75%, rgba(249, 115, 22, 0.12) 100%);
+        border-top: 2px solid rgba(22, 70, 60, 0.08);
+        border-bottom: 2px solid rgba(22, 70, 60, 0.08);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .impact-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: 
+          radial-gradient(circle at 20% 50%, rgba(255, 153, 51, 0.03) 0%, transparent 50%),
+          radial-gradient(circle at 80% 50%, rgba(19, 136, 8, 0.03) 0%, transparent 50%);
+        pointer-events: none;
+      }
+      .impact-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+      .impact-inner span {
+        color: #1a6c4e;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .impact-inner p {
+        color: #49625d;
+        margin: 10px 0 0;
+        line-height: 1.7;
+        max-width: 620px;
+      }
+      footer {
+        background: linear-gradient(135deg, #f9faf8 0%, #edf7f3 50%, #f5f0ff 100%);
+        border-top: 2px solid rgba(22, 70, 60, 0.12);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      footer::before {
+        content: "";
+        position: absolute;
+        bottom: -100px;
+        right: -100px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
+        background-size: 25px 25px;
+        pointer-events: none;
+      }
+      
+      footer::after {
+        content: "";
+        position: absolute;
+        top: 10%;
+        left: -50px;
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, rgba(255, 153, 51, 0.04) 1px, transparent 1px);
+        background-size: 25px 25px;
+        pointer-events: none;
+      }
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px 0 26px;
+        flex-wrap: wrap;
+      }
+      .footer-inner p,
+      .footer-inner nav,
+      .footer-inner span {
+        color: #3b564f;
+      }
+      .footer-inner nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .footer-inner a {
+        color: #1f433d;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      @keyframes wobble {
+        0%, 100% { transform: rotate(0deg) translateY(0px); }
+        15% { transform: rotate(-2deg) translateY(-2px); }
+        30% { transform: rotate(2deg) translateY(1px); }
+        45% { transform: rotate(-1.5deg) translateY(-1px); }
+        60% { transform: rotate(1.5deg) translateY(1px); }
+        75% { transform: rotate(-1deg) translateY(-1px); }
+      }
+      .wobble {
+        display: inline-block;
+        animation: wobble 2.1s ease-in-out infinite;
+      }
+      .primary-cta, .secondary-cta, .report-top, .support, .button, .button-ghost {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      }
+      .primary-cta:hover, .secondary-cta:hover, .report-top:hover, .support:hover, .button:hover, .button-ghost:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(19,120,80,0.15);
+        filter: brightness(0.99);
+      }
+      .primary-cta {
+        background: linear-gradient(135deg, #0d3b2f 0%, #1d5e4a 100%);
+        border: 1px solid rgba(13, 59, 47, 0.18);
+        color: #fff;
+        font-weight: 800;
+        border-radius: 12px;
+        letter-spacing: 0.01em;
+        box-shadow: none;
+      }
+      .secondary-cta {
+        background: #ffffff;
+        border: 1px solid rgba(18, 61, 49, 0.12);
+        color: #123d31;
+        font-weight: 800;
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: none;
+      }
+      .secondary-cta:hover,
+      .secondary-cta:focus,
+      .secondary-cta:visited {
+        text-decoration: none;
+      }
+      .report-top {
+        background: linear-gradient(135deg, #0d3b2f 0%, #145a47 100%);
+        border: 1px solid rgba(13, 59, 47, 0.15);
+        color: #fff;
+        font-weight: 800;
+        border-radius: 12px;
+        box-shadow: 0 10px 18px rgba(13,59,47,0.12);
+      }
+      .language-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        border: 1px solid rgba(22, 70, 60, 0.12);
+        border-radius: 999px;
+        padding: 8px 12px;
+        color: #16463c;
+        cursor: pointer;
+      }
+      .language {
+        border: none;
+        background: transparent;
+        font-weight: 700;
+        color: #16463c;
+        cursor: pointer;
+        outline: none;
+        font: inherit;
+      }
+      .language-wrap svg { display: block; }
+      .report-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(8, 24, 18, 0.54);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 50;
+      }
+      .report-modal-backdrop.open { display: flex; }
+      .report-modal {
+        width: min(720px, 100%);
+        border-radius: 24px;
+        background: #fff;
+        border: 1px solid rgba(22, 70, 60, 0.12);
+        box-shadow: 0 26px 60px rgba(0, 0, 0, 0.18);
+        overflow: hidden;
+      }
+      .report-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        background: linear-gradient(180deg, #f5f9f6 0%, #edf5ee 100%);
+        border-bottom: 1px solid rgba(22, 70, 60, 0.08);
+        padding: 18px 22px;
+      }
+      .report-modal-header h3 {
+        margin: 0;
+        color: #0b3a2d;
+        font-size: 1.35rem;
+      }
+      .close-report {
+        border: none;
+        background: transparent;
+        color: #17402d;
+        font-size: 1.8rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .report-form {
+        padding: 22px;
+      }
+      .field {
+        margin-bottom: 18px;
+      }
+      .field label {
+        display: block;
+        margin-bottom: 8px;
+        color: #123b2f;
+        font-weight: 700;
+      }
+      .field textarea,
+      .field input {
+        width: 100%;
+        border: 1px solid rgba(22, 70, 60, 0.18);
+        border-radius: 14px;
+        padding: 12px 14px;
+        font: inherit;
+        color: #16372d;
+        background: #fff;
+      }
+      .field textarea {
+        min-height: 140px;
+        resize: vertical;
+      }
+      .location-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .location-btn {
+        flex-shrink: 0;
+        border: 1px solid rgba(22, 70, 60, 0.14);
+        background: #edf5f1;
+        color: #16372d;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .optional-note {
+        margin-top: -8px;
+        margin-bottom: 14px;
+        color: #4d625d;
+        font-size: 0.9rem;
+      }
+      .report-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 10px;
+      }
+      .ghost-button, .primary-submit {
+        border-radius: 999px;
+        border: none;
+        padding: 10px 18px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .ghost-button {
+        background: #eef4ee;
+        color: #183b2f;
+      }
+      .primary-submit {
+        background: linear-gradient(135deg, #ff9933 0%, #23a251 100%);
+        color: #fff;
+      }
+      .report-status {
+        display: none;
+        margin-top: 16px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: #edf9f0;
+        border: 1px solid rgba(26, 135, 61, 0.2);
+        color: #165133;
+        font-weight: 600;
+      }
+      .report-status.visible { display: block; }
+      .photo-preview-wrap {
+        display: none;
+        margin-top: 12px;
+        border: 1px solid rgba(22, 70, 60, 0.12);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #f7faf7;
+      }
+      .photo-preview-wrap.visible { display: block; }
+      .photo-preview-wrap img {
+        display: block;
+        width: 100%;
+        max-height: 220px;
+        object-fit: cover;
+      }
+      .menu-button {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        border: 1px solid rgba(22, 70, 60, 0.12);
+        background: rgba(255, 255, 255, 0.8);
+        color: #16463c;
+        cursor: pointer;
+      }
+      @media (max-width: 780px) {
+        .header-inner {
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 0;
+        }
+        .nav-links {
+          display: none;
+          width: 100%;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 12px 0 4px;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .header-actions {
+          margin-left: auto;
+        }
+        .menu-button {
+          display: inline-flex;
+        }
+        .hero-grid,
+        .impact-inner,
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+        .people-grid,
+        .challenge-grid,
+        .steps-grid,
+        .trust-grid {
+          grid-template-columns: 1fr;
+        }
+        .report-modal {
+          border-radius: 20px;
+        }
+      }
+      @media (max-width: 520px) {
+        .gov-banner {
+          letter-spacing: 0.08em;
+          font-size: 0.68rem;
+        }
+        .hero-copy h1 {
+          font-size: clamp(2.2rem, 13vw, 3.1rem);
+        }
+        .hero-actions,
+        .report-actions,
+        .card-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .hero-actions a,
+        .hero-actions button,
+        .report-actions button,
+        .support,
+        .open-challenge {
+          width: 100%;
+          justify-content: center;
+        }
+        .section-heading,
+        .filter-bar,
+        .challenge-meta,
+        .footer-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .filter-bar {
+          gap: 12px;
+        }
+        .category-list {
+          width: 100%;
+          overflow-x: auto;
+          padding-bottom: 4px;
+        }
+        .challenge-card,
+        .connection-card,
+        .report-modal {
+          border-radius: 18px;
+        }
+      }
+    </style>
+</head>
+
+<body>
+    <div class="gov-topbar" aria-hidden="true"></div>
+    <div class="gov-banner" data-i18n="banner.govText"><span class="dot"></span> Government of Jharkhand | Citizen service portal</div>
+    <div hidden="">
+        <!--$-->
+        <!--/$-->
+    </div>
+    <main>
+        <header class="site-header">
+                <div class="shell header-inner"><a class="brand" href="/" aria-label="Government of Jharkhand home"><span class="brand-mark gov-brand" aria-hidden="true"></span><span><strong data-i18n="brand.govName">Government of Jharkhand</strong><small data-i18n="brand.govSub">Citizen service portal</small></span></a>
+                <nav
+                    class="nav-links" aria-label="Main navigation"><a href="#challenges" data-i18n="nav.challenges">Challenges</a><a href="#how" data-i18n="nav.how">How it works</a><a href="/track" data-i18n="nav.activity">My activity</a><a href="/help" data-i18n="nav.help">Help</a><label class="language-wrap" aria-label="Select language"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages" aria-hidden="true"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg><select id="langToggle" class="language" aria-label="Select language"><option value="en">English</option><option value="hi">हिंदी</option><option value="bn">বাংলা</option><option value="ta">தமிழ்</option><option value="te">తెలుగు</option><option value="mr">मराठी</option><option value="gu">ગુજરાતી</option><option value="kn">ಕನ್ನಡ</option><option value="ml">മലയാളം</option><option value="pa">ਪੰਜਾਬੀ</option><option value="ur">اردو</option><option value="as">অসমীয়া</option></select></label></nav>
+                    <div
+                        class="header-actions"><a href="/login" data-slot="button" data-variant="ghost" data-size="default" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 h-9 px-4 py-2 has-[&gt;svg]:px-3 login-button" data-i18n="nav.login">Login</a><a href="/admin" data-slot="button" data-variant="ghost" data-size="default" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 h-9 px-4 py-2 has-[&gt;svg]:px-3 login-button" data-i18n="nav.admin">Admin</a>
+                        <button
+                            data-slot="button" data-variant="default" data-size="default" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 report-top" data-open-report data-i18n="button.report">Report a problem</button><button class="menu-button" aria-label="Toggle menu" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg></button></div>
+            </div>
+        </header>
+        <section id="main-content" class="hero">
+            <div class="shell hero-grid">
+                <div class="hero-copy">
+                    <div class="eyebrow" data-i18n="hero.eyebrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path><path d="m9 12 2 2 4-4"></path></svg>                        Verified community challenges</div>
+                    <h1><span class="wobble" data-i18n="hero.problem">Your problem.</span> <span class="highlight" data-i18n="hero.strength">India strength.</span></h1>
+                    <p data-i18n="hero.desc">Turn real community problems into practical solutions by connecting citizens with students, experts, and industry.</p>
+                    <div class="hero-actions"><button data-slot="button" data-variant="default" data-size="lg" class="inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 h-10 rounded-md px-6 has-[&gt;svg]:px-4 primary-cta" data-open-report data-i18n="button.tell">Tell us your problem</button>
+                        <a
+                            href="#challenges" data-slot="button" data-variant="outline" data-size="lg" class="inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 h-10 rounded-md px-6 has-[&gt;svg]:px-4 secondary-cta" data-i18n="button.explore">Explore challenges <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"
+                                aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+                    </div>
+                    <p class="help-note" data-i18n="hero.note"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>                        Simple language · Takes less than 3 minutes</p>
+                </div>
+                <div class="connection-card" aria-label="How people collaborate">
+                    <div class="connection-top"><span data-i18n="connection.mission">ONE SHARED MISSION</span><strong data-i18n="connection.headline">From local voice to lasting change</strong></div>
+                    <div class="path-line"></div>
+                    <div class="people-grid">
+                        <div><span class="person-icon citizen"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg></span><strong data-i18n="connection.citizens">Citizens</strong><small data-i18n="connection.citizensSub">Share needs</small></div>
+                        <div><span class="person-icon student"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg></span><strong data-i18n="connection.universities">Universities</strong><small data-i18n="connection.universitiesSub">Build solutions</small></div>
+                        <div><span class="person-icon industry"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2" aria-hidden="true"><path d="M10 12h4"></path><path d="M10 8h4"></path><path d="M14 21v-3a2 2 0 0 0-4 0v3"></path><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path></svg></span><strong data-i18n="connection.industry">Industry</strong><small data-i18n="connection.industrySub">Support scale</small></div>
+                    </div>
+                    <div class="solution-pill" data-i18n="connection.solution"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>                        One measurable solution</div>
+                </div>
+            </div>
+        </section>
+        <section class="trust-strip" aria-label="Live platform statistics">
+            <div class="shell trust-grid">
+                <div><strong>—</strong><span data-i18n="metrics.verified">verified challenges</span></div>
+                <div><strong>—</strong><span data-i18n="metrics.teams">approved teams</span></div>
+                <div><strong>—</strong><span data-i18n="metrics.support">community supports</span></div>
+                <div><strong>24/7</strong><span data-i18n="metrics.reporting">problem reporting</span></div>
+            </div>
+        </section>
+        <section id="challenges" class="challenges-section">
+            <div class="shell">
+                <div class="section-heading">
+                    <div><span class="section-kicker" data-i18n="section.needs.kicker">NEEDS AROUND US</span>
+                        <h2 data-i18n="section.needs.heading">Where your help can make a difference</h2>
+                    </div><span class="live-data-badge" data-i18n="section.needs.badge"><span></span>
+                    <!-- -->Showing examples until first approval</span>
+                </div>
+                <div class="filter-bar"><label class="search-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg><span class="sr-only" data-i18n="search.label">Search challenges</span><input data-slot="input" class="h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40" data-i18n-placeholder="search.placeholder" placeholder="Search by need or location…" value=""/></label>
+                    <div
+                        class="category-list" aria-label="Challenge categories"><button type="button" class="active" data-category="all" aria-pressed="true" data-i18n="category.all">All</button><button type="button" class="" data-category="water" aria-pressed="false" data-i18n="category.water">Water</button><button type="button" class="" data-category="agriculture" aria-pressed="false" data-i18n="category.agriculture">Agriculture</button><button type="button" class="" data-category="education" aria-pressed="false" data-i18n="category.education">Education</button><button type="button" class="" data-category="environment" aria-pressed="false" data-i18n="category.environment">Environment</button></div>
+            </div>
+            <div class="challenge-grid">
+                <article class="challenge-card" data-category="water">
+                    <div class="challenge-visual water"><span class="challenge-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-waves-horizontal" aria-hidden="true"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0"></path><path d="M2 19q2.5 2 5 0t5 0 5 0 5 0"></path><path d="M2 5q2.5 2 5 0t5 0 5 0 5 0"></path></svg></span>
+                        <span
+                            class="priority"><span></span>
+                            <!-- --><span data-i18n="challenge.example">Example challenge</span></span><span class="category-tag" data-i18n="category.water">Water</span></div>
+                    <div class="challenge-body">
+                        <div class="location"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <!-- --><span data-i18n="challenge.water.location">Bero, Ranchi</span></div>
+                        <h3 data-i18n="challenge.water.title">Clean drinking water needed in Bero village</h3>
+                        <p data-i18n="challenge.water.desc">Three hand pumps serve over 600 people, but two stop working every summer.</p>
+                        <div class="challenge-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg> <!-- -->3<!-- --> <span data-i18n="challenge.water.teams">teams working</span></span><span>148<!-- --> <span data-i18n="challenge.supports">support this</span></span></div>
+                        <div
+                            class="card-actions"><button class="support" data-i18n="challenge.support">I support this</button>
+                            <button
+                                class="open-challenge" disabled="" aria-label="Example challenge"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+                    </div>
+            </div>
+            </article>
+            <article class="challenge-card" data-category="agriculture">
+                <div class="challenge-visual farm"><span class="challenge-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sprout" aria-hidden="true"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"></path><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"></path><path d="M5 21h14"></path></svg></span>
+                    <span
+                        class="priority"><span></span>
+                        <!-- --><span data-i18n="challenge.example">Example challenge</span></span><span class="category-tag" data-i18n="category.agriculture">Agriculture</span></div>
+                <div class="challenge-body">
+                    <div class="location"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <!-- --><span data-i18n="challenge.agri.location">Gumla, Jharkhand</span></div>
+                    <h3 data-i18n="challenge.agri.title">Farmers need low-cost crop storage</h3>
+                    <p data-i18n="challenge.agri.desc">Vegetables spoil before reaching the market. The community seeks a simple solar solution.</p>
+                    <div class="challenge-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg> <!-- -->2<!-- --> <span data-i18n="challenge.agri.teams">teams working</span></span><span>96<!-- --> <span data-i18n="challenge.supports">support this</span></span></div>
+                    <div
+                        class="card-actions"><button class="support" data-i18n="challenge.support"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-heart" aria-hidden="true"><path d="M11 14h2a2 2 0 0 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"></path><path d="m14.45 13.39 5.05-4.694C20.196 8 21 6.85 21 5.75a2.75 2.75 0 0 0-4.797-1.837.276.276 0 0 1-.406 0A2.75 2.75 0 0 0 11 5.75c0 1.2.802 2.248 1.5 2.946L16 11.95"></path><path d="m2 15 6 6"></path><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a1 1 0 0 0-2.75-2.91"></path></svg> <!-- -->I support this</button>
+                        <button
+                            class="open-challenge" disabled="" aria-label="Example challenge"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+                </div>
+                </div>
+            </article>
+            <article class="challenge-card" data-category="education">
+                <div class="challenge-visual learn"><span class="challenge-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open" aria-hidden="true"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg></span>
+                    <span
+                        class="priority"><span></span>
+                        <!-- --><span data-i18n="challenge.example">Example challenge</span></span><span class="category-tag" data-i18n="category.education">Education</span></div>
+                <div class="challenge-body">
+                    <div class="location"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <!-- --><span data-i18n="challenge.edu.location">Dumka, Jharkhand</span></div>
+                    <h3 data-i18n="challenge.edu.title">Learning support for village students</h3>
+                    <p data-i18n="challenge.edu.desc">Students need reusable, low-data lessons for science and mathematics after school.</p>
+                    <div class="challenge-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg> <!-- -->4<!-- --> <span data-i18n="challenge.edu.teams">teams working</span></span><span>72<!-- --> <span data-i18n="challenge.supports">support this</span></span></div>
+                    <div
+                        class="card-actions"><button class="support" data-i18n="challenge.support"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-heart" aria-hidden="true"><path d="M11 14h2a2 2 0 0 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"></path><path d="m14.45 13.39 5.05-4.694C20.196 8 21 6.85 21 5.75a2.75 2.75 0 0 0-4.797-1.837.276.276 0 0 1-.406 0A2.75 2.75 0 0 0 11 5.75c0 1.2.802 2.248 1.5 2.946L16 11.95"></path><path d="m2 15 6 6"></path><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a1 1 0 0 0-2.75-2.91"></path></svg> <!-- -->I support this</button>
+                        <button
+                            class="open-challenge" disabled="" aria-label="Example challenge"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+                </div>
+                </div>
+            </article>
+            <article class="challenge-card" data-category="environment">
+                <div class="challenge-visual water"><span class="challenge-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf" aria-hidden="true"><path d="M11 20c4.418 0 8-3.582 8-8V4H11C6.582 4 3 7.582 3 12s3.582 8 8 8Z"></path><path d="M3 12c2.5 0 5-2.5 5-5"></path></svg></span>
+                    <span class="priority"><span></span><span data-i18n="challenge.example">Example challenge</span></span><span class="category-tag" data-i18n="category.environment">Environment</span></div>
+                <div class="challenge-body">
+                    <div class="location"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <!-- --><span data-i18n="challenge.env.location">Latehar, Jharkhand</span></div>
+                    <h3 data-i18n="challenge.env.title">Community forest cleanup and waste segregation</h3>
+                    <p data-i18n="challenge.env.desc">Plastic waste is clogging drains and damaging local tree cover. The village needs a practical cleanup plan.</p>
+                    <div class="challenge-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg> <!-- -->3<!-- --> <span data-i18n="challenge.env.teams">teams working</span></span><span>118<!-- --> <span data-i18n="challenge.supports">support this</span></span></div>
+                    <div class="card-actions"><button class="support" data-i18n="challenge.support"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-heart" aria-hidden="true"><path d="M11 14h2a2 2 0 0 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"></path><path d="m14.45 13.39 5.05-4.694C20.196 8 21 6.85 21 5.75a2.75 2.75 0 0 0-4.797-1.837.276.276 0 0 1-.406 0A2.75 2.75 0 0 0 11 5.75c0 1.2.802 2.248 1.5 2.946L16 11.95"></path><path d="m2 15 6 6"></path><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a1 1 0 0 0-2.75-2.91"></path></svg> <!-- -->I support this</button><button class="open-challenge" disabled="" aria-label="Environment challenge"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></div>
+                </div>
+            </article>
+            </div>
+            </div>
+        </section>
+        <section id="how" class="how-section">
+            <div class="shell">
+                <div class="center-heading"><span class="section-kicker" data-i18n="how.kicker">SIMPLE BY DESIGN</span>
+                    <h2 data-i18n="how.heading">One problem. Three steps. Real progress.</h2>
+                </div>
+                <div class="steps-grid">
+                    <article><span>01</span>
+                        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic" aria-hidden="true"><path d="M12 19v3"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><rect x="9" y="2" width="6" height="13" rx="3"></rect></svg></div>
+                        <h3 data-i18n="step.one.title">Share the problem</h3>
+                        <p data-i18n="step.one.desc">Speak or type in simple language. Your report is saved privately for review.</p>
+                    </article>
+                    <article><span>02</span>
+                        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg></div>
+                        <h3 data-i18n="step.two.title">Admin verifies it</h3>
+                        <p data-i18n="step.two.desc">Only genuine, useful challenges are approved and shown publicly.</p>
+                    </article>
+                    <article><span>03</span>
+                        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2"
+                                aria-hidden="true"><path d="M10 12h4"></path><path d="M10 8h4"></path><path d="M14 21v-3a2 2 0 0 0-4 0v3"></path><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path></svg></div>
+                        <h3 data-i18n="step.three.title">Build and scale</h3>
+                        <p data-i18n="step.three.desc">Partners mentor, provide resources, test solutions, and track impact.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="impact" class="impact-banner">
+            <div class="shell impact-inner">
+                <div><span data-i18n="impact.kicker">BUILT FOR EVERY VOICE</span>
+                    <h2 data-i18n="impact.heading">A stronger Jharkhand starts with listening.</h2>
+                    <p data-i18n="impact.desc">No technical knowledge needed. Tell us what your community needs and we’ll help structure it.</p>
+                </div><button data-open-report data-slot="button" data-variant="default" data-size="lg" class="inline-flex shrink-0 items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 bg-primary text-primary-foreground hover:bg-primary/90 h-10 rounded-md px-6 has-[&gt;svg]:px-4" data-i18n="impact.button">Report your first problem <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button></div>
+        </section>
+        <div class="report-modal-backdrop" id="reportModal" aria-hidden="true">
+            <div class="report-modal" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+                <div class="report-modal-header">
+                    <h3 id="reportModalTitle" data-i18n="report.modalTitle">Tell us your problem</h3>
+                    <button type="button" class="close-report" data-close-report aria-label="Close report form">×</button>
+                </div>
+                <form class="report-form" id="reportForm">
+                    <div class="field">
+                        <label for="problemText" data-i18n="report.problemLabel">What is the problem?</label>
+                        <textarea id="problemText" name="problemText" data-i18n-placeholder="report.problemPlaceholder" placeholder="Describe the issue clearly, including where it is happening and who it affects."></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label for="problemLocation" data-i18n="report.locationLabel">Location (optional)</label>
+                        <div class="location-actions">
+                            <input id="problemLocation" name="problemLocation" type="text" data-i18n-placeholder="report.locationPlaceholder" placeholder="Village, ward, landmark, or nearby area" />
+                            <button type="button" class="location-btn" id="useLiveLocationBtn">Use my live location</button>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="problemPhoto" data-i18n="report.photoLabel">Photo of the problem (optional)</label>
+                        <input id="problemPhoto" name="problemPhoto" type="file" accept="image/*" />
+                        <div class="photo-preview-wrap" id="photoPreviewWrap">
+                            <img id="photoPreview" alt="Selected upload preview" />
+                        </div>
+                    </div>
+
+                    <p class="optional-note" data-i18n="report.optionalNote">Optional: add a location or photo if it helps explain the problem safely.</p>
+
+                    <div class="report-actions">
+                        <button type="button" class="ghost-button" data-close-report data-i18n="report.cancel">Cancel</button>
+                        <button type="submit" class="primary-submit" data-i18n="report.submit">Submit for review</button>
+                    </div>
+
+                    <div class="report-status" id="reportStatus"></div>
+                </form>
+            </div>
+        </div>
+        <footer>
+            <div class="shell footer-inner">
+                <div class="brand footer-brand"><span class="brand-mark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-heart" aria-hidden="true"><path d="M11 14h2a2 2 0 0 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"></path><path d="m14.45 13.39 5.05-4.694C20.196 8 21 6.85 21 5.75a2.75 2.75 0 0 0-4.797-1.837.276.276 0 0 1-.406 0A2.75 2.75 0 0 0 11 5.75c0 1.2.802 2.248 1.5 2.946L16 11.95"></path><path d="m2 15 6 6"></path><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a1 1 0 0 0-2.75-2.91"></path></svg></span><span><strong data-i18n="footer.brandName">Samarthya</strong><small data-i18n="footer.brandTag">Ideas into Impact</small></span></div>
+                <p data-i18n="footer.description">A collaborative platform for citizens, universities, industry, and government.</p>
+                <nav aria-label="Footer navigation"><a href="/track" data-i18n="footer.activity">My activity</a><a href="/help" data-i18n="footer.help">Help</a><a href="/privacy" data-i18n="footer.privacy">Privacy</a><a href="/admin" data-i18n="footer.admin">Admin</a></nav><span>SIH 2026 · Smart Education</span></div>
+        </footer>
+    </main>
+    <!--$-->
+    <!--/$-->
+    <script>
+      const translations = {
+        en: {
+          'brand.govName': 'Government of Jharkhand',
+          'brand.govSub': 'Citizen service portal',
+          'nav.login': 'Login',
+          'nav.challenges': 'Challenges',
+          'nav.how': 'How it works',
+          'nav.activity': 'My activity',
+          'nav.help': 'Help',
+          'nav.admin': 'Admin',
+          'button.report': 'Report a problem',
+          'button.tell': 'Tell us your problem',
+          'button.explore': 'Explore challenges',
+          'hero.eyebrow': 'Verified community challenges',
+          'hero.problem': 'Your problem.',
+          'hero.strength': 'India strength.',
+          'hero.desc': 'Turn real community problems into practical solutions by connecting citizens with students, experts, and industry.',
+          'hero.note': 'Simple language · Takes less than 3 minutes',
+          'connection.mission': 'ONE SHARED MISSION',
+          'connection.headline': 'From local voice to lasting change',
+          'connection.citizens': 'Citizens',
+          'connection.citizensSub': 'Share needs',
+          'connection.universities': 'Universities',
+          'connection.universitiesSub': 'Build solutions',
+          'connection.industry': 'Industry',
+          'connection.industrySub': 'Support scale',
+          'connection.solution': 'One measurable solution',
+          'metrics.verified': 'verified challenges',
+          'metrics.teams': 'approved teams',
+          'metrics.support': 'community supports',
+          'metrics.reporting': 'problem reporting',
+          'section.needs.kicker': 'NEEDS AROUND US',
+          'section.needs.heading': 'Where your help can make a difference',
+          'section.needs.badge': 'Showing examples until first approval',
+          'search.label': 'Search challenges',
+          'search.placeholder': 'Search by need or location…',
+          'category.all': 'All',
+          'category.water': 'Water',
+          'category.agriculture': 'Agriculture',
+          'category.education': 'Education',
+          'category.environment': 'Environment',
+          'challenge.example': 'Example challenge',
+          'challenge.support': 'I support this',
+          'challenge.supports': 'support this',
+          'challenge.water.location': 'Bero, Ranchi',
+          'challenge.water.title': 'Clean drinking water needed in Bero village',
+          'challenge.water.desc': 'Three hand pumps serve over 600 people, but two stop working every summer.',
+          'challenge.water.teams': 'teams working',
+          'challenge.agri.location': 'Gumla, Jharkhand',
+          'challenge.agri.title': 'Farmers need low-cost crop storage',
+          'challenge.agri.desc': 'Vegetables spoil before reaching the market. The community seeks a simple solar solution.',
+          'challenge.agri.teams': 'teams working',
+          'challenge.edu.location': 'Dumka, Jharkhand',
+          'challenge.edu.title': 'Learning support for village students',
+          'challenge.edu.desc': 'Students need reusable, low-data lessons for science and mathematics after school.',
+          'challenge.edu.teams': 'teams working',
+          'challenge.env.location': 'Latehar, Jharkhand',
+          'challenge.env.title': 'Community forest cleanup and waste segregation',
+          'challenge.env.desc': 'Plastic waste is clogging drains and damaging local tree cover. The village needs a practical cleanup plan.',
+          'challenge.env.teams': 'teams working',
+          'how.kicker': 'SIMPLE BY DESIGN',
+          'how.heading': 'One problem. Three steps. Real progress.',
+          'step.one.title': 'Share the problem',
+          'step.one.desc': 'Speak or type in simple language. Your report is saved privately for review.',
+          'step.two.title': 'Admin verifies it',
+          'step.two.desc': 'Only genuine, useful challenges are approved and shown publicly.',
+          'step.three.title': 'Build and scale',
+          'step.three.desc': 'Partners mentor, provide resources, test solutions, and track impact.',
+          'impact.kicker': 'BUILT FOR EVERY VOICE',
+          'impact.heading': 'A stronger Jharkhand starts with listening.',
+          'impact.desc': 'No technical knowledge needed. Tell us what your community needs and we’ll help structure it.',
+          'impact.button': 'Report your first problem',
+          'banner.title': 'Public service portal for citizen problem solving',
+          'track.title': 'Track your submissions',
+          'help.title': 'How to use this portal',
+          'privacy.title': 'Your safety comes before visibility.',
+          'admin.title': 'Administrator sign in',
+          'report.modalTitle': 'Tell us your problem',
+          'report.problemLabel': 'What is the problem?',
+          'report.problemPlaceholder': 'Describe the issue clearly, including where it is happening and who it affects.',
+          'report.locationLabel': 'Location (optional)',
+          'report.locationPlaceholder': 'Village, ward, landmark, or nearby area',
+          'report.photoLabel': 'Photo of the problem (optional)',
+          'report.optionalNote': 'Optional: add a location or photo if it helps explain the problem safely.',
+          'report.cancel': 'Cancel',
+          'report.submit': 'Submit for review',
+          'footer.brandName': 'Government of Jharkhand',
+          'footer.brandTag': 'Citizen service portal',
+          'footer.description': 'A collaborative platform for citizens, universities, industry, and government.',
+          'footer.activity': 'My activity',
+          'footer.help': 'Help',
+          'footer.privacy': 'Privacy',
+          'footer.admin': 'Admin'
+        },
+        hi: {
+          'brand.govName': 'झारखंड सरकार',
+          'brand.govSub': 'नागरिक सेवा पोर्टल',
+          'nav.login': 'लॉग इन',
+          'nav.challenges': 'चुनौतियाँ',
+          'nav.how': 'यह कैसे काम करता है',
+          'nav.activity': 'मेरी गतिविधि',
+          'nav.help': 'सहायता',
+          'nav.admin': 'प्रशासन',
+          'button.report': 'समस्या रिपोर्ट करें',
+          'button.tell': 'अपनी समस्या बताएं',
+          'button.explore': 'चुनौतियाँ देखें',
+          'hero.eyebrow': 'सत्यापित सामुदायिक चुनौतियाँ',
+          'hero.problem': 'आपकी समस्या.',
+          'hero.strength': 'भारत की ताकत.',
+          'hero.desc': 'वास्तविक सामुदायिक समस्याओं को छात्रों, विशेषज्ञों और उद्योग के साथ जोड़कर व्यावहारिक समाधान बनाएं।',
+          'hero.note': 'सरल भाषा · 3 मिनट से कम समय',
+          'connection.mission': 'एक साझा उद्देश्य',
+          'connection.headline': 'स्थानीय आवाज़ से स्थायी बदलाव तक',
+          'connection.citizens': 'नागरिक',
+          'connection.citizensSub': 'आवश्यकता साझा करें',
+          'connection.universities': 'विश्वविद्यालय',
+          'connection.universitiesSub': 'समाधान बनाएं',
+          'connection.industry': 'उद्योग',
+          'connection.industrySub': 'मापनीय समर्थन',
+          'connection.solution': 'एक मापने योग्य समाधान',
+          'metrics.verified': 'सत्यापित चुनौतियाँ',
+          'metrics.teams': 'स्वीकृत टीमें',
+          'metrics.support': 'सामुदायिक सहयोग',
+          'metrics.reporting': 'समस्या रिपोर्टिंग',
+          'section.needs.kicker': 'हमारे आसपास की ज़रूरतें',
+          'section.needs.heading': 'आपकी मदद से बदलाव संभव है',
+          'section.needs.badge': 'पहली स्वीकृति तक उदाहरण दिखाए जा रहे हैं',
+          'search.label': 'चुनौतियाँ खोजें',
+          'search.placeholder': 'आवश्यकता या स्थान से खोजें…',
+          'category.all': 'सभी',
+          'category.water': 'पानी',
+          'category.agriculture': 'कृषि',
+          'category.education': 'शिक्षा',
+          'category.environment': 'पर्यावरण',
+          'challenge.example': 'उदाहरण चुनौती',
+          'challenge.support': 'मैं इसका समर्थन करता हूँ',
+          'challenge.supports': 'इसका समर्थन करें',
+          'challenge.water.location': 'बेरो, राँची',
+          'challenge.water.title': 'बेरो गाँव में स्वच्छ पेयजल की आवश्यकता है',
+          'challenge.water.desc': 'तीन हैण्डपंप 600 से अधिक लोगों की सेवा करते हैं, लेकिन हर गर्मी में दो काम करना बंद कर देते हैं।',
+          'challenge.water.teams': 'टीमें काम कर रही हैं',
+          'challenge.agri.location': 'गुमला, झारखंड',
+          'challenge.agri.title': 'किसानों को कम लागत वाले फसल भंडारण की आवश्यकता है',
+          'challenge.agri.desc': 'सब्जियाँ बाजार तक पहुँचने से पहले खराब हो जाती हैं। समुदाय को सरल सौर समाधान की आवश्यकता है।',
+          'challenge.agri.teams': 'टीमें काम कर रही हैं',
+          'challenge.edu.location': 'दुमका, झारखंड',
+          'challenge.edu.title': 'गाँव के छात्रों के लिए सीखने का समर्थन',
+          'challenge.edu.desc': 'विद्यार्थियों को स्कूल के बाद विज्ञान और गणित के लिए पुन: उपयोग योग्य, कम डेटा वाली शिक्षा की आवश्यकता है।',
+          'challenge.edu.teams': 'टीमें काम कर रही हैं',
+          'challenge.env.location': 'लातेहार, झारखंड',
+          'challenge.env.title': 'सामुदायिक जंगल सफाई और अपशिष्ट पृथक्करण',
+          'challenge.env.desc': 'प्लास्टिक कचरा नालियों को अवरुद्ध कर रहा है और स्थानीय वृक्षावरण को नुकसान पहुँच रहा है। गाँव को व्यावहारिक सफाई योजना की आवश्यकता है।',
+          'challenge.env.teams': 'टीमें काम कर रही हैं',
+          'how.kicker': 'साधारण डिजाइन',
+          'how.heading': 'एक समस्या। तीन कदम। वास्तविक प्रगति।',
+          'step.one.title': 'समस्या साझा करें',
+          'step.one.desc': 'सरल भाषा में बोलें या लिखें। आपकी रिपोर्ट समीक्षा के लिए निजी रूप से सुरक्षित रखी जाती है।',
+          'step.two.title': 'प्रशासन सत्यापित करता है',
+          'step.two.desc': 'केवल वास्तविक और उपयोगी चुनौतियाँ ही सत्यापित होकर सार्वजनिक की जाती हैं।',
+          'step.three.title': 'बनाएं और बढ़ाएं',
+          'step.three.desc': 'भागीदार मार्गदर्शन, संसाधन, समाधान परीक्षण और प्रभाव ट्रैक करते हैं।',
+          'impact.kicker': 'हर आवाज़ के लिए बनाया गया',
+          'impact.heading': 'झारखंड को मजबूत बनाने की शुरुआत सुनकर होती है।',
+          'impact.desc': 'कोई तकनीकी ज्ञान की आवश्यकता नहीं है। बताइए आपकी समुदाय को क्या चाहिए और हम इसे संरचित करने में मदद करेंगे।',
+          'impact.button': 'अपनी पहली समस्या रिपोर्ट करें',
+          'banner.title': 'नागरिक समस्या समाधान के लिए सार्वजनिक सेवा पोर्टल',
+          'track.title': 'अपनी प्रस्तुतियाँ ट्रैक करें',
+          'help.title': 'इस पोर्टल का उपयोग कैसे करें',
+          'privacy.title': 'दृश्यता से पहले आपकी सुरक्षा।',
+          'admin.title': 'प्रशासक साइन इन',
+          'report.modalTitle': 'अपनी समस्या बताएं',
+          'report.problemLabel': 'समस्या क्या है?',
+          'report.problemPlaceholder': 'समस्या को साफ़ रूप से बताएं, इसमें कहां हो रही है और यह किसे प्रभावित कर रही है।',
+          'report.locationLabel': 'स्थान (वैकल्पिक)',
+          'report.locationPlaceholder': 'गाँव, वार्ड, स्थल या नज़दीकी क्षेत्र',
+          'report.photoLabel': 'समस्या की फोटो (वैकल्पिक)',
+          'report.optionalNote': 'वैकल्पिक: अगर समस्या को सुरक्षित रूप से समझाने में मदद मिले तो स्थान या फोटो जोड़ें।',
+          'report.cancel': 'रद्द करें',
+          'report.submit': 'समीक्षा के लिए भेजें',
+          'footer.brandName': 'झारखंड सरकार',
+          'footer.brandTag': 'विचार से प्रभाव तक',
+          'footer.description': 'नागरिकों, विश्वविद्यालयों, उद्योग और सरकार के लिए एक सहकारी मंच।',
+          'footer.activity': 'मेरी गतिविधि',
+          'footer.help': 'सहायता',
+          'footer.privacy': 'गोपनीयता',
+          'footer.admin': 'प्रशासन'
+        },
+        bn: {
+          'brand.govName': 'भारत সরকার',
+          'brand.govSub': 'সেবা পোর্টাল',
+          'nav.login': 'লগ ইন',
+          'nav.challenges': 'চ্যালেঞ্জ',
+          'nav.how': 'এটি কীভাবে কাজ করে',
+          'nav.activity': 'আমার কার্যক্রম',
+          'nav.help': 'সহায়তা',
+          'nav.admin': 'অ্যাডমিন',
+          'button.report': 'সমস্যা রিপোর্ট করুন',
+          'button.tell': 'আপনার সমস্যা জানাবেন',
+          'button.explore': 'চ্যালেঞ্জ দেখুন',
+          'hero.eyebrow': 'যাচাই করা সম্প্রদায়ের চ্যালেঞ্জ',
+          'hero.problem': 'আপনার সমস্যা.',
+          'hero.strength': 'ভারতের শক্তি.',
+          'hero.desc': 'বাস্তব সমাজের সমস্যাকে ছাত্র, বিশেষজ্ঞ ও শিল্পের সঙ্গে যুক্ত করে কার্যকর সমাধান তৈরি করুন।',
+          'hero.note': 'সহজ ভাষা · ৩ মিনিটের কম সময়',
+          'connection.mission': 'একটি সাধারণ লক্ষ্য',
+          'connection.headline': 'স্থানীয় কণ্ঠ থেকে স্থায়ী পরিবর্তন',
+          'connection.citizens': 'নাগরিক',
+          'connection.citizensSub': 'চাহিদা ভাগ করুন',
+          'connection.universities': 'বিশ্ববিদ্যালয়',
+          'connection.universitiesSub': 'সমাধান তৈরি করুন',
+          'connection.industry': 'শিল্প',
+          'connection.industrySub': 'স্কেল সমর্থন',
+          'connection.solution': 'একটি পরিমাপযোগ্য সমাধান',
+          'metrics.verified': 'যাচাই করা চ্যালেঞ্জ',
+          'metrics.teams': 'অনুমোদিত দল',
+          'metrics.support': 'সম্প্রদায় সমর্থন',
+          'metrics.reporting': 'সমস্যা রিপোর্টিং',
+          'section.needs.kicker': 'আমাদের চারপাশের প্রয়োজন',
+          'section.needs.heading': 'আপনার সাহায্যে পরিবর্তন সম্ভব',
+          'section.needs.badge': 'প্রথম অনুমোদন পর্যন্ত উদাহরণ দেখানো হচ্ছে',
+          'search.label': 'চ্যালেঞ্জ খুঁজুন',
+          'search.placeholder': 'প্রয়োজন বা অবস্থান দিয়ে খুঁজুন…',
+          'category.all': 'সমস্ত',
+          'category.water': 'পানি',
+          'category.agriculture': 'কৃষি',
+          'category.education': 'শিক্ষা',
+          'category.environment': 'পরিবেশ',
+          'challenge.example': 'উদাহরণ চ্যালেঞ্জ',
+          'challenge.support': 'আমি এটি সমর্থন করি',
+          'challenge.supports': 'এটি সমর্থন করুন',
+          'challenge.water.location': 'বেরো, রাঁচি',
+          'challenge.water.title': 'বেরো গ্রামে নিরাপদ পানীয় জলের প্রয়োজন',
+          'challenge.water.desc': 'তিনটি হ্যান্ডপাম্প ৬০০ জনেরও বেশি মানুষকে সেবা দেয়, কিন্তু গরমের মৌসুমে দু’টি বন্ধ হয়ে যায়।',
+          'challenge.water.teams': 'দল কাজ করছে',
+          'challenge.agri.location': 'গুমলা, ঝাড়খণ্ড',
+          'challenge.agri.title': 'কৃষকরা কম খরচে ফসল সংরক্ষণের প্রয়োজনীয়তা অনুভব করছেন',
+          'challenge.agri.desc': 'সবজিগুলো বাজারে পৌঁছানোর আগেই নষ্ট হয়ে যায়। সম্প্রদায় একটি সহজ সৌর সমাধানের জন্য চায়।',
+          'challenge.agri.teams': 'দল কাজ করছে',
+          'challenge.edu.location': 'দুমকা, ঝাড়খণ্ড',
+          'challenge.edu.title': 'গ্রামাঞ্চলের শিক্ষার্থীদের জন্য শেখার সহায়তা',
+          'challenge.edu.desc': 'শিক্ষার্থীদের স্কুলের পর বিজ্ঞান ও গণিতের জন্য পুনঃব্যবহারযোগ্য, কম-ডেটার পাঠের প্রয়োজন।',
+          'challenge.edu.teams': 'দল কাজ করছে',
+          'challenge.env.location': 'লাতেহার, ঝাড়খণ্ড',
+          'challenge.env.title': 'কমিউনিটি ফরেস্ট ক্লিনআপ ও বর্জ্য পৃথকীকরণ',
+          'challenge.env.desc': 'প্লাস্টিক বর্জ্য নালীগুলো ব্লক করছে এবং স্থানীয় গাছের আচ্ছাদনকে ক্ষতিগ্রস্ত করছে। গ্রামকে একটি ব্যবহারিক পরিষ্কার পরিকল্পনার প্রয়োজন।',
+          'challenge.env.teams': 'দল কাজ করছে',
+          'how.kicker': 'সহজ নকশা',
+          'how.heading': 'একটি সমস্যা। তিনটি ধাপ। বাস্তব অগ্রগতি।',
+          'step.one.title': 'সমস্যা শেয়ার করুন',
+          'step.one.desc': 'সহজ ভাষায় কথা বলুন বা টাইপ করুন। আপনার রিপোর্ট পর্যালোচনার জন্য গোপনে সংরক্ষিত হয়।',
+          'step.two.title': 'অ্যাডমিন যাচাই করেন',
+          'step.two.desc': 'শুধু সত্যিকারের, কার্যকর চ্যালেঞ্জই অনুমোদিত ও প্রকাশিত হয়।',
+          'step.three.title': 'বিনির্মাণ ও প্রসার',
+          'step.three.desc': 'পার্টনাররা নির্দেশনা, সম্পদ, সমাধান পরীক্ষা এবং প্রভাব ট্র্যাক করে।',
+          'impact.kicker': 'প্রতিটি কণ্ঠের জন্য',
+          'impact.heading': 'একটি শক্তিশালী ঝাড়খণ্ড শোনার সঙ্গে শুরু হয়।',
+          'impact.desc': 'কোনো প্রযুক্তিগত জ্ঞান লাগে না। আমাদের জানান আপনার সম্প্রদায় কী চায়, আমরা সেটি গঠন করতে সাহায্য করব।',
+          'impact.button': 'আপনার প্রথম সমস্যাটি রিপোর্ট করুন',
+          'report.modalTitle': 'আপনার সমস্যা বলুন',
+          'report.problemLabel': 'সমস্যা কী?',
+          'report.problemPlaceholder': 'সমস্যাটি স্পষ্টভাবে বলুন, কোথায় ঘটছে এবং কার উপর প্রভাব পড়ছে।',
+          'report.locationLabel': 'অবস্থান (ঐচ্ছিক)',
+          'report.locationPlaceholder': 'গ্রাম, ওয়ার্ড, Landmark বা কাছের এলাকা',
+          'report.photoLabel': 'সমস্যার ছবি (ঐচ্ছিক)',
+          'report.optionalNote': 'ঐচ্ছিক: সমস্যা নিরাপদভাবে ব্যাখ্যা করতে স্থান বা ছবি যোগ করুন।',
+          'report.cancel': 'বাতিল',
+          'report.submit': 'পর্যালোচনার জন্য জমা দিন',
+          'footer.brandName': 'সমর্থ্য',
+          'footer.brandTag': 'ধারণা থেকে প্রভাব',
+          'footer.description': 'নাগরিক, বিশ্ববিদ্যালয়, শিল্প ও সরকারকে একত্রিত করার জন্য একটি সহযোগী প্ল্যাটফর্ম।',
+          'footer.activity': 'আমার কার্যক্রম',
+          'footer.help': 'সহায়তা',
+          'footer.privacy': 'গোপনীয়তা',
+          'footer.admin': 'অ্যাডমিন'
+        },
+        ta: {
+          'brand.govName': 'இந்திய அரசு',
+          'brand.govSub': 'நகரிய சேவை போர்டல்',
+          'nav.login': 'உள்நுழை',
+          'nav.challenges': 'சவால்கள்',
+          'nav.how': 'இது எப்படி வேலை செய்கிறது',
+          'nav.activity': 'என் செயல்பாடுகள்',
+          'nav.help': 'உதவி',
+          'nav.admin': 'நிர்வாகம்',
+          'button.report': 'சிக்கலை புகாரளிக்கவும்',
+          'button.tell': 'உங்கள் சிக்கலை சொல்லுங்கள்',
+          'button.explore': 'சவால்களைப் பார்க்கவும்',
+          'hero.eyebrow': 'சரிபார்க்கப்பட்ட சமூகம் சவால்கள்',
+          'hero.problem': 'உங்கள் பிரச்சினை.',
+          'hero.strength': 'இந்தியத்தின் வலிமை.',
+          'hero.desc': 'நிஜ சமூகப் பிரச்சினைகளை மாணவர்கள், நிபுணர்கள் மற்றும் தொழில்துறையுடன் இணைத்து செயல்படக்கூடிய தீர்வுகளை உருவாக்குங்கள்.',
+          'hero.note': 'எளிய மொழி · 3 நிமிடங்களுக்கும் குறைவு',
+          'connection.mission': 'ஒரே பகிரப்பட்ட இலக்கு',
+          'connection.headline': 'உள்ளூர் குரலிலிருந்து நீடித்த மாற்றம் வரை',
+          'connection.citizens': 'குடிமக்கள்',
+          'connection.citizensSub': 'தேவைகளை பகிருங்கள்',
+          'connection.universities': 'பல்கலைக்கழகங்கள்',
+          'connection.universitiesSub': 'தீர்வுகளை உருவாக்கவும்',
+          'connection.industry': 'தொழில்',
+          'connection.industrySub': 'அளவிடக்கூடிய ஆதரவு',
+          'connection.solution': 'ஒரு அளவிடக்கூடிய தீர்வு',
+          'metrics.verified': 'சரிபார்க்கப்பட்ட சவால்கள்',
+          'metrics.teams': 'அனுமதிக்கப்பட்ட குழுக்கள்',
+          'metrics.support': 'சமூக ஆதரவு',
+          'metrics.reporting': 'சிக்கல் அறிக்கை',
+          'section.needs.kicker': 'எங்களிடம் உள்ள தேவைகள்',
+          'section.needs.heading': 'உங்கள் உதவியுடன் மாற்றம் சாத்தியம்',
+          'section.needs.badge': 'முதல் அங்கீகாரம் வரை எடுத்துக்காட்டுகள் காட்டப்படுகின்றன',
+          'search.label': 'சவால்களைத் தேடுங்கள்',
+          'search.placeholder': 'தேவை அல்லது இடம் மூலம் தேடுங்கள்…',
+          'category.all': 'அனைத்தும்',
+          'category.water': 'குடிநீர்',
+          'category.agriculture': 'விவசாயம்',
+          'category.education': 'கல்வி',
+          'category.environment': 'சுற்றுச்சூழல்',
+          'challenge.example': 'எடுத்துக்காட்டு சவால்',
+          'challenge.support': 'நான் இதை ஆதரிக்கிறேன்',
+          'challenge.supports': 'இதற்கு ஆதரவு.',
+          'challenge.water.location': 'பெரோ, ராஞ்சி',
+          'challenge.water.title': 'பெரோ கிராமத்தில் சுத்தமான குடிநீர் தேவை',
+          'challenge.water.desc': 'மூன்று ஹேண்ட்பம்ப்கள் 600க்கும் மேற்பட்ட மக்களுக்கு சேவை செய்கின்றன, ஆனால் கோடைகாலத்தில் இரண்டு வேலை செய்வதை நிறுத்துகின்றன.',
+          'challenge.water.teams': 'குழுக்கள் பணியாற்றி வருகின்றன',
+          'challenge.agri.location': 'கும்லா, ஜார்க்கண்ட்',
+          'challenge.agri.title': 'விவசாயிகள் குறைந்த விலையில் பயிர் சேமிப்பு வசதியை விரும்புகின்றனர்',
+          'challenge.agri.desc': 'பயிர்கள் சந்தைக்கு செல்லும் முன்பே கெட்டுவிடுகின்றன. சமூகம் எளிய சூரிய தீர்வைக் கோருகிறது.',
+          'challenge.agri.teams': 'குழுக்கள் பணியாற்றி வருகின்றன',
+          'challenge.edu.location': 'தும்கா, ஜார்க்கண்ட்',
+          'challenge.edu.title': 'கிராமத்து மாணவர்களுக்கு கற்றல் ஆதரவு',
+          'challenge.edu.desc': 'மாணவர்கள் பள்ளிக்கு பிறகு அறிவியல் மற்றும் கணிதத்திற்கான மீண்டும் பயன்படுத்தக்கூடிய குறைந்த-டேட்டா பாடங்களை விரும்புகின்றனர்.',
+          'challenge.edu.teams': 'குழுக்கள் பணியாற்றி வருகின்றன',
+          'challenge.env.location': 'லதேஹர், ஜார்க்கண்ட்',
+          'challenge.env.title': 'சமூக வன தூய்மை மற்றும் கழிவு பிரித்தல்',
+          'challenge.env.desc': 'பிளாஸ்டிக் கழிவுகள் வடிகால்களை அடைத்து உள்ளூர் மரங்களின் பரப்பை சேதப்படுத்துகின்றன. கிராமத்திற்கு நடைமுறை சுத்திகரிப்பு திட்டம் தேவை.',
+          'challenge.env.teams': 'குழுக்கள் பணியாற்றி வருகின்றன',
+          'how.kicker': 'எளிமையான வடிவமைப்பு',
+          'how.heading': 'ஒரு பிரச்சனை. மூன்று படிகள். உண்மையான முன்னேற்றம்.',
+          'step.one.title': 'பிரச்சனையைப் பகிர்ந்து கொள்ளுங்கள்',
+          'step.one.desc': 'எளிய மொழியில் பேசுங்கள் அல்லது தட்டச்சு செய்யுங்கள். உங்கள் அறிக்கை மதிப்பாய்வுக்காக தனிப்பட்ட முறையில் சேமிக்கப்படும்.',
+          'step.two.title': 'நிர்வாகம் சரிபார்க்கிறது',
+          'step.two.desc': 'சரியான, பயனுள்ள சவால்கள் மட்டுமே அங்கீகரிக்கப்பட்டு பொதுவில் காட்டப்படுகின்றன.',
+          'step.three.title': 'முன்னேற்றம் மற்றும் விரிவாக்கம்',
+          'step.three.desc': 'பங்குதாரர்கள் வழிகாட்டுதல், ஆதாரங்கள், தீர்வுகளை சோதித்து, தாக்கத்தை கண்காணிக்கின்றனர்.',
+          'impact.kicker': 'ஒவ்வொரு குரலுக்கும் அமைக்கப்பட்டது',
+          'impact.heading': 'வலிமையான ஜார்க்கண்ட் கேட்பதிலிருந்து தொடங்குகிறது.',
+          'impact.desc': 'எந்த தொழில்நுட்ப அறிவும் தேவையில்லை. உங்கள் சமூகத்திற்கு என்ன தேவை என்பதை சொல்லுங்கள்; நாங்கள் அதை கட்டமைக்க உதவுவோம்.',
+          'impact.button': 'உங்கள் முதல் பிரச்சனையை அறிவிக்கவும்',
+          'report.modalTitle': 'உங்கள் பிரச்சினையை கூறுங்கள்',
+          'report.problemLabel': 'பிரச்சனை என்ன?',
+          'report.problemPlaceholder': 'பிரச்சனையை தெளிவாக விவரிக்கவும், எங்கு நடக்கிறது மற்றும் யாரை தாக்குகிறது என்பதை சேர்க்கவும்.',
+          'report.locationLabel': 'இடம் (விருப்பத்தேர்வு)',
+          'report.locationPlaceholder': 'கிராமம், வார்டு, அடையாளம் அல்லது அருகிலுள்ள பகுதி',
+          'report.photoLabel': 'பிரச்சனையின் புகைப்படம் (விருப்பத்தேர்வு)',
+          'report.optionalNote': 'விருப்பத்தேர்வு: பிரச்சனையை பாதுகாப்பாக விளக்க உதவினால் இடம் அல்லது புகைப்படம் சேர்க்கவும்.',
+          'report.cancel': 'ரத்து செய்',
+          'report.submit': 'மதிப்பாய்வுக்கு சமர்ப்பி',
+          'footer.brandName': 'சமர்த்தியா',
+          'footer.brandTag': 'சிந்தனையிலிருந்து தாக்கம் வரை',
+          'footer.description': 'குடிமக்கள், பல்கலைக்கழகங்கள், தொழில் மற்றும் அரசாங்கத்திற்கான கூட்டு தளம்.',
+          'footer.activity': 'என் செயல்பாடுகள்',
+          'footer.help': 'உதவி',
+          'footer.privacy': 'தனியுரிமை',
+          'footer.admin': 'நிர்வாகம்'
+        },
+        te: {
+          'brand.govName': 'భారత ప్రభుత్వం',
+          'brand.govSub': 'పౌర సేవా పోర్టల్',
+          'nav.login': 'లాగిన్',
+          'nav.challenges': 'చాలా పనులు',
+          'nav.how': 'ఇది ఎలా పని చేస్తుంది',
+          'nav.activity': 'నా కార్యాచరణ',
+          'nav.help': 'సహాయం',
+          'nav.admin': 'అడ్మిన్',
+          'button.report': 'సమస్యను నివేదించండి',
+          'button.tell': 'మీ సమస్యను చెప్పండి',
+          'button.explore': 'చallenges చూడండి',
+          'hero.eyebrow': 'ధ్రువీకరించిన సమాజ సమస్యలు',
+          'hero.problem': 'మీ సమస్య.',
+          'hero.strength': 'భారత బలం.',
+          'hero.desc': 'వాస్తవ సమాజ సమస్యలను విద్యార్థులు, నిపుణులు మరియు పరిశ్రమతో కలిపి ఉపయోగకరమైన పరిష్కారాలు రూపొందించండి.',
+          'hero.note': 'సులభమైన భాష · 3 నిమిషాల్లోపు',
+          'connection.mission': 'ఒక సాధ్యమైన లక్ష్యం',
+          'connection.headline': 'స్థానిక స్వరం నుంచి స్థిరమైన మార్పు వరకు',
+          'connection.citizens': 'పౌరులు',
+          'connection.citizensSub': 'అవసరాలను పంచుకోండి',
+          'connection.universities': 'విశ్వవిద్యాలయాలు',
+          'connection.universitiesSub': 'పరిష్కారాలు రూపొందించండి',
+          'connection.industry': 'పరిశ్రమ',
+          'connection.industrySub': 'స్థాయి మద్దతు',
+          'connection.solution': 'ఒక కొలవగల పరిష్కారం',
+          'metrics.verified': 'ధ్రువీకరించిన సమస్యలు',
+          'metrics.teams': 'అనుమతించిన బృందాలు',
+          'metrics.support': 'సమాజ మద్దతు',
+          'metrics.reporting': 'సమస్య నివేదన',
+          'section.needs.kicker': 'మన చుట్టూ ఉన్న అవసరాలు',
+          'section.needs.heading': 'మీ సహాయంతో మార్పు సాధ్యం',
+          'section.needs.badge': 'మొదటి ఆమోదం వరకు ఉదాహరణలు చూపబడుతున్నాయి',
+          'search.label': 'సమస్యలను వెతికి',
+          'search.placeholder': 'అవసరం లేదా స్థానం ద్వారా శోధించండి…',
+          'category.all': 'అన్నీ',
+          'category.water': 'నీరు',
+          'category.agriculture': 'వ్యవసాయం',
+          'category.education': 'విద్య',
+          'category.environment': 'పర్యావరణం',
+          'challenge.example': 'ఉదాహరణ సమస్య',
+          'challenge.support': 'నేను దీనికి మద్దతు ఇస్తున్నాను',
+          'challenge.supports': 'ఈ సమస్యకు మద్దతు',
+          'challenge.water.location': 'బెరో, రాంచీ',
+          'challenge.water.title': 'బెరో గ్రామంలో త్రాగునీటి అవసరం',
+          'challenge.water.desc': 'మూడు హ్యాండ్‌పంపులు 600 మందికి పైగా ప్రజలకు సేవ చేస్తాయి, కానీ ప్రతి వేసవిలో రెండు పనిచేయడం మానేస్తాయి.',
+          'challenge.water.teams': 'బృందాలు పనిచేస్తున్నాయి',
+          'challenge.agri.location': 'గుమ్లా, జార్ఖండ్',
+          'challenge.agri.title': 'రైతులకు తక్కువ ఖర్చుతో పంట నిల్వ అవసరం',
+          'challenge.agri.desc': 'పంటలు మార్కెట్ చేరేముందు నాశనం అవుతాయి. సంఘం సరళమైన సౌర పరిష్కారాన్ని కోరుతోంది.',
+          'challenge.agri.teams': 'బృందాలు పనిచేస్తున్నాయి',
+          'challenge.edu.location': 'దుమ్కా, జార్ఖండ్',
+          'challenge.edu.title': 'గ్రామీణ విద్యార్థుల కోసం అభ్యాస సహాయం',
+          'challenge.edu.desc': 'విద్యార్థులకు పాఠశాల తర్వాత విజ్ఞానం మరియు గణితానికి మళ్లీ ఉపయోగించగల, తక్కువ డేటా పాఠాలు అవసరం.',
+          'challenge.edu.teams': 'బృందాలు పనిచేస్తున్నాయి',
+          'challenge.env.location': 'లతేహర్, జార్ఖండ్',
+          'challenge.env.title': 'సమాజ అటవీ శుభ్రపరిచే కార్యక్రమం మరియు వ్యర్థ వేరు చేయడం',
+          'challenge.env.desc': 'ప్లాస్టిక్ వ్యర్థాలు నీటి కాలువలను భరించవేసి స్థానిక వృక్షాలను నాశనం చేస్తున్నాయి. గ్రామానికి కార్యాచరణ శుభ్రపరిచే ప్రణాళిక అవసరం.',
+          'challenge.env.teams': 'బృందాలు పనిచేస్తున్నాయి',
+          'how.kicker': 'సులభమైన రూపకల్పన',
+          'how.heading': 'ఒక సమస్య. మూడు దశలు. వాస్తవ పురోగతి.',
+          'step.one.title': 'సమస్యను పంచుకోండి',
+          'step.one.desc': 'సులభమైన భాషలో మాట్లాడండి లేదా టైప్ చేయండి. మీ నివేదిక సమీక్ష కోసం గోప్యంగా సేవ్ చేయబడుతుంది.',
+          'step.two.title': 'అడ్మిన్ ధ్రువీకరిస్తాడు',
+          'step.two.desc': 'నిజమైన, ఉపయోగకరమైన సమస్యలు మాత్రమే ఆమోదించబడతాయి మరియు ప్రజలకు చూపబడతాయి.',
+          'step.three.title': 'బిల్డ్ చేసి విస్తరించండి',
+          'step.three.desc': 'భాగస్వాములు మార్గనిర్దేశం, వనరులు, పరిష్కారాల పరీక్ష మరియు ప్రభావాన్ని ట్రాక్ చేస్తారు.',
+          'impact.kicker': 'ప్రతి వాయిస్ కోసం',
+          'impact.heading': 'బలమైన జార్ఖండ్ వినడం నుండి ప్రారంభమవుతుంది.',
+          'impact.desc': 'సాంకేతిక జ్ఞానం అవసరం లేదు. మీ సంఘానికి ఏది అవసరం అని చెప్పండి; మేము ituను నిర్మించడంలో సహాయం చేస్తాము.',
+          'impact.button': 'మీ మొదటి సమస్యను నివేదించండి',
+          'report.modalTitle': 'మీ సమస్యను చెప్పండి',
+          'report.problemLabel': 'సమస్య ఏమిటి?',
+          'report.problemPlaceholder': 'సమస్యను స్పష్టంగా వివరించండి, అది ఎక్కడ జరుగుతుంది మరియు ఎవరి పై ప్రభావం చూపుతుంది.',
+          'report.locationLabel': 'స్థానం (ఐచ్ఛికం)',
+          'report.locationPlaceholder': 'గ్రామం, వార్డు, ల్యాండ్మార్క్ లేదా సమీప ప్రాంతం',
+          'report.photoLabel': 'సమస్య యొక్క ఫోటో (ఐచ్ఛికం)',
+          'report.optionalNote': 'ఐచ్ఛికం: సమస్యను సురక్షితంగా వివరించడానికి సహాయమైనట్లయితే స్థానం లేదా ఫోటో జోడించండి.',
+          'report.cancel': 'రద్దు',
+          'report.submit': 'సమీక్ష కోసం సమర్పించండి',
+          'footer.brandName': 'సమర్థ్య',
+          'footer.brandTag': 'ఆలోచన నుండి ప్రభావం వరకు',
+          'footer.description': 'పౌరులు, విశ్వవిద్యాలయాలు, పరిశ్రమ మరియు ప్రభుత్వానికి సహకార ప్లాట్ఫాం.',
+          'footer.activity': 'నా కార్యాచరణ',
+          'footer.help': 'సహాయం',
+          'footer.privacy': 'గోప్యత',
+          'footer.admin': 'అడ్మిన్'
+        },
+        mr: { 'brand.govName': 'झारखंड सरकार', 'brand.govSub': 'नागरिक सेवा पोर्टल', 'nav.login': 'लॉगिन', 'nav.challenges': 'आव्हाने', 'nav.how': 'हे कसे काम करते?', 'nav.activity': 'माझी क्रिया', 'nav.help': 'मदत', 'nav.admin': 'अॅडमिन', 'button.report': 'समस्येची नोंद करा', 'button.tell': 'तुमची समस्या सांगा', 'button.explore': 'आव्हाने पहा', 'hero.eyebrow': 'सत्यापित समुदाय आव्हाने', 'hero.problem': 'तुमची समस्या.', 'hero.strength': 'भारताची शक्ती.', 'hero.desc': 'वास्तविक सामुदायिक समस्यांना विद्यार्थी, तज्ञ आणि उद्योगाशी जोडून व्यवहार्य उपाय बनवा.', 'hero.note': 'सोप्या भाषा · 3 मिनिटांपेक्षा कमी', 'connection.mission': 'एक सामायिक ध्येय', 'connection.headline': 'स्थानिक आवाज़ापासून टिकाऊ बदलापर्यंत', 'connection.citizens': 'नागरिक', 'connection.citizensSub': 'आवश्यकता सांगा', 'connection.universities': 'विद्यापीठे', 'connection.universitiesSub': 'उपाय तयार करा', 'connection.industry': 'उद्योग', 'connection.industrySub': 'प्रमाणित समर्थन', 'connection.solution': 'एक मोजता येणारा उपाय', 'metrics.verified': 'सत्यापित आव्हाने', 'metrics.teams': 'स्वीकृत संघ', 'metrics.support': 'सामुदायिक पाठबळ', 'metrics.reporting': 'समस्या नोंदणी', 'section.needs.kicker': 'आमच्या आसपासची गरज', 'section.needs.heading': 'तुमच्या मदतीतून बदल शक्य आहे', 'section.needs.badge': 'पहिली मान्यता होईपर्यंत उदाहरणे दिसत आहेत', 'search.label': 'आव्हाने शोधा', 'search.placeholder': 'गरज किंवा ठिकाणाने शोधा…', 'category.all': 'सर्व', 'category.water': 'पाणी', 'category.agriculture': 'कृषि', 'category.education': 'शिक्षण', 'category.environment': 'पर्यावरण', 'challenge.example': 'उदाहरण आव्हान', 'challenge.support': 'मी याला पाठिंबा देतो', 'challenge.supports': 'याला पाठिंबा द्या', 'challenge.water.location': 'बेरो, रांची', 'challenge.water.title': 'बेरो गावात स्वच्छ पिण्याच्या पाण्याची गरज आहे', 'challenge.water.desc': 'तीन हातपंप 600 पेक्षा जास्त लोकांची सेवा करतात, पण प्रत्येक उन्हाळ्यात दोन काम करणे बंद करतात.', 'challenge.water.teams': 'टीम काम करत आहेत', 'challenge.agri.location': 'गुमला, झारखंड', 'challenge.agri.title': 'शेतकऱ्यांना स्वस्त भाजीपालन साठवणूक आवश्यक आहे', 'challenge.agri.desc': 'भाजीपाला बाजारात पोहोचण्यापूर्वी खराब होतो. समुदायाला सोपे सौर उपाय हवे आहे.', 'challenge.agri.teams': 'टीम काम करत आहेत', 'challenge.edu.location': 'दुमका, झारखंड', 'challenge.edu.title': 'गावातील विद्यार्थ्यांसाठी शिकण्याचा आधार', 'challenge.edu.desc': 'विद्यार्थ्यांना शाळेनंतर विज्ञान आणि गणितासाठी पुन्हा वापरता येणाऱ्या कमी-डेटा अभ्यासाची गरज आहे.', 'challenge.edu.teams': 'टीम काम करत आहेत', 'challenge.env.location': 'लातेहार, झारखंड', 'challenge.env.title': 'सामुदायिक वन स्वच्छता आणि कचरा वर्गीकरण', 'challenge.env.desc': 'प्लास्टिक कचरा नाल्यांमध्ये अडकल्यामुळे स्थानिक झाडांची झाकणं नष्ट होत आहेत. गावाला व्यावहारिक स्वच्छता आराखडा आवश्यक आहे.', 'challenge.env.teams': 'टीम काम करत आहेत', 'how.kicker': 'सोप्या डिझाइनची पद्धत', 'how.heading': 'एक समस्या. तीन चरण. वास्तविक प्रगती.', 'step.one.title': 'समस्या सांगा', 'step.one.desc': 'सोप्या भाषेत बोला किंवा टाइप करा. तुमची अहवाल तपासणीसाठी खाजगी स्वरूपात जतन केली जाते.', 'step.two.title': 'अॅडमिन तपासतो', 'step.two.desc': 'फक्त वास्तविक आणि उपयोगी आव्हानेच स्वीकृत व सार्वजनिक केली जातात.', 'step.three.title': 'बनवा आणि विस्तार करा', 'step.three.desc': 'भागीदार मार्गदर्शन, संसाधने, उपाय चाचणी आणि प्रभाव ट्रॅक करतात.', 'impact.kicker': 'प्रत्येक आवाजासाठी', 'impact.heading': 'शक्तिशाली झारखंडाची सुरुवात ऐकण्यापासून होते.', 'impact.desc': 'तांत्रिक ज्ञानाची गरज नाही. तुमच्या समुदायाला काय हवे आहे ते सांगितल्यास आम्ही ते तयार करू.', 'impact.button': 'तुमची पहिली समस्या नोंदवा', 'report.modalTitle': 'तुमची समस्या सांगा', 'report.problemLabel': 'समस्या काय आहे?', 'report.problemPlaceholder': 'समस्येचे स्पष्ट वर्णन करा, ती कुठे होत आहे आणि कोणी प्रभावित होत आहे याची माहिती द्या.', 'report.locationLabel': 'स्थान (पर्यायी)', 'report.locationPlaceholder': 'गाव, वार्ड, खूण किंवा जवळची जागा', 'report.photoLabel': 'समस्येची फोटो (पर्यायी)', 'report.optionalNote': 'पर्यायी: समस्या सुरक्षितपणे समजावण्यासाठी स्थान किंवा फोटो जोडू शकता.', 'report.cancel': 'रद्द करा', 'report.submit': 'पुनरावलोकनासाठी सबमिट करा', 'footer.brandName': 'समर्थ्य', 'footer.brandTag': 'विचार ते प्रभाव', 'footer.description': 'नागरिक, विद्यापीठ, उद्योग आणि सरकारसाठी एक सहयोगी मंच.', 'footer.activity': 'माझी क्रिया', 'footer.help': 'मदत', 'footer.privacy': 'गोपनीयता', 'footer.admin': 'अॅडमिन' },
+        gu: { 'brand.govName': 'ભારત સરકાર', 'brand.govSub': 'નાગરિક સેવા પોર્ટલ', 'nav.login': 'લોગિન', 'nav.challenges': 'ચેલેન્જો', 'nav.how': 'આ કેવી રીતે કામ કરે છે', 'nav.activity': 'મારી પ્રવૃત્તિ', 'nav.help': 'મદદ', 'nav.admin': 'એડમિન', 'button.report': 'સમસ્યાની જાણ કરો', 'button.tell': 'તમારી સમસ્યા કહો', 'button.explore': 'ચેલેન્જ જુઓ', 'hero.eyebrow': 'ચકાસેલ સામુદાયિક ચેલેન્જો', 'hero.problem': 'તમારી સમસ્યા.', 'hero.strength': 'ભારતીય શક્તિ.', 'hero.desc': 'વાસ્તવિક સમુદાય સમસ્યાઓને વિદ્યાર્થીઓ, નિષ્ણાંતો અને ઉદ્યોગ સાથે જોડીને ઉપયોગી ઉકેલ બનાવો.', 'hero.note': 'સફળ ભાષા · 3 મિનિટથી ઓછી સમયમાં', 'connection.mission': 'એક હોલીયુવાદી લક્ષ્ય', 'connection.headline': 'સ્થાનિક અવાજથી લાંબા ગાળાની ફેરફાર સુધી', 'connection.citizens': 'નાગરિકો', 'connection.citizensSub': 'જરૂરિયાત શેર કરો', 'connection.universities': 'વિશ્વવિદ્યાલય', 'connection.universitiesSub': 'ઉકેલ્સ બનાવો', 'connection.industry': 'ઉદ્યોગ', 'connection.industrySub': 'માપનીય સહાયક', 'connection.solution': 'એક માપી શકાય તેવું ઉકેલ', 'metrics.verified': 'ચકાસેલ ચેલેન્જો', 'metrics.teams': 'મંજુરિત ટીમો', 'metrics.support': 'સામુદાયિક સમર્થન', 'metrics.reporting': 'સમસ્યા રિપોર્ટિંગ', 'section.needs.kicker': 'અમારી આસપાસની જરૂરિયાતો', 'section.needs.heading': 'તમારી મદદથી ફેરફાર શક્ય છે', 'section.needs.badge': 'પ્રથમ મંજૂરી સુધી ઉદાહરણો બતાવામાં આવી રહ્યા છે', 'search.label': 'ચેલેન્જ શોધો', 'search.placeholder': 'જરૂરિયાત અથવા સ્થાનથી શોધો…', 'category.all': 'બધા', 'category.water': 'પાણી', 'category.agriculture': 'કૃષિ', 'category.education': 'શિક્ષા', 'category.environment': 'પર્યાવરણી', 'challenge.example': 'ઉદાહરણ ચેલેન્જ', 'challenge.support': 'હું આને ટેકો આપી રહ્યો છું', 'challenge.supports': 'આને ટેકો આપો', 'challenge.water.location': 'બેરો, રાંચી', 'challenge.water.title': 'બેરો ગામમાં સ્વચ્છ પીણું પાણીની જરૂર છે', 'challenge.water.desc': 'ત્રણ હેન્ડપમ્પ્સ 600 થી વધુ લોકોને સેવા આપે છે, પરંતુ દરેક ઉનાળામાં બે બંધ થઈ જાય છે.', 'challenge.water.teams': 'ટીમો BAM', 'challenge.agri.location': 'ગુમલા, ઝારખંડ', 'challenge.agri.title': 'ખેડૂતોએ સસ્તા ફળાવટ માટે ઉત્પાદન સંભારોની જરૂર છે', 'challenge.agri.desc': 'સબજી মার্কેટ સુધી પહોંચતા પહેલાં નષ્ટ થઈ જાય છે. સમુદાયને સરળ સોલર ઉકેલ જોઈ છે.', 'challenge.agri.teams': 'ટીમો BAM', 'challenge.edu.location': 'દુમકા, ઝારખંડ', 'challenge.edu.title': 'ગ્રામીણ વિદ્યાર્થીઓ માટે અભ્યાસ સહાય', 'challenge.edu.desc': 'વિદ્યાર્થીઓ માટે શાળામાંથી આગળ વિજ્ઞાન અને ગણિત માટે પુનઃઉપયોગી, ઓછી ડેટા શીખવાની જરૂર છે.', 'challenge.edu.teams': 'ટીમો BAM', 'challenge.env.location': 'લાતેહર, ઝારખંડ', 'challenge.env.title': 'સામુદાયિક વન સાફસફાઈ અને કચરો વહеંચણી', 'challenge.env.desc': 'પ્લાસ્ટિક કચરો નાલીઓને আটકાવી રહ્યો છે અને સ્થાનિક વૃક્ષોથી નુકસાન પહોંચાડી રહ્યું છે. ગામને વ્યવહારિક સાફસફાઈ યોજનાની જરૂર છે.', 'challenge.env.teams': 'ટીમો BAM', 'how.kicker': 'સરળ ડિઝાઇન', 'how.heading': 'એક સમસ્યા. ત્રણ પગલાં. વાસ્તવિક કામ.', 'step.one.title': 'સમસ્યા શેર કરો', 'step.one.desc': 'સરળ ભાષામાં બોલો અથવા લખો. તમારી રિપોર્ટની ચકાસણી માટે ખાનગી રીતે સંગ્રહ થાય છે.', 'step.two.title': 'એડમિન પુષ્ટિ કરે છે', 'step.two.desc': 'માત્ર સત્ય અને ઉપયોગી સમસ્યાઓ જ મંજૂર અને જાહેર કરવામાં આવે છે.', 'step.three.title': 'બનાવો અને વિસ્તારો', 'step.three.desc': 'ભાગીદારો માર્ગદર્શન, સ્ત્રોત, ઉકેલ પરીક્ષણ અને અસરને ટ્રેક કરે છે.', 'impact.kicker': 'દરેક અવાજ માટે', 'impact.heading': 'મજબૂત ઝારખંડ શોભનથી શરૂ થાય છે.', 'impact.desc': 'કોઈ ટેકનિકલ જ્ઞાનની જરૂર નથી. તમારી համայնને શું જરૂર છે તે કહો, અમે તેને ગોઠવવામાં મદદ કરીશું.', 'impact.button': 'તમારી પ્રથમ સમસ્યા રિપોર્ટ કરો', 'report.modalTitle': 'તમારી સમસ્યા કહો', 'report.problemLabel': 'સમસ્યા શું છે?', 'report.problemPlaceholder': 'સમસ્યાનું સ્પષ્ટ વર્ણન કરો, તે ક્યાં થાય છે અને કયા લોકો પર અસર થાય છે.', 'report.locationLabel': 'સ્થાન (વૈકલ્પિક)', 'report.locationPlaceholder': 'ગામ, વર્ડ్, લૅન્ડમાર્ક અથવા નજીકનો વિસ્તાર', 'report.photoLabel': 'સમસ્યાની ફોટોશોટ (વૈકલ્પિક)', 'report.optionalNote': 'વૈકલ્પિક: જો સ્થાન અથવા ફોટો સમજાવવામાં મદદ કરે તો તેને ઉમેરો.', 'report.cancel': 'રદ કરો', 'report.submit': 'સમીક્ષાન માટે સબમિટ કરો', 'footer.brandName': 'સમર્થ્ય', 'footer.brandTag': 'વિચારથી પ્રભાવ સુધી', 'footer.description': 'નાગરિકો, વિશ્વવિદ્યાલયો, ઉદ્યોગ અને સરકાર માટે સહયોગી પ્લેટફોર્મ.', 'footer.activity': 'મારી પ્રવૃત્તિ', 'footer.help': 'મદદ', 'footer.privacy': 'ગોપનીયતા', 'footer.admin': 'એડમિન' },
+        kn: { 'brand.govName': 'ಭಾರತ ಸರ್ಕಾರ', 'brand.govSub': 'ಪೌರ ಸೇವಾ ಪೋರ್ಟಲ್', 'nav.login': 'ಲಾಗಿನ್', 'nav.challenges': 'ಸವಾಲುಗಳು', 'nav.how': 'ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ', 'nav.activity': 'ನನ್ನ ಚಟುವಟಿಕೆ', 'nav.help': 'ಸಹಾಯ', 'nav.admin': 'ಆಡ್ಮಿನ್', 'button.report': 'ಸಮಸ್ಯೆಯನ್ನು ವರದಿಮಾಡಿ', 'button.tell': 'ನಿಮ್ಮ ಸಮಸ್ಯೆಯನ್ನು ಹೇಳಿ', 'button.explore': 'ಸವಾಲುಗಳನ್ನು ವೀಕ್ಷಿಸಿ', 'hero.eyebrow': 'ಪರಿಶೀಲಿಸಲಾದ ಸಮುದಾಯ ಸವಾಲುಗಳು', 'hero.problem': 'ನಿಮ್ಮ ಸಮಸ್ಯೆ.', 'hero.strength': 'ಭಾರತದ ಶಕ್ತಿ.', 'hero.desc': 'ನಿಜವಾದ ಸಮುದಾಯ ಸಮಸ್ಯೆಗಳನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳು, ವೃತ್ತಿಪರರು ಮತ್ತು ಉದ್ಯಮದೊಂದಿಗೆ ಸೇರಿಸಿ ಉಪಯುಕ್ತ ಪರಿಹಾರಗಳನ್ನು ರಚಿಸಿ.', 'hero.note': 'ಸರಳ ಭಾಷೆ · 3 ನಿಮಿಷಗಳಿಗಿಂತ ಕಡಿಮೆ', 'connection.mission': 'ಒಂದು ಹಂಚಿಕೆಯ ಗುರಿ', 'connection.headline': 'ಸ್ಥಳೀಯ ಧ್ವನಿಯಿಂದ ಶಾಶ್ವತ ಬದಲಾವಣೆವರೆಗೆ', 'connection.citizens': 'ಪೌರರು', 'connection.citizensSub': 'ಅಗತ್ಯಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ', 'connection.universities': 'ವಿಶ್ವವಿದ್ಯಾಲಯಗಳು', 'connection.universitiesSub': 'ಪರಿಹಾರಗಳನ್ನು ರಚಿಸಿ', 'connection.industry': 'ಉದ್ಯಮ', 'connection.industrySub': 'ಅಳತೆ ಮಾಡಬಹುದಾದ ಬೆಂಬಲ', 'connection.solution': 'ಒಂದು ಅಳೆಯಬಹುದಾದ ಪರಿಹಾರ', 'metrics.verified': 'ಪರಿಶೀಲಿಸಲಾದ ಸವಾಲುಗಳು', 'metrics.teams': 'ಅನುಮೋದಿಸಲಾದ ತಂಡಗಳು', 'metrics.support': 'ಸಮುದಾಯ ಬೆಂಬಲ', 'metrics.reporting': 'ಸಮಸ್ಯ ವರದಿ', 'section.needs.kicker': 'ನಮ್ಮ ಸುತ್ತಲಿನ ಅಗತ್ಯತೆಗಳು', 'section.needs.heading': 'ನಿಮ್ಮ ಸಹಾಯದಿಂದ ಬದಲಾವಣೆ ಸಾಧ್ಯ', 'section.needs.badge': 'ಮೊದಲ ಅನುಮೋದನೆಯವರೆಗೆ ಉದಾಹರಣೆಗಳನ್ನು ತೋರಿಸಲಾಗುತ್ತಿದೆ', 'search.label': 'ಸವಾಲುಗಳನ್ನು ಹುಡುಕಿ', 'search.placeholder': 'ಅಗತ್ಯತೆ ಅಥವಾ ಸ್ಥಳದಿಂದ ಹುಡುಕಿ…', 'category.all': 'ಎಲ್ಲವೂ', 'category.water': 'ನೀರು', 'category.agriculture': 'ಕೃಷಿ', 'category.education': 'ವಿದ್ಯಾನ', 'category.environment': 'ಪರಿಸರ', 'challenge.example': 'ಉದಾಹರಣೆ ಸವಾಲು', 'challenge.support': 'ನಾನು ಇದನ್ನು ಬೆಂಬಲಿಸುತ್ತೇನೆ', 'challenge.supports': 'ಇದನ್ನು ಬೆಂಬಲಿಸಿ', 'challenge.water.location': 'ಬೆರೋ, ರಾಂಚಿ', 'challenge.water.title': 'ಬೆರೋ ಗ್ರಾಮದಲ್ಲಿ ಸ್ವಚ್ಛ ಕುಡಿಯುವ ನೀರಿನ ಅಗತ್ಯವಿದೆ', 'challenge.water.desc': 'ಮೂರು ಹ್ಯಾಂಡ್ಪಂಪ್ಗಳು 600 ಕ್ಕೂ ಹೆಚ್ಚು ಜನರಿಗೆ ಸೇವೆ ಸಲ್ಲಿಸುತ್ತವೆ, ಆದರೆ ಪ್ರತಿಯೊಂದು ಬೇಸಿಗೆಯಲ್ಲಿಯೂ ಎರಡು ಕೆಲಸ ಮಾಡುವುದು ನಿಲ್ಲಿಸುತ್ತವೆ.', 'challenge.water.teams': 'ಟೀಮ್ಗಳು ಕೆಲಸ ಮಾಡುತ್ತಿವೆ', 'challenge.agri.location': 'ಗುಮ್ಲಾ, ಜಾರ್ಖಂಡ್', 'challenge.agri.title': 'ರೈತರಿಗೆ ಕಡಿಮೆ ವೆಚ್ಚದ ಬೆಳೆ ಸಂಗ್ರಹಣೆಯ ಅಗತ್ಯವಿದೆ', 'challenge.agri.desc': 'ಕೆಂಪುಸಾರು, ಬೆಂಗಳೂರು, ಬಾಗಿಲುಗಳಿಗೆ ಮುಂಚಿತವಾಗಿ ಹಾಳಾಗುತ್ತವೆ. ಸಮುದಾಯವು ಸರಳ ಸೌರ ಪರಿಹಾರವನ್ನು ಬಯಸುತ್ತದೆ.', 'challenge.agri.teams': 'ಟೀಮ್ಗಳು ಕೆಲಸ ಮಾಡುತ್ತಿವೆ', 'challenge.edu.location': 'ಡುಮ್ಕಾ, ಜಾರ್ಖಂಡ್', 'challenge.edu.title': 'ಗ್ರಾಮೀಣ ವಿದ್ಯಾರ್ಥಿಗಳ ಕಲಿಕೆಗೆ ಸಹಾಯ', 'challenge.edu.desc': 'ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಶಾಲೆಯ ನಂತರ ವಿಜ್ಞಾನ ಮತ್ತು ಗಣಿತಕ್ಕಾಗಿ ಮರುಬಳಕೆ ಮಾಡಬಹುದಾದ ಕಡಿಮೆ-ಡೇಟಾ ಪಾಠಗಳು ಬೇಕಾಗಿವೆ.', 'challenge.edu.teams': 'ಟೀಮ್ಗಳು ಕೆಲಸ ಮಾಡುತ್ತಿವೆ', 'challenge.env.location': 'ಲತೇಹರ್, ಜಾರ್ಖಂಡ್', 'challenge.env.title': 'ಸಮುದಾಯ ಅರಣ್ಯ ಸ್ವಚ್ಛತೆ ಮತ್ತು ಕಚರ segregati', 'challenge.env.desc': 'ಪ್ಲಾಸ್ಟಿಕ್ ಕಚರವು ಜಲಮೂಲಗಳನ್ನು ತಡೆಯುತ್ತದೆ ಮತ್ತು ಸ್ಥಳೀಯ ಮರಗಳ ಮೇಲೆ ಹಾನಿ ಉಂಟುಮಾಡುತ್ತದೆ. ಗ್ರಾಮಕ್ಕೆ ಕಾರ್ಯಸಾಧ್ಯವಾದ ಸ್ವಚ್ಛತಾ ಯೋಜನೆ ಅಗತ್ಯವಿದೆ.', 'challenge.env.teams': 'ಟೀಮ್ಗಳು ಕೆಲಸ ಮಾಡುತ್ತಿವೆ', 'how.kicker': 'ಸರಳ ವಿನ್ಯಾಸ', 'how.heading': 'ಒಂದು ಸಮಸ್ಯೆ. ಮೂರು ಹಂತಗಳು. ನಿಜವಾದ ಪ್ರಗತಿ.', 'step.one.title': 'ಸಮಸ್ಯೆ ಹಂಚಿಕೊಳ್ಳಿ', 'step.one.desc': 'ಸರಳ ಭಾಷೆಯಲ್ಲಿ ಮಾತನಾಡಿ ಅಥವಾ ಟೈಪ್ ಮಾಡಿ. ನಿಮ್ಮ ವರದಿ ಪರಿಶೀಲನೆಗಾಗಿ ಖಾಸಗಿಯಾಗಿ ಸಂಗ್ರಹವಾಗುತ್ತದೆ.', 'step.two.title': 'ಆಡ್ಮಿನ್ ಪರಿಶೀಲನೆ ಮಾಡುತ್ತಾನೆ', 'step.two.desc': 'ನಿಜವಾದ, ಉಪಯುಕ್ತ ಸವಾಲುಗಳು ಮಾತ್ರ ಅನುಮೋದಿಸಿ ಸಾರ್ವಜನಿಕವಾಗಿ ತೋರಿಸಲಾಗುತ್ತದೆ.', 'step.three.title': 'ನಿರ್ಮಿಸಿ ಮತ್ತು ವಿಸ್ತರಿಸಿ', 'step.three.desc': 'ಪಾಲುದಾರರು ಮಾರ್ಗದರ್ಶನ, ಸಂಪನ್ಮೂಲಗಳು, ಪರಿಹಾರಗಳ ಪರೀಕ್ಷೆ ಮತ್ತು ಪ್ರಭಾವವನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡುತ್ತಾರೆ.', 'impact.kicker': 'ಪ್ರತಿ ಧ್ವನಿಗಾಗಿ', 'impact.heading': 'ಬಲವಾದ ಜಾರ್ಖಂಡ್ ಕೇಳುವುದರಿಂದ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ.', 'impact.desc': 'ಯಾವುದೇ ತಾಂತ್ರಿಕ ಜ್ಞಾನ ಅವಶ್ಯಕವಿಲ್ಲ. ನಿಮ್ಮ ಸಮುದಾಯಕ್ಕೆ ಏನಿದೆ ಎಂದು ಹೇಳಿ, ನಾವು ಅದನ್ನು ರಚಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.', 'impact.button': 'ನಿಮ್ಮ ಮೊದಲ ಸಮಸ್ಯೆಯನ್ನು ವರದಿಮಾಡಿ', 'report.modalTitle': 'ನಿಮ್ಮ ಸಮಸ್ಯೆಯನ್ನು ಹೇಳಿ', 'report.problemLabel': 'ಸಮಸ್ಯೆ ಯಾವುದು?', 'report.problemPlaceholder': 'ಸಮಸ್ಯೆಯನ್ನು ಸ್ಪಷ್ಟವಾಗಿ ವಿವರಿಸಿ, ಅದು ಎಲ್ಲಿ ನಡೆಯುತ್ತಿದೆ ಮತ್ತು ಯಾರ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುತ್ತಿದೆ.', 'report.locationLabel': 'ಸ್ಥಳ (ಐಚ್ಛಿಕ)', 'report.locationPlaceholder': 'ಗ್ರಾಮ, ವಾರ್ಡ್, ಲ್ಯಾಂಡ್ ಮಾರ್ಕ್ ಅಥವಾ ಹತ್ತಿರದ ಪ್ರದೇಶ', 'report.photoLabel': 'ಸಮಸ್ಯದ ಫೋಟೋ (ಐಚ್ಛಿಕ)', 'report.optionalNote': 'ಐಚ್ಛಿಕ: ಸಮಸ್ಯೆಯನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ವಿವರಿಸಲು ಸಹಾಯ ಮಾಡಿದರೆ ಸ್ಥಳ ಅಥವಾ ಫೋಟೋ ಸೇರಿಸಿ.', 'report.cancel': 'ರದ್ದುಮಾಡಿ', 'report.submit': 'ಪರಿಶೀಲನೆಗಾಗಿ ಸಲ್ಲಿಸಿ', 'footer.brandName': 'ಸಮರ್ಥ್ಯ', 'footer.brandTag': 'ಆలోಚನೆಗಳಿಂದ ಪರಿಣಾಮಕ್ಕೆ', 'footer.description': 'ಪೌರರು, ವಿಶ್ವವಿದ್ಯಾಲಯಗಳು, ಉದ್ಯಮ ಮತ್ತು ಸರ್ಕಾರದ ನಡುವಿನ ಸಹಕಾರಿ ವೇದಿಕೆ.', 'footer.activity': 'ನನ್ನ ಚಟುವಟಿಕೆ', 'footer.help': 'ಸಹಾಯ', 'footer.privacy': 'ಗೌಪ್ಯತೆ', 'footer.admin': 'ಆಡ್ಮಿನ್' },
+        ml: { 'brand.govName': 'ഇന്ത്യ ಸರ್ಕಾರം', 'brand.govSub': 'നാഗരിക സേവാ പോർട്ടൽ', 'nav.login': 'ലോഗിൻ', 'nav.challenges': 'ചെല്ലനുമകൾ', 'nav.how': 'ഇതെങ്ങനെ പ്രവർത്തിക്കുന്നു', 'nav.activity': 'എന്റെ പ്രവർത്തനങ്ങൾ', 'nav.help': 'സഹായം', 'nav.admin': 'അഡ്മിൻ', 'button.report': 'പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക', 'button.tell': 'നിങ്ങളുടെ പ്രശ്നം പറയൂ', 'button.explore': 'ചെല്ലനുമകൾ കാണുക', 'hero.eyebrow': 'പൊരുത്തപ്പെടുത്തിയ സമൂഹപരമായ വെല്ലുവിളികൾ', 'hero.problem': 'നിങ്ങളുടെ പ്രശ്നം.', 'hero.strength': 'ഇന്ത്യയുടെ ശക്തി.', 'hero.desc': 'യഥാർത്ഥ സമുദായ പ്രശ്നങ്ങൾ വിദ്യാർത്ഥികൾ, വിദഗ്ധർ, വ്യവസായം എന്നിവയുമായി ചേർത്ത് പ്രായോഗിക പരിഹാരങ്ങൾ ഉണ്ടാക്കുക.', 'hero.note': 'সহജ ഭാഷ · 3 മിനിറ്റിൽ കുറവല്ല', 'connection.mission': 'ഒരു പൊതു താല്പര്യം', 'connection.headline': 'പ്രാദേശിക ശബ്ദത്തിൽ നിന്ന് pitkäകാല മാറ്റം വരെ', 'connection.citizens': 'പൗരന്മാർ', 'connection.citizensSub': 'ആവശ്യങ്ങൾ പങ്കിടുക', 'connection.universities': 'വിദ്യാലയങ്ങൾ', 'connection.universitiesSub': 'പരിഹാരങ്ങൾ സൃഷ്ടിക്കുക', 'connection.industry': 'വ്യവസായം', 'connection.industrySub': 'അളക്കാവുന്ന പിന്തുണ', 'connection.solution': 'ഒരു അളക്കാവുന്ന പരിഹാരം', 'metrics.verified': 'പതിവായി പരിശോധിച്ച വെല്ലുവിളികൾ', 'metrics.teams': 'അൻവോപിച്ച ടീമുകൾ', 'metrics.support': 'സമുദായ പിന്തുണ', 'metrics.reporting': 'പ്രശ്നം റിപ്പോർട്ടിംഗ്', 'section.needs.kicker': 'നമ്മുടെ ചുറ്റുമുള്ള ആവശ്യങ്ങൾ', 'section.needs.heading': 'നിങ്ങളുടെ സഹായം കൊണ്ട് മാറ്റം സാധ്യമാണ്', 'section.needs.badge': 'ആദ്യ അംഗീകാരമെത്തുന്നതുവരെ ഉദാഹരണങ്ങൾ കാണിക്കുന്നു', 'search.label': 'വെല്ലുവിളികൾ തിരയുക', 'search.placeholder': 'ആവശ്യത്തിനോ സ്ഥലത്തിനോ വേണ്ടി തിരയുക…', 'category.all': 'എല്ലാം', 'category.water': 'വെള്ളം', 'category.agriculture': 'കൃഷി', 'category.education': 'വിദ്യ', 'category.environment': 'പരിസ്ഥിതി', 'challenge.example': 'ഉദാഹരണ വെല്ലുവിളി', 'challenge.support': 'ഞാൻ ഇത് പിന്തുണക്കുന്നു', 'challenge.supports': 'ഇതിനെ പിന്തുണക്കുക', 'challenge.water.location': 'ബേരോ, റാഞ്ചി', 'challenge.water.title': 'ബേരോ ഗ്രാമത്തിൽ ശുദ്ധമായ കുടിവെള്ളം ആവശ്യമാണ്', 'challenge.water.desc': 'മൂന്നു കൈ പമ്പുകൾ 600 ഓളം ആളുകളെ സേവിക്കുന്നു, വേനൽക്കാലത്ത് രണ്ട് മെച്ചപ്പെട്ട് നിർത്തുന്നു.', 'challenge.water.teams': 'ടീമുകൾ പ്രവർത്തിക്കുന്നു', 'challenge.agri.location': 'ഗുമ്ലാ, ജാർഖണ്ഡ്', 'challenge.agri.title': 'കർഷകർ ലാഭകരമായ വിളക്കൂട്ടം സംഭരണത്തിനായി ആവശ്യപ്പെടുന്നു', 'challenge.agri.desc': 'പച്ചക്കറി വിപണിയിലേക്ക് എത്തുന്നതിന് മുമ്പ് നശിക്കുന്നു. സമൂഹത്തിന് ലളിതമായ സോളാർ പരിഹാരം വേണം.', 'challenge.agri.teams': 'ടീമുകൾ പ്രവർത്തിക്കുന്നു', 'challenge.edu.location': 'ദൂംകാ, ജാർഖണ്ഡ്', 'challenge.edu.title': 'ഗ്രാമസാമാന്യ വിദ്യാർത്ഥികൾക്ക് പഠന സഹായം', 'challenge.edu.desc': 'വിദ്യാർത്ഥികൾക്ക് സ്കൂൾ കഴിഞ്ഞ് ശാസ്ത്രവും ഗണിതവും പഠിക്കാൻ ചെറിയ ഡാറ്റയിൽ പുനരുപയോഗിക്കാവുന്ന പാഠങ്ങൾ വേണം.', 'challenge.edu.teams': 'ടീമുകൾ പ്രവർത്തിക്കുന്നു', 'challenge.env.location': 'ലതേഹർ, ജാർഖണ്ഡ്', 'challenge.env.title': 'സമുദായ വനശുദ്ധീകരണവും മാലിന്യ വേർതിരിവും', 'challenge.env.desc': 'പ്ലാസ്റ്റിക് മാലിന്യം തോടുകളെ അടിച്ച് തഴച്ചുവെള്ളവും നാട്ടു മൃഗങ്ങൾക്കും ഹാനി ഉണ്ടാക്കുന്നു. ഗ്രാമത്തിന് പ്രായോഗിക ശുചീകരണ പദ്ധതി വേണം.', 'challenge.env.teams': 'ടീമുകൾ പ്രവർത്തിക്കുന്നു', 'how.kicker': 'ലളിതവും മനോഹരവുമായ രൂപകൽപ്പന', 'how.heading': 'ഒരു പ്രശ്നം. മൂന്ന് ഘട്ടങ്ങൾ. യഥാർത്ഥ പുരോഗതി.', 'step.one.title': 'പ്രശ്നം പങ്കിടുക', 'step.one.desc': 'ലളിതമായ ഭാഷയിൽ സംസാരിക്കുകയോ ടൈപ്പ് ചെയ്യുകയോ ചെയ്യുക. നിങ്ങളുടെ റിപ്പോർട്ട് പരിശോധനയ്ക്കായി സ്വകാര്യമായി 저장ിക്കും.', 'step.two.title': 'അഡ്മിൻ സ്ഥിരീകരിക്കുന്നു', 'step.two.desc': 'ന gerçekവും ഉപയോഗപ്രദവുമായ പ്രശ്നങ്ങൾ മാത്രം അംഗീകരിച്ച് പൊതു ഡാറ്റയിൽ കാണിക്കുന്നു.', 'step.three.title': 'സൃഷ്ടിച്ച് വ്യാപിപ്പിക്കുക', 'step.three.desc': 'പങ്കാളികൾ മാർഗ്ഗദർശനം, വിഭവങ്ങൾ, പരിഹാര പരീക്ഷണം, ആഘാത ട്രാക്ക് എന്നിവ നടത്തുന്നു.', 'impact.kicker': 'ഓരോ വോയ്‌സിനും വേണ്ടിയുള്ളത്', 'impact.heading': 'ശക്തമായ ജാർഖണ്ഡ് കേൾക്കുന്നതിൽ നിന്ന് ആരംഭിക്കുന്നു.', 'impact.desc': 'സാങ്കേതിക വൈദഗ്ദ്ധ്യം വേണ്ട. നിങ്ങളുടെ സമൂഹത്തിന് എന്ത് വേണമെന്ന് പറയൂ, ഞങ്ങൾ അത് structured ചെയ്യാൻ സഹായിക്കും.', 'impact.button': 'നിങ്ങളുടെ ആദ്യ പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക', 'report.modalTitle': 'നിങ്ങളുടെ പ്രശ്നം പറയൂ', 'report.problemLabel': 'പ്രശ്നം എന്താണ്?', 'report.problemPlaceholder': 'പ്രശ്നം വ്യക്തമായി വിശദീകരിക്കുക, അത് എവിടെ നടക്കുന്നു, ആരെയാണ് ബാധിക്കുന്നു.', 'report.locationLabel': 'സ്ഥലം (ഓപ്ഷണൽ)', 'report.locationPlaceholder': 'ഗ്രാമം, വാർഡ്, ലാൻഡ്മാർക്ക് അല്ലെങ്കിൽ സമീപ പ്രദേശം', 'report.photoLabel': 'പ്രശ്നത്തിന്റെ ഫോട്ടോ (ഓപ്ഷണൽ)', 'report.optionalNote': 'ഓപ്ഷണൽ: പ്രശ്നം സുരക്ഷിതമായി വിശദീകരിക്കാൻ സഹായിക്കുന്നെങ്കിൽ സ്ഥലം അല്ലെങ്കിൽ ഫോട്ടോ ചേർക്കുക.', 'report.cancel': 'റദ്ദാക്കുക', 'report.submit': 'വിലയിരുത്തലിനായി സമർപ്പിക്കുക', 'footer.brandName': 'സമാര്ത്യ', 'footer.brandTag': 'ആലോചനയിൽ നിന്ന് സ്വാധീനം വരെ', 'footer.description': 'പൗരന്മാർ, വിദ്യാഭ്യാസസ്ഥാപനങ്ങൾ, വ്യവസായം, സർക്കാർ എന്നിവയ്ക്കായി ചേർന്ന പ്ലാറ്റ്ഫോം.', 'footer.activity': 'എന്റെ പ്രവർത്തനങ്ങൾ', 'footer.help': 'സഹായം', 'footer.privacy': 'സ്വകാര്യത', 'footer.admin': 'അഡ്മിൻ' },
+        pa: { 'brand.govName': 'ਭਾਰਤ ਸਰਕਾਰ', 'brand.govSub': 'ਨਾਗਰਿਕ ਸੇਵਾ ਪੋਰਟਲ', 'nav.login': 'ਲੌਗਇਨ', 'nav.challenges': 'ਚੁਨौतੀਆਂ', 'nav.how': 'ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ', 'nav.activity': 'ਮੇਰੀ ਗਤੀਵਿਧੀ', 'nav.help': 'ਮਦਦ', 'nav.admin': 'ਐਡਮਿਨ', 'button.report': 'ਮਸਲੇ ਦੀ ਰਿਪੋਰਟ ਕਰੋ', 'button.tell': 'ਆਪਣੀ ਸਮੱਸਿਆ ਬੋਲੋ', 'button.explore': 'ਚੁਨौतੀਆਂ ਵੇਖੋ', 'hero.eyebrow': 'ਜਾਂਚ ਕੀਤੇ ਸਮੁਦਾਈ ਚੁਨौती', 'hero.problem': 'ਤੁਹਾਡੀ ਸਮੱਸਿਆ.', 'hero.strength': 'ਭਾਰਤ ਦੀ ਸ਼ਕਤੀ.', 'hero.desc': 'ਵਾਸਤਵਿਕ ਸਮਾਜਿਕ ਮੁੱਦੇ ਨੂੰ ਵਿਦਿਆਰਥੀਆਂ, ਮਾਹਰਾਂ ਅਤੇ ਉਦਯੋਗ ਨਾਲ ਜੋੜ ਕੇ ਅਮਲਯੋਗ ਹੱਲ ਬਣਾਓ।', 'hero.note': 'ਸਰਲ ਭਾਸ਼ਾ · 3 ਮਿੰਟ ਤੋਂ ਘੱਟ', 'connection.mission': 'ਇਕ ਸਾਂਝੀ ਮੰਜ਼ਿਲ', 'connection.headline': 'ಸ್ಥਾਨਕ ਅਵਾਜ਼ ਤੋਂ ਸਥਾਈ ਬਦਲਾਅ ਤੱਕ', 'connection.citizens': 'ਨਾਗਰਿਕ', 'connection.citizensSub': 'ਲੋੜਾਂ ਸਾਂਝੀਆਂ ਕਰੋ', 'connection.universities': 'ਯੂਨੀਵਰਸਿਟੀਆਂ', 'connection.universitiesSub': 'ਹੱਲ ਬਣਾਓ', 'connection.industry': 'ਉਦਯੋਗ', 'connection.industrySub': 'ਮਾਪਣਯੋਗ ਸਹਾਇਤਾ', 'connection.solution': 'ਇੱਕ ਮਾਪਣਯੋਗ ਹੱਲ', 'metrics.verified': 'ਜਾਂਚ ਕੀਤੀਆਂ ਚੁਨौतੀਆਂ', 'metrics.teams': 'ਮਨਜ਼ੂਰ ਕੀਤੀਆਂ ਟੀਮਾਂ', 'metrics.support': 'ਸਮੁਦਾਈ ਸਹਿਯੋਗ', 'metrics.reporting': 'ਮਸਲੇ ਦੀ ਰਿਪੋਰਟਿੰਗ', 'section.needs.kicker': 'ਸਾਡੇ ਆਲੇ ਦੁਆਲੇ ਦੀ ਅਰਥ', 'section.needs.heading': 'ਤੁਹਾਡੀ ਮਦਦ ਨਾਲ ਬਦਲਾਅ ਸੰਭਵ ਹੈ', 'section.needs.badge': 'ਪਹਿਲੀ ਮਨਜ਼ੂਰੀ ਤੱਕ ਉਦਾਹਰਨਾਂ ਦਿਖਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ', 'search.label': 'ਚੁਨੌਤੀਆਂ ਖੋਜੋ', 'search.placeholder': 'ਲੋੜ ਜਾਂ ਸਥਾਨ ਦੇ ਅਨੁਸਾਰ ਖੋਜੋ…', 'category.all': 'ਸਾਰੇ', 'category.water': 'ਪਾਣੀ', 'category.agriculture': 'ਕਰਸ਼ੀ', 'category.education': 'ਸਿੱਖਿਆ', 'category.environment': 'ਵਾਤਾਵਰਣ', 'challenge.example': 'ਉਦਾਹਰਣ ਚੁਨौती', 'challenge.support': 'ਮੈਂ ਇਸਦਾ ਸਹਿਯੋਗ ਕਰਦਾ ਹਾਂ', 'challenge.supports': 'ਇਸਦਾ ਸਹਿਯੋਗ ਕਰੋ', 'challenge.water.location': 'ਬੇਰੋ, ਰਾਂਚੀ', 'challenge.water.title': 'ਬੇਰੋ ਗ੍ਰਾਮ ਵਿੱਚ ਸੁਚਾਰੂ ਪਾਣੀ ਦੀ ਲੋੜ ਹੈ', 'challenge.water.desc': 'ਤਿੰਨ ਹੈਂਡਪੰਪ 600 ਤੋਂ ਵੱਧ ਲੋਕਾਂ ਦੀ ਸੇਵਾ ਕਰਦੇ ਹਨ, ਪਰ ਹਰ ਗਰਮੀਆਂ ਵਿੱਚ ਦੋ ਕੰਮ ਕਰਨਾ ਬੰਦ ਕਰ ਦਿੰਦੇ ਹਨ।', 'challenge.water.teams': 'ਟੀਮਾਂ ਕੰਮ ਕਰ ਰਹੀਆਂ ਹਨ', 'challenge.agri.location': 'ਗੁਮਲਾ, ਜ਼ਾਰਖੰਡ', 'challenge.agri.title': 'ਕਿਸਾਨਾਂ ਨੂੰ ਘੱਟ ਕੀਮਤ ਵਿੱਚ ਫਸਲ ਭੰਡਾਰ ਦੀ ਲੋੜ ਹੈ', 'challenge.agri.desc': 'ਸਬਜ਼ੀਆਂ ਬਾਜ਼ਾਰ ਤੱਕ ਪਹੁੰਚਣ ਤੋਂ ਪਹਿਲਾਂ ਖ਼ਰਾਬ ਹੋ ਜਾਂਦੀਆਂ ਹਨ। ਸਮੁਦਾਇ ਨੂੰ ਆਸਾਨ ਸੂਰਜੀ ਹੱਲ ਦੀ ਲੋੜ ਹੈ।', 'challenge.agri.teams': 'ਟੀਮਾਂ ਕੰਮ ਕਰ ਰਹੀਆਂ ਹਨ', 'challenge.edu.location': 'ਦੁਮਕਾ, ਜ਼ਾਰਖੰਡ', 'challenge.edu.title': 'ਗ੍ਰਾਮੀਣ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਅਧਿਐਨ ਸਹਾਇਤਾ', 'challenge.edu.desc': 'ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਸਕੂਲ ਤੋਂ ਬਾਅਦ ਵਿਗਿਆਨ ਅਤੇ ਗਣਿਤ ਲਈ ਮੁੜ-ਉਪਯੋਗੀ, ਘੱਟ-ਡੇਟਾ ਪਾਠਾਂ ਦੀ ਲੋੜ ਹੈ।', 'challenge.edu.teams': 'ਟੀਮਾਂ ਕੰਮ ਕਰ ਰਹੀਆਂ ਹਨ', 'challenge.env.location': 'ਲਾਤੇਹਰ, ਜ਼ਾਰਖੰਡ', 'challenge.env.title': 'ਸਮੁਦਾਈ ਵਨ ਸਫਾਈ ਅਤੇ ਕੱਚਰ ਵੰਡ', 'challenge.env.desc': 'ਪਲਾਸਟਿਕ ਕੱਛਰ ਨਾਲੀਆਂ ਨੂੰ ਰੁਕਵਾਉਂਦਾ ਹੈ ਅਤੇ ਸਥਾਨਕ ਰੁੱਖਾਂ ਨੂੰ ਨੁਕਸਾਨ ਪਹੁੰਚਾਉਂਦਾ ਹੈ। ਗ੍ਰਾਮ ਨੂੰ ਕਾਰਗੁਜ਼ਾਰੀ ਵਾਲੀ ਸਫਾਈ ਯੋਜਨਾ ਦੀ ਲੋੜ ਹੈ।', 'challenge.env.teams': 'ਟੀਮਾਂ ਕੰਮ ਕਰ ਰਹੀਆਂ ਹਨ', 'how.kicker': 'ਸਧਾਰਨ ਡਿਜ਼ਾਈਨ', 'how.heading': 'ਇੱਕ ਸਮੱਸਿਆ। ਤਿੰਨ ਕਦਮ। ਵਾਸਤਵਿਕ ਤਰੱਕੀ।', 'step.one.title': 'ਸਮੱਸਿਆ ਸਾਂਝੀ ਕਰੋ', 'step.one.desc': 'ਸਧਾਰਨ ਭਾਸ਼ਾ ਵਿੱਚ ਗੱਲ ਕਰੋ ਜਾਂ ਟਾਈਪ ਕਰੋ। ਤੁਹਾਡੀ ਰਿਪੋਰਟ ਸਮੀਖਿਆ ਲਈ ਨਿੱਜੀ ਰੂਪ ਵਿੱਚ ਸਹੇਜੀ ਜਾਵੇਗੀ।', 'step.two.title': 'ਐਡਮਿਨ ਤਸਦੀਕ ਕਰਦਾ ਹੈ', 'step.two.desc': 'ਕੇਵਲ ਸਹੀ ਅਤੇ ਸੁਪ੍ਰਯੋਗੀ ਚੁਨੌਤੀਆਂ ਹੀ ਮਨਜ਼ੂਰ ਅਤੇ ਜਨਤਕ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।', 'step.three.title': 'ਬਣਾਓ ਅਤੇ ਫੈਲਾਓ', 'step.three.desc': 'ਭਾਈਦਾਰਾਂ ਮਾਰਗਦਰਸ਼ਨ, ਸਰੋਤ, ਹੱਲਾਂ ਦੀ ਜਾਂਚ ਅਤੇ ਪ੍ਰਭਾਵ ਨੂੰ ਟਰੈਕ ਕਰਦੇ ਹਨ।', 'impact.kicker': 'ਹਰ ਆਵਾਜ਼ ਲਈ', 'impact.heading': 'ਮਜ਼ਬੂਤ ਜ਼ਾਰਖੰਡ ਦੀ ਸ਼ੁਰੂਆਤ ਸੁਣਨ ਤੋਂ ਹੁੰਦੀ ਹੈ।', 'impact.desc': 'ਕੋਈ ਤਕਨੀਕੀ ਗਿਆਨ ਲੋੜ ਨਹੀਂ ਹੈ। ਆਪਣੀ ਜਮਾਤ ਨੂੰ ਕੀ ਚਾਹੀਦਾ ਹੈ ਦੱਸੋ, ਅਸੀਂ ਉਸਨੂੰ ਬਣਾਉਣ ਵਿੱਚ ਮਦਦ ਕਰਾਂਗੇ।', 'impact.button': 'ਆਪਣੀ ਪਹਿਲੀ ਸਮੱਸਿਆ ਰਿਪੋਰਟ ਕਰੋ', 'report.modalTitle': 'ਆਪਣੀ ਸਮੱਸਿਆ ਦੱਸੋ', 'report.problemLabel': 'ਸਮੱਸਿਆ ਕੀ ਹੈ?', 'report.problemPlaceholder': 'ਸਮੱਸਿਆ ਨੂੰ ਸਪੱਸ਼ਟ ਰੂਪ ਵਿੱਚ ਵੇਖੋ, ਇਹ ਕਿੱਥੇ ਹੋ ਰਹੀ ਹੈ ਅਤੇ ਕਿਸ ਤੇ ਪ੍ਰਭਾਵ ਪਾ ਰਹੀ ਹੈ।', 'report.locationLabel': 'ਸਥਾਨ (ਚੋਣਵੇਹੀ)', 'report.locationPlaceholder': 'ਗ੍ਰਾਮ, ਵਾਰਡ, ਲੈਂਡਮਾਰਕ ਜਾਂ ਨਜ਼ਦੀਕੀ ਇਲਾਕਾ', 'report.photoLabel': 'ਸਮੱਸਿਆ ਦੀ ਫੋਟੋ (ਚੋਣਵੇਹੀ)', 'report.optionalNote': 'ਚੋਣਵੇਹੀ: ਜੇ ਸਥਾਨ ਜਾਂ ਫੋਟੋ ਸਮਝਣ ਵਿੱਚ ਮਦਦ ਕਰਦੇ ਹੋ ਤਾਂ ਜੋੜੋ।', 'report.cancel': 'ਰੱਦ ਕਰੋ', 'report.submit': 'ਸਮੀਖਿਆ ਲਈ ਜਮ੍ਹਾਂ ਕਰੋ', 'footer.brandName': 'ਸਮਰਥਿਆ', 'footer.brandTag': 'ਵਿਚਾਰ ਤੋਂ ਪ੍ਰਭਾਵ ਤੱਕ', 'footer.description': 'ਨਾਗਰਿਕਾਂ, ਯੂਨੀਵਰਸਿਟੀਆਂ, ਉਦਯੋਗ ਅਤੇ ਸਰਕਾਰ ਲਈ ਇੱਕ ਸਹਿਯੋਗੀ ਪਲੇਟਫਾਰਮ।', 'footer.activity': 'ਮੇਰੀ ਗਤੀਵਿਧੀ', 'footer.help': 'ਮਦਦ', 'footer.privacy': 'ਨਿਜਤਾ', 'footer.admin': 'ਐਡਮਿਨ' },
+        ur: { 'brand.govName': 'بھارت حکومت', 'brand.govSub': 'شہری خدمت پورٹل', 'nav.login': 'لاگ ان', 'nav.challenges': 'چیلنجز', 'nav.how': 'یہ کیسے کام کرتا ہے', 'nav.activity': 'میری سرگرمی', 'nav.help': 'مدد', 'nav.admin': 'ایڈمن', 'button.report': 'مسئلہ رپورٹ کریں', 'button.tell': 'اپنی مسئلہ بیان کریں', 'button.explore': 'چیلنجز دیکھیں', 'hero.eyebrow': 'تصدیق شدہ کمیونٹی چیلنجز', 'hero.problem': 'آپ کا مسئلہ.', 'hero.strength': 'بھارت کی طاقت.', 'hero.desc': 'حقیقی کمیونٹی مسائل کو طلبہ، ماہرین اور صنعت سے جوڑ کر عملی حل بنائیں۔', 'hero.note': 'سادہ زبان · 3 منٹ سے کم', 'connection.mission': 'ایک مشترکہ مشن', 'connection.headline': 'مقامی آواز سے پائیدار تبدیلی تک', 'connection.citizens': 'شہری', 'connection.citizensSub': 'ضرورتیں بانٹیں', 'connection.universities': 'یونیورسٹی', 'connection.universitiesSub': 'حل بنائیں', 'connection.industry': 'انڈسٹری', 'connection.industrySub': 'ماپا جانے والا تعاون', 'connection.solution': 'ایک قابل پیمائش حل', 'metrics.verified': 'تصدیق شدہ چیلنجز', 'metrics.teams': 'منظور شدہ ٹیمیں', 'metrics.support': 'کمیونٹی سپورٹ', 'metrics.reporting': 'مسئلہ رپورٹنگ', 'section.needs.kicker': 'ہماری چاروں طرف کی ضرورتیں', 'section.needs.heading': 'آپ کی مدد سے تبدیلی ممکن ہے', 'section.needs.badge': 'پہلی منظوری تک مثالیں دکھائی جا رہی ہیں', 'search.label': 'چیلنجز تلاش کریں', 'search.placeholder': 'ضرورت یا مقام کے مطابق تلاش کریں…', 'category.all': 'تمام', 'category.water': 'پانی', 'category.agriculture': 'زراعت', 'category.education': 'تعلیم', 'category.environment': 'ماحول', 'challenge.example': 'مثالی چیلنج', 'challenge.support': 'میں اس کی حمایت کرتا ہوں', 'challenge.supports': 'اس کی حمایت کریں', 'challenge.water.location': 'بیرو، رانچی', 'challenge.water.title': 'بیرو گاؤں میں صاف پینے کے پانی کی ضرورت ہے', 'challenge.water.desc': 'تین ہینڈ پمپ 600 سے زائد لوگوں کی خدمت کرتے ہیں، مگر ہر گرمی میں دو کام کرنا بند کر دیتے ہیں۔', 'challenge.water.teams': 'ٹیمیں کام کر رہی ہیں', 'challenge.agri.location': 'گملا، جھارکھنڈ', 'challenge.agri.title': 'کسانوں کو سستی فصل ذخیرہ سازی کی ضرورت ہے', 'challenge.agri.desc': 'سبزیاں مارکیٹ میں پہنچنے سے پہلے خراب ہو جاتی ہیں۔ کمیونٹی کو آسان سولر حل کی ضرورت ہے۔', 'challenge.agri.teams': 'ٹیمیں کام کر رہی ہیں', 'challenge.edu.location': 'دومکا، جھارکھنڈ', 'challenge.edu.title': 'دیہی طلبہ کے لیے تعلیمی مدد', 'challenge.edu.desc': 'طلبہ کو اسکول کے بعد سائنس اور ریاضی کے لیے دوبارہ استعمال ہونے والی کم ڈیٹا اسائنمنٹ کی ضرورت ہے۔', 'challenge.edu.teams': 'ٹیمیں کام کر رہی ہیں', 'challenge.env.location': 'لاٹھہر، جھارکھنڈ', 'challenge.env.title': 'کمیونٹی جنگل صفائی اور فضلہ الگ کرنا', 'challenge.env.desc': 'پلاسٹک فضلہ نالیوں کو مسدود کر رہا ہے اور مقامی درختوں کو نقصان پہنچا رہا ہے۔ گاؤں کو عملی صفائی منصوبے کی ضرورت ہے۔', 'challenge.env.teams': 'ٹیمیں کام کر رہی ہیں', 'how.kicker': 'سادہ ڈیزائن', 'how.heading': 'ایک مسئلہ۔ تین قدم۔ حقیقی ترقی۔', 'step.one.title': 'مسئلہ بیان کریں', 'step.one.desc': 'سادہ زبان میں بولیں یا ٹائپ کریں۔ آپ کا رپورٹس جائزے کے لیے نجی طور پر محفوظ رکھا جاتا ہے۔', 'step.two.title': 'ایڈمن تصدیق کرتا ہے', 'step.two.desc': 'صرف اصل اور فائدہ مند چیلنجز ہی منظور اور عوام کے سامنے رکھے جاتے ہیں۔', 'step.three.title': 'تخلیق اور پھیلاؤ', 'step.three.desc': 'پارٹنرز رہنمائی، وسائل، حل کی جانچ اور اثر کو ٹریک کرتے ہیں۔', 'impact.kicker': 'ہر آواز کے لیے', 'impact.heading': 'مضبوط جھارکھنڈ سننے سے شروع ہوتا ہے۔', 'impact.desc': 'کسی تکنیکی علم کی ضرورت نہیں۔ اپنی کمیونٹی کو کیا درکار ہے بتائیں، ہم اسے ترتیب دینے میں مدد کریں گے۔', 'impact.button': 'آپ کا پہلا مسئلہ رپورٹ کریں', 'report.modalTitle': 'اپنی مسئلہ بیان کریں', 'report.problemLabel': 'مسئلہ کیا ہے؟', 'report.problemPlaceholder': 'مسئلہ واضح طور پر بیان کریں، یہ کہاں ہو رہا ہے اور کس پر اثر ڈال رہا ہے۔', 'report.locationLabel': 'مقام (اختیاری)', 'report.locationPlaceholder': 'گاؤں، وارڈ، لینڈ مارک یا قریبی علاقہ', 'report.photoLabel': 'مسئلہ کی تصویر (اختیاری)', 'report.optionalNote': 'اختیاری: اگر مقام یا تصویر مسئلے کو بہتر طور پر سمجھانے میں مدد دے تو شامل کریں۔', 'report.cancel': 'منسوخ', 'report.submit': 'جائزہ کے لیے ارسال کریں', 'footer.brandName': 'سمارتیا', 'footer.brandTag': 'خیال سے اثر تک', 'footer.description': 'شہریوں، یونیورسٹیوں، صنعت اور حکومت کے لیے ایک مشترکہ پلیٹ فارم۔', 'footer.activity': 'میری سرگرمی', 'footer.help': 'مدد', 'footer.privacy': 'رازداری', 'footer.admin': 'ایڈمن' },
+        as: { 'brand.govName': 'ভাৰত চৰকাৰ', 'brand.govSub': 'নাগৰিক সেৱা প’ৰ্টেল', 'nav.login': 'লগিন', 'nav.challenges': 'চেলেঞ্জ', 'nav.how': 'ইয়াক কেনেকৈ কাম কৰে', 'nav.activity': 'মোৰ কাৰ্যকলাপ', 'nav.help': 'সহায়', 'nav.admin': 'অ্যাডমিন', 'button.report': 'সমস্যা প্ৰতিবেদন কৰক', 'button.tell': 'আপোনাৰ সমস্যাটো ক’লে দিয়ক', 'button.explore': 'চেলেঞ্জসমূহ চাওক', 'hero.eyebrow': 'প্ৰমাণিত সমাজ চেলেঞ্জ', 'hero.problem': 'আপোনাৰ সমস্যাটো.', 'hero.strength': 'ভাৰতৰ শক্তি.', 'hero.desc': 'বাস্তৱ সমাজ সমস্যা সমূহক শিক্ষান্থী, বিশেষজ্ঞ আৰু শিল্পৰ সৈতে সংযোগ কৰি ব্যৱহাৰযোগ্য সমাধান সৃষ্টি কৰক।', 'hero.note': 'সহজ ভাষা · ৩ মিনিটত কম', 'connection.mission': 'একৰা অংশীদাৰী লক্ষ্য', 'connection.headline': 'স্থানীয় কণ্ঠৰ পৰা স্থায়ী পৰিবৰ্তনলৈ', 'connection.citizens': 'নাগৰিক', 'connection.citizensSub': 'চাহিদা শেয়াৰ কৰক', 'connection.universities': 'বিশ্ববিদ্যালয়', 'connection.universitiesSub': 'সমাধান সৃষ্টি কৰক', 'connection.industry': 'শিল্প', 'connection.industrySub': 'পরিমাপযোগ্য সমৰ্থন', 'connection.solution': 'এটা এজন চিহ্নিত সমাধান', 'metrics.verified': 'প্ৰমাণিত চেলেঞ্জ', 'metrics.teams': 'অনুমোদিত দল', 'metrics.support': 'সমাজৰ সমৰ্থন', 'metrics.reporting': 'সমস্যা প্ৰতিবেদন', 'section.needs.kicker': 'আমাৰ চারিগৈ থকা চাহিদা', 'section.needs.heading': 'আপোনাৰ সহায়তাই পৰিবৰ্তন সম্ভৱ', 'section.needs.badge': 'প্ৰথম অনুমোদনলৈকে উদাহরণ দেখুৱা হৈছে', 'search.label': 'চেলেঞ্জ সন্ধান কৰক', 'search.placeholder': 'চাহিদা বা ঠাইৰে সন্ধান কৰক…', 'category.all': 'সকলো', 'category.water': 'পানী', 'category.agriculture': 'কৃষি', 'category.education': 'শিক্ষা', 'category.environment': 'পৰিবেশ', 'challenge.example': 'উদাহরণ চেলেঞ্জ', 'challenge.support': 'আমি এইটো সমৰ্থন কৰো', 'challenge.supports': 'এইটো সমৰ্থন কৰক', 'challenge.water.location': 'বেরো, রাঁচী', 'challenge.water.title': 'বেরো গ্ৰামে পৰিষ্কাৰ পানী আহৰণৰ প্রয়োজন', 'challenge.water.desc': 'তিনিও হ্যান্ডপাম্প ৬০০ জনতকৈ অধিক লোকৰ সেবা কৰে, কিন্তু গৰমিৰ সময়ত দুটাও বন্ধ হৈ থাকে।', 'challenge.water.teams': 'দলবোৰ কাম কৰি আছে', 'challenge.agri.location': 'গুমলা, ঝাড়খণ্ড', 'challenge.agri.title': 'কৃষকক সস্তা ফসল সংরক্ষণের প্রয়োজন', 'challenge.agri.desc': 'সবজি বাজারলৈ যাওঁতে আগতে ক্ষতিগ্ৰস্ত হয়। সমাজটোৱে সহজ সৌৰ সমাধান বিচাৰে।', 'challenge.agri.teams': 'দলবোৰ কাম কৰি আছে', 'challenge.edu.location': 'দুমকা, ঝাড়খণ্ড', 'challenge.edu.title': 'গ্রামীণ বাচ্চাবোৰৰ বাবে শিক্ষণ সহায়তা', 'challenge.edu.desc': 'বাচ্চাবিলাকে বিদ্যালয়ৰ পিছতেই বিজ্ঞান আৰু গণিতৰ বাবে পুনঃব্যবহৃত, কম ডেটা পাঠৰ প্রয়োজন।', 'challenge.edu.teams': 'দলবোৰ কাম কৰি আছে', 'challenge.env.location': 'লাতেহাৰ, ঝাড়খণ্ড', 'challenge.env.title': 'সমাজ বন পৰিষ্কাৰ আৰু আবর্জনা আলাদা কৰা', 'challenge.env.desc': 'প্লাস্টিক আবর্জনা নালীবোৰ আটক কৰি স্থানীয় গছপাখৰ ক্ষতি কৰি আছে। গ্রামটোৰ বাবে কার্যকর পৰিষ্কাৰ পরিকল্পনা লাগে।', 'challenge.env.teams': 'দলবোৰ কাম কৰি আছে', 'how.kicker': 'সহজ ডিজাইন', 'how.heading': 'এখনো সমস্যা। তিনিটা ধাপ। বাস্তৱ অগ্ৰগতি।', 'step.one.title': 'সমস্যাটো শেয়াৰ কৰক', 'step.one.desc': 'সহজ ভাষাত কথা কওঁক বা টাইপ কৰক। আপুনি দিয়া প্ৰতিবেদন পৰ্যালোচনাৰ বাবে গোপনভাৱে সংৰক্ষণ কৰা হয়।', 'step.two.title': 'অ্যাডমিন পৰীক্ষা কৰে', 'step.two.desc': 'কেৱল সত্য আৰু উপযোগী চেলেঞ্জবোৰহে অনুমোদন আৰু জনসাধাৰণলৈ দেখুৱা হয়।', 'step.three.title': 'গঠন আৰু বিস্তার', 'step.three.desc': 'সহযোগীসকল পথপ্রদর্শন, সম্পদ, সমাধান পৰীক্ষণ আৰু প্রভাব ট্রেক কৰে।', 'impact.kicker': 'প্রতিটো কণ্ঠৰ বাবে', 'impact.heading': 'শক্তিশালী ঝাড়খণ্ড শুনাৰ পৰা আৰম্ভ হয়।', 'impact.desc': 'কোনো প্ৰযুক্তিগত জ্ঞানৰ প্ৰয়োজন নাই। আপোনাৰ সমাজৰ কী প্রয়োজন, মোক ক’লে দিয়ক; আমি সেয়া গঠন কৰাত সহায় কৰিব।', 'impact.button': 'আপোনাৰ প্ৰথম সমস্যাটো প্ৰতিবেদন কৰক', 'report.modalTitle': 'আপোনাৰ সমস্যাটো ক’লে দিয়ক', 'report.problemLabel': 'সমস্যাটো কি?', 'report.problemPlaceholder': 'সমস্যাটো স্পষ্টভাৱে বর্ণনা কৰক, সেয়া কোথায় চলি আছে আৰু কোনজনক প্রভাব কৰিছে.', 'report.locationLabel': 'স্থান (ঐচ্ছিক)', 'report.locationPlaceholder': 'গাঁও, ৱাৰ্ড, ল্যান্ডমার্ক বা ওচৰৰ অঞ্চল', 'report.photoLabel': 'সমস্যাটোৰ ছবি (ঐচ্ছিক)', 'report.optionalNote': 'ঐচ্ছিক: যদি স্থান বা ছবি নিরাপদে ব্যাখ্যা কৰাত সহায় কৰে, তেন্তে যোগ কৰক।', 'report.cancel': 'বাতিল', 'report.submit': 'পৰ্যালোচনাৰ বাবে জমা কৰক', 'footer.brandName': 'সমর্থ্য', 'footer.brandTag': 'চিন্তাৰ পৰা প্রভাবলৈ', 'footer.description': 'নাগৰিক, বিশ্ববিদ্যালয়, শিল্প আৰু চৰকাৰৰ বাবে সহযোগী প্লেটফর্ম।', 'footer.activity': 'মোৰ কাৰ্যকলাপ', 'footer.help': 'সহায়', 'footer.privacy': 'গোপনীয়তা', 'footer.admin': 'অ্যাডমিন' },
+      };
+
+      function applyLanguage(lang) {
+        const dict = translations[lang] || translations.en;
+        document.querySelectorAll('[data-i18n]').forEach((node) => {
+          const key = node.getAttribute('data-i18n');
+          const text = dict[key] || translations.en[key];
+          if (!text) return;
+
+          const hasSvg = node.querySelector('svg');
+          if (hasSvg) {
+            const textNodes = Array.from(node.childNodes).filter((child) => child.nodeType === Node.TEXT_NODE);
+            if (textNodes.length) {
+              textNodes.forEach((child) => {
+                child.textContent = '';
+              });
+              const textNode = document.createTextNode(text);
+              if (node.lastChild && node.lastChild.nodeType === Node.ELEMENT_NODE) {
+                node.appendChild(textNode);
+              } else {
+                node.insertBefore(textNode, node.lastChild || null);
+              }
+            } else {
+              node.textContent = text;
+            }
+          } else {
+            node.textContent = text;
+          }
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => {
+          const key = node.getAttribute('data-i18n-placeholder');
+          const value = dict[key] || translations.en[key];
+          if (value) {
+            node.placeholder = value;
+          }
+        });
+
+        const toggle = document.getElementById('langToggle');
+        if (toggle) {
+          toggle.value = lang;
+        }
+
+        localStorage.setItem('lang', lang);
+      }
+
+      function initMobileMenu() {
+        const toggle = document.querySelector('.menu-button');
+        const nav = document.querySelector('.nav-links');
+        if (!toggle || !nav) return;
+
+        toggle.addEventListener('click', () => {
+          const isOpen = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        nav.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      const REPORT_STORAGE_KEY = 'india_gov_reports';
+
+      function getReports() {
+        try {
+          return JSON.parse(localStorage.getItem(REPORT_STORAGE_KEY) || '[]');
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function showStatus(message) {
+        const status = document.getElementById('reportStatus');
+        if (!status) return;
+        status.textContent = message;
+        status.classList.add('visible');
+      }
+
+      function syncReportModal() {
+        const modal = document.getElementById('reportModal');
+        if (!modal) return;
+        const isOpen = modal.classList.contains('open');
+        modal.setAttribute('aria-hidden', String(!isOpen));
+      }
+
+      function openReportModal() {
+        const modal = document.getElementById('reportModal');
+        if (!modal) return;
+        modal.classList.add('open');
+        syncReportModal();
+      }
+
+      function closeReportModal() {
+        const modal = document.getElementById('reportModal');
+        const form = document.getElementById('reportForm');
+        const photoInput = document.getElementById('problemPhoto');
+        const photoPreview = document.getElementById('photoPreview');
+        const photoPreviewWrap = document.getElementById('photoPreviewWrap');
+        if (!modal) return;
+        modal.classList.remove('open');
+        syncReportModal();
+        if (form) form.reset();
+        if (photoInput) photoInput.value = '';
+        if (photoPreview) photoPreview.removeAttribute('src');
+        if (photoPreviewWrap) photoPreviewWrap.classList.remove('visible');
+      }
+
+      function initReportFlow() {
+        document.querySelectorAll('[data-open-report], .report-top, .primary-cta').forEach((button) => {
+          button.addEventListener('click', openReportModal);
+        });
+
+        document.querySelectorAll('[data-close-report]').forEach((button) => {
+          button.addEventListener('click', closeReportModal);
+        });
+
+        const useLiveLocationBtn = document.getElementById('useLiveLocationBtn');
+        const locationInput = document.getElementById('problemLocation');
+
+        if (useLiveLocationBtn && locationInput) {
+          useLiveLocationBtn.addEventListener('click', () => {
+            if (!navigator.geolocation) {
+              showStatus('Your browser does not support live location access.');
+              return;
+            }
+
+            useLiveLocationBtn.disabled = true;
+            useLiveLocationBtn.textContent = 'Getting location...';
+
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const { latitude, longitude } = position.coords;
+                const fallback = `Lat ${latitude.toFixed(5)}, Lng ${longitude.toFixed(5)}`;
+                const geocodeUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+
+                fetch(geocodeUrl, {
+                  headers: {
+                    'Accept-Language': 'en'
+                  }
+                })
+                  .then((response) => response.ok ? response.json() : null)
+                  .then((data) => {
+                    const readable = data && data.display_name ? data.display_name.split(',').slice(0, 4).join(', ').trim() : fallback;
+                    locationInput.value = readable || fallback;
+                  })
+                  .catch(() => {
+                    locationInput.value = fallback;
+                  })
+                  .finally(() => {
+                    showStatus('Live location added to your report.');
+                    useLiveLocationBtn.disabled = false;
+                    useLiveLocationBtn.textContent = 'Use my live location';
+                  });
+              },
+              (error) => {
+                let message = 'Unable to access your live location.';
+                if (error.code === 1) {
+                  message = 'Location access was denied. Please enter the location manually.';
+                } else if (error.code === 2) {
+                  message = 'Location is currently unavailable. Please try again or enter it manually.';
+                } else if (error.code === 3) {
+                  message = 'Location request timed out. Please enter the location manually.';
+                }
+                showStatus(message);
+                useLiveLocationBtn.disabled = false;
+                useLiveLocationBtn.textContent = 'Use my live location';
+              },
+              {
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 0
+              }
+            );
+          });
+        }
+
+        const modal = document.getElementById('reportModal');
+        if (modal) {
+          modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeReportModal();
+          });
+        }
+
+        const photoInput = document.getElementById('problemPhoto');
+        const photoPreview = document.getElementById('photoPreview');
+        const photoPreviewWrap = document.getElementById('photoPreviewWrap');
+
+        if (photoInput) {
+          photoInput.addEventListener('change', () => {
+            const file = photoInput.files && photoInput.files[0];
+            if (!file) {
+              if (photoPreviewWrap) photoPreviewWrap.classList.remove('visible');
+              if (photoPreview) photoPreview.removeAttribute('src');
+              return;
+            }
+            const reader = new FileReader();
+            reader.onload = (event) => {
+              if (photoPreview && event.target && typeof event.target.result === 'string') {
+                photoPreview.src = event.target.result;
+              }
+              if (photoPreviewWrap) photoPreviewWrap.classList.add('visible');
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+
+        const form = document.getElementById('reportForm');
+        if (form) {
+          form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const description = document.getElementById('problemText')?.value.trim() || '';
+            if (!description) {
+              showStatus('Please describe the problem before submitting.');
+              return;
+            }
+
+            const location = document.getElementById('problemLocation')?.value.trim() || '';
+            const photoFile = document.getElementById('problemPhoto')?.files?.[0];
+            const photoData = photoPreview && photoPreview.src && photoPreview.src.startsWith('data:') ? photoPreview.src : '';
+            const reports = getReports();
+            reports.unshift({
+              id: String(Date.now()),
+              description,
+              location,
+              photoName: photoFile ? photoFile.name : '',
+              photoData,
+              createdAt: new Date().toISOString()
+            });
+            localStorage.setItem(REPORT_STORAGE_KEY, JSON.stringify(reports));
+            const trackUrl = '/track';
+            if (window.location.pathname !== trackUrl) {
+              window.location.href = trackUrl;
+            }
+            showStatus('Your problem has been saved for review.');
+            closeReportModal();
+          });
+        }
+      }
+
+      function initLanguageToggle() {
+        const saved = localStorage.getItem('lang') || 'en';
+        const lang = translations[saved] ? saved : 'en';
+        applyLanguage(lang);
+
+        const toggle = document.getElementById('langToggle');
+        if (toggle) {
+          toggle.addEventListener('change', (event) => {
+            const next = event.target.value;
+            applyLanguage(translations[next] ? next : 'en');
+          });
+        }
+      }
+
+      function initChallengeFilters() {
+        const filterButtons = document.querySelectorAll('.category-list button[data-category]');
+        const cards = document.querySelectorAll('.challenge-card');
+
+        filterButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const selected = button.dataset.category || 'all';
+
+            filterButtons.forEach((item) => {
+              const active = item === button;
+              item.classList.toggle('active', active);
+              item.setAttribute('aria-pressed', String(active));
+            });
+
+            cards.forEach((card) => {
+              const category = card.dataset.category || 'all';
+              const shouldShow = selected === 'all' || category === selected;
+              card.style.display = shouldShow ? '' : 'none';
+            });
+          });
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          initLanguageToggle();
+          initMobileMenu();
+          initChallengeFilters();
+          initReportFlow();
+        });
+      } else {
+        initLanguageToggle();
+        initMobileMenu();
+        initChallengeFilters();
+        initReportFlow();
+      }
+    </script></body>
+
+</html>

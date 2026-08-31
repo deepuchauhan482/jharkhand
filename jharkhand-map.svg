@@ -1,0 +1,197 @@
+<svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="mapShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+    
+    <!-- Terrain gradient for elevation -->
+    <linearGradient id="terrainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8d7c3;stop-opacity:0.15" />
+      <stop offset="50%" style="stop-color:#d4c4a8;stop-opacity:0.12" />
+      <stop offset="100%" style="stop-color:#c9b8a0;stop-opacity:0.1" />
+    </linearGradient>
+    
+    <!-- Water gradient -->
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#357abd;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Base background with terrain texture -->
+  <rect width="800" height="900" fill="#f5e6d3" opacity="0.8"/>
+  <rect width="800" height="900" fill="url(#terrainGrad)"/>
+  
+  <!-- Topographic contour lines - subtle elevation detail -->
+  <g stroke="rgba(139, 90, 43, 0.08)" stroke-width="0.8" fill="none">
+    <circle cx="300" cy="250" r="120"/>
+    <circle cx="300" cy="250" r="95"/>
+    <circle cx="300" cy="250" r="70"/>
+    <circle cx="400" cy="380" r="100"/>
+    <circle cx="400" cy="380" r="75"/>
+    <circle cx="280" cy="550" r="110"/>
+  </g>
+  
+  <!-- Jharkhand State Boundary - Accurate detailed border -->
+  <g filter="url(#mapShadow)">
+    <!-- Main boundary with detailed contours -->
+    <path d="M 180 120 L 250 100 L 320 110 L 380 95 L 440 105 L 480 130 L 520 160 L 540 200 L 550 250 L 560 310 L 555 370 L 540 420 L 530 460 L 515 500 L 495 530 L 470 555 L 440 570 L 410 580 L 380 585 L 350 588 L 320 590 L 290 592 L 260 590 L 230 592 L 200 590 L 170 585 L 140 575 L 115 555 L 95 520 L 80 480 L 70 430 L 65 370 L 62 300 L 65 240 L 70 180 L 85 140 L 110 120 L 140 110 L 180 120 Z" 
+          fill="url(#terrainGrad)" stroke="rgba(101, 67, 33, 0.4)" stroke-width="3"/>
+    
+    <!-- District boundaries with better styling -->
+    <g stroke="rgba(139, 90, 43, 0.25)" stroke-width="2" fill="none">
+      <!-- Ranchi district -->
+      <path d="M 300 200 L 400 180 L 420 280 L 350 310 L 300 290 Z"/>
+      
+      <!-- Dhanbad district (Northern) -->
+      <path d="M 380 95 L 480 130 L 500 220 L 420 180 L 380 110 Z"/>
+      
+      <!-- Giridih district -->
+      <path d="M 250 100 L 380 95 L 400 180 L 300 200 L 250 150 Z"/>
+      
+      <!-- West Singhbhum district -->
+      <path d="M 140 280 L 250 250 L 300 290 L 280 420 L 200 450 L 140 350 Z"/>
+      
+      <!-- East Singhbhum district -->
+      <path d="M 300 290 L 420 280 L 480 400 L 420 500 L 350 480 L 300 380 Z"/>
+      
+      <!-- South Central -->
+      <path d="M 200 450 L 280 420 L 350 480 L 280 540 L 200 520 Z"/>
+      
+      <!-- Pakur-Godda region (North) -->
+      <path d="M 250 100 L 320 110 L 300 200 L 250 150 Z"/>
+    </g>
+    
+    <!-- Major Cities with labels -->
+    <g>
+      <!-- Ranchi (capital) - larger marker -->
+      <circle cx="330" cy="250" r="8" fill="rgba(220, 20, 60, 0.85)"/>
+      <circle cx="330" cy="250" r="12" fill="none" stroke="rgba(220, 20, 60, 0.4)" stroke-width="2"/>
+      <text x="330" y="275" text-anchor="middle" font-size="11" font-weight="bold" fill="rgba(139, 70, 20, 0.8)">Ranchi</text>
+      
+      <!-- Dhanbad -->
+      <circle cx="440" cy="140" r="6" fill="rgba(255, 140, 0, 0.85)"/>
+      <text x="440" y="165" text-anchor="middle" font-size="10" font-weight="bold" fill="rgba(139, 70, 20, 0.75)">Dhanbad</text>
+      
+      <!-- Jamshedpur -->
+      <circle cx="450" cy="420" r="6" fill="rgba(255, 140, 0, 0.85)"/>
+      <text x="450" y="445" text-anchor="middle" font-size="10" font-weight="bold" fill="rgba(139, 70, 20, 0.75)">Jamshedpur</text>
+      
+      <!-- Giridih -->
+      <circle cx="310" cy="130" r="5" fill="rgba(255, 140, 0, 0.8)"/>
+      <text x="310" y="150" text-anchor="middle" font-size="9" font-weight="bold" fill="rgba(139, 70, 20, 0.7)">Giridih</text>
+      
+      <!-- Bokaro -->
+      <circle cx="400" cy="200" r="5" fill="rgba(255, 140, 0, 0.8)"/>
+      <text x="400" y="220" text-anchor="middle" font-size="9" font-weight="bold" fill="rgba(139, 70, 20, 0.7)">Bokaro</text>
+      
+      <!-- Dumka -->
+      <circle cx="270" cy="180" r="4" fill="rgba(255, 165, 0, 0.7)"/>
+      <text x="270" y="198" text-anchor="middle" font-size="8" font-weight="bold" fill="rgba(139, 70, 20, 0.65)">Dumka</text>
+      
+      <!-- Deoghar -->
+      <circle cx="350" cy="120" r="4" fill="rgba(255, 165, 0, 0.7)"/>
+      <text x="350" y="138" text-anchor="middle" font-size="8" font-weight="bold" fill="rgba(139, 70, 20, 0.65)">Deoghar</text>
+      
+      <!-- Hazaribagh -->
+      <circle cx="280" cy="150" r="4" fill="rgba(255, 165, 0, 0.7)"/>
+      <text x="280" y="168" text-anchor="middle" font-size="8" font-weight="bold" fill="rgba(139, 70, 20, 0.65)">Hazaribagh</text>
+      
+      <!-- Koderma -->
+      <circle cx="340" cy="170" r="4" fill="rgba(255, 165, 0, 0.7)"/>
+      <text x="340" y="188" text-anchor="middle" font-size="8" font-weight="bold" fill="rgba(139, 70, 20, 0.65)">Koderma</text>
+      
+      <!-- Chaibasa (West Singhbhum) -->
+      <circle cx="200" cy="450" r="4" fill="rgba(255, 165, 0, 0.7)"/>
+      <text x="200" y="468" text-anchor="middle" font-size="8" font-weight="bold" fill="rgba(139, 70, 20, 0.65)">Chaibasa</text>
+    </g>
+    
+    <!-- Rivers and Water Bodies -->
+    <g stroke="url(#waterGrad)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Damodar River (major) -->
+      <path d="M 520 160 Q 480 200, 450 260 Q 420 310, 380 350 Q 340 400, 300 450"/>
+      
+      <!-- Subarnarekha River -->
+      <path d="M 380 95 Q 420 130, 460 180 Q 500 240, 520 300"/>
+      
+      <!-- Brahmaputra tributaries (North Koel) -->
+      <path d="M 180 120 Q 220 160, 260 210 Q 300 270, 320 340"/>
+      
+      <!-- South Koel -->
+      <path d="M 140 280 Q 170 350, 200 420 Q 230 480, 260 540"/>
+      
+      <!-- Minor tributaries -->
+      <path d="M 250 100 Q 280 140, 310 200"/>
+      <path d="M 420 280 Q 450 350, 480 400"/>
+    </g>
+    
+    <!-- Water bodies (Lakes/Reservoirs) -->
+    <g fill="url(#waterGrad)" opacity="0.3">
+      <ellipse cx="380" cy="320" rx="35" ry="45"/>
+      <ellipse cx="280" cy="480" rx="30" ry="40"/>
+      <ellipse cx="450" cy="250" rx="25" ry="35"/>
+    </g>
+  </g>
+  
+  <!-- Latitude/Longitude grid -->
+  <g stroke="rgba(139, 90, 43, 0.05)" stroke-width="0.8" stroke-dasharray="4,3">
+    <line x1="200" y1="0" x2="200" y2="900"/>
+    <line x1="400" y1="0" x2="400" y2="900"/>
+    <line x1="600" y1="0" x2="600" y2="900"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="600" x2="800" y2="600"/>
+  </g>
+  
+  <!-- Scale indicator -->
+  <g transform="translate(50, 820)">
+    <text x="0" y="0" font-size="10" font-weight="bold" fill="rgba(139, 70, 20, 0.7)">Scale</text>
+    <line x1="0" y1="10" x2="60" y2="10" stroke="rgba(139, 70, 20, 0.6)" stroke-width="2"/>
+    <line x1="0" y1="6" x2="0" y2="14" stroke="rgba(139, 70, 20, 0.6)" stroke-width="1.5"/>
+    <line x1="60" y1="6" x2="60" y2="14" stroke="rgba(139, 70, 20, 0.6)" stroke-width="1.5"/>
+    <text x="30" y="28" text-anchor="middle" font-size="8" fill="rgba(139, 70, 20, 0.6)">~50 km</text>
+  </g>
+  
+  <!-- North Compass -->
+  <g transform="translate(700, 80)">
+    <circle cx="0" cy="0" r="25" fill="rgba(255, 255, 255, 0.85)" stroke="rgba(139, 90, 43, 0.4)" stroke-width="2"/>
+    <path d="M 0 -18 L 10 5 L 0 0 L -10 5 Z" fill="rgba(220, 20, 60, 0.8)"/>
+    <text x="0" y="22" text-anchor="middle" font-size="11" font-weight="bold" fill="rgba(139, 70, 20, 0.8)">N</text>
+  </g>
+  
+  <!-- Government of Jharkhand Logo -->
+  <g transform="translate(650, 40)">
+    <!-- Logo background circle -->
+    <circle cx="0" cy="0" r="35" fill="rgba(255, 255, 255, 0.9)" stroke="rgba(139, 70, 20, 0.4)" stroke-width="2"/>
+    
+    <!-- Ashoka Chakra (blue) with Jharkhand colors -->
+    <circle cx="0" cy="0" r="28" fill="none" stroke="rgba(19, 136, 8, 0.6)" stroke-width="1.5"/>
+    
+    <!-- Inner design - combination of Indian flag and Jharkhand elements -->
+    <!-- Saffron segment (top) -->
+    <path d="M 0 0 L 20 0 A 20 20 0 0 1 14.14 14.14 Z" fill="rgba(255, 153, 51, 0.7)"/>
+    
+    <!-- White segment (middle) -->
+    <path d="M 0 0 L 14.14 14.14 A 20 20 0 0 1 -14.14 14.14 Z" fill="rgba(255, 255, 255, 0.8)"/>
+    
+    <!-- Green segment (bottom) -->
+    <path d="M 0 0 L -14.14 14.14 A 20 20 0 0 1 -20 0 Z" fill="rgba(19, 136, 8, 0.7)"/>
+    
+    <!-- Ashoka Chakra center -->
+    <circle cx="0" cy="0" r="6" fill="rgba(0, 0, 128, 0.8)"/>
+    <circle cx="0" cy="0" r="4" fill="rgba(19, 136, 8, 0.9)"/>
+    
+    <!-- Jharkhand state symbol - waterfall or forest theme -->
+    <path d="M -8 -15 Q -6 -10, -4 -5 Q -2 0, 0 5 Q 2 0, 4 -5 Q 6 -10, 8 -15" 
+          fill="none" stroke="rgba(0, 0, 128, 0.6)" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <!-- Logo text -->
+    <text x="0" y="48" text-anchor="middle" font-size="9" font-weight="bold" fill="rgba(139, 70, 20, 0.8)">Jharkhand</text>
+  </g>
+  
+  <!-- Map title -->
+  <g transform="translate(350, 50)">
+    <text x="0" y="0" text-anchor="middle" font-size="18" font-weight="bold" fill="rgba(139, 70, 20, 0.7)">Jharkhand Physical Map</text>
+    <text x="0" y="18" text-anchor="middle" font-size="10" fill="rgba(139, 70, 20, 0.5)">Government of Jharkhand</text>
+  </g>
+</svg>

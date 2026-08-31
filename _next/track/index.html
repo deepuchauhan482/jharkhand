@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Government of Jharkhand | My Activity</title>
+    <style>
+      :root {
+        --bg: #f6f5ef;
+        --panel: #ffffff;
+        --panel-alt: #eff8f5;
+        --primary: #16463c;
+        --primary-soft: #dfeeea;
+        --accent: #2f7d69;
+        --text: #1e2a29;
+        --muted: #536765;
+        --line: #dfe9e6;
+        --shadow: 0 18px 45px rgba(22, 70, 60, 0.12);
+        --saffron: #ff9933;
+        --green: #138808;
+        --navy: #0d2f5d;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(255,153,51,0.08), transparent 22%),
+          radial-gradient(circle at top right, rgba(19,136,8,0.08), transparent 24%),
+          linear-gradient(180deg, #f7f4ef 0%, #f3faf7 100%);
+        color: var(--text);
+      }
+      a { color: inherit; text-decoration: none; }
+      .shell {
+        width: min(1100px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+      .site-header {
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 80px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: url('../jharkhand-seal.svg') center/cover no-repeat;
+        position: relative;
+        border: 1px solid rgba(19, 136, 8, 0.3);
+        box-shadow: 0 0 8px rgba(19, 136, 8, 0.2);
+        overflow: hidden;
+      }
+      .brand-mark::before {
+        content: "";
+      }
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.2) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .gov-topbar {
+        background: linear-gradient(90deg, #ff9933 0%, #ff9933 33.33%, #fff 33.33%, #fff 66.66%, #138808 66.66%, #138808 100%);
+        height: 8px;
+      }
+      .gov-banner {
+        text-align: center;
+        background: linear-gradient(90deg, rgba(255,153,51,0.14), rgba(255,255,255,0.9), rgba(19,136,8,0.14));
+        color: #184333;
+        padding: 9px 12px;
+        letter-spacing: 0.12em;
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+      .brand strong { display: block; font-size: 1.1rem; }
+      .brand small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .nav a { transition: color 0.2s ease; }
+      .nav a:hover { color: var(--primary); }
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .button, .button-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.8rem 1.2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        border: 1px solid transparent;
+        transition: 0.2s ease;
+      }
+      .button {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: var(--shadow);
+      }
+      .button:hover { filter: brightness(1.04); }
+      .button-ghost {
+        border-color: var(--line);
+        background: transparent;
+        color: var(--primary);
+      }
+      .page {
+        padding: 52px 0 80px;
+      }
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .section-box {
+        background: linear-gradient(135deg, rgba(255,153,51,0.05), rgba(255,255,255,1) 28%, rgba(19,136,8,0.04));
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        box-shadow: var(--shadow);
+        padding: 32px;
+      }
+      .eyebrow {
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        margin-bottom: 12px;
+      }
+      h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1.1;
+        color: var(--primary);
+      }
+      .sub {
+        margin: 0 0 26px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(120px, 1fr));
+        gap: 14px;
+        margin: 30px 0 8px;
+      }
+      .stat {
+        background: linear-gradient(180deg, #fffaf5 0%, #f0f9f4 100%);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px 14px;
+        text-align: center;
+      }
+      .stat:nth-child(2) { background: linear-gradient(180deg, #f0fbf5 0%, #f4faf7 100%); }
+      .stat:nth-child(3) { background: linear-gradient(180deg, #eef6ff 0%, #f4faf7 100%); }
+      .stat strong {
+        display: block;
+        font-size: 1.6rem;
+        color: var(--primary);
+        margin-bottom: 6px;
+      }
+      .stat span { color: var(--muted); font-weight: 600; }
+      .empty-box {
+        margin-top: 26px;
+        padding: 22px 20px;
+        border-radius: 18px;
+        border: 1px dashed var(--line);
+        background: #fbfdfc;
+        color: var(--muted);
+        text-align: center;
+        font-size: 1.02rem;
+      }
+      .footer {
+        padding: 30px 0 60px;
+        color: var(--muted);
+      }
+      .footer-inner {
+        border-top: 1px solid var(--line);
+        padding-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 720px) {
+        .header-inner {
+          flex-wrap: wrap;
+          padding: 14px 0;
+        }
+        .nav {
+          width: 100%;
+          justify-content: center;
+        }
+        .section-box { padding: 22px 18px; }
+        .stats { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gov-topbar" aria-hidden="true"></div>
+    <div class="gov-banner">Public service portal for citizen problem solving</div>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a href="/" class="brand" aria-label="Government of Jharkhand home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <strong>झारखंड सरकार</strong>
+            <small>Government of Jharkhand</small>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="/" data-i18n="nav.home">Home</a>
+          <a href="/track" data-i18n="nav.activity">My activity</a>
+          <a href="/help" data-i18n="nav.help">Help</a>
+          <a href="/privacy" data-i18n="nav.privacy">Privacy</a>
+          <a href="/admin" data-i18n="nav.admin">Admin</a>
+          <label class="language-wrap" aria-label="Select language" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #dfe9e6;border-radius:999px;padding:8px 12px;">
+            <span aria-hidden="true">🌐</span>
+            <select id="langToggle" class="language-toggle" aria-label="Select language" style="border:none;background:transparent;font-weight:700;color:#16463c;cursor:pointer;">
+              <option value="en">English</option>
+              <option value="hi">हिंदी</option>
+              <option value="bn">বাংলা</option>
+              <option value="ta">தமிழ்</option>
+              <option value="te">తెలుగు</option>
+              <option value="mr">मराठी</option>
+              <option value="gu">ગુજરાતી</option>
+              <option value="kn">ಕನ್ನಡ</option>
+              <option value="ml">മലയാളം</option>
+              <option value="pa">ਪੰਜਾਬੀ</option>
+              <option value="ur">اردو</option>
+              <option value="as">অসমীয়া</option>
+            </select>
+          </label>
+        </nav>
+        <div class="top-actions">
+          <a class="button-ghost" href="/">Return home</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="wrap">
+        <section class="section-box">
+          <div class="eyebrow" data-i18n="activity.eyebrow">Your device · private view</div>
+          <h1 data-i18n="activity.title">Track your submissions</h1>
+          <p class="sub" data-i18n="activity.line1">
+            See the review status of reports, student proposals and support offers submitted from this browser.
+          </p>
+          <p class="sub" data-i18n="activity.line2">
+            This page does not require your name or phone number. Activity stays linked only to this browser.
+          </p>
+
+          <div class="stats" aria-label="Submission statistics">
+            <div class="stat"><strong id="reportCount">0</strong><span data-i18n="activity.reportLabel">Reports</span></div>
+            <div class="stat"><strong data-i18n="activity.solutionCount">0</strong><span data-i18n="activity.solutionLabel">Solutions</span></div>
+            <div class="stat"><strong data-i18n="activity.offerCount">0</strong><span data-i18n="activity.offerLabel">Offers</span></div>
+          </div>
+
+          <div class="report-list" id="activityList" aria-live="polite"></div>
+
+          <div style="margin-top: 24px;">
+            <a class="button" href="/" data-i18n="activity.button">Explore challenges</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const translations = {
+        en: {
+          'nav.home': 'Home',
+          'nav.activity': 'My activity',
+          'nav.help': 'Help',
+          'nav.privacy': 'Privacy',
+          'nav.admin': 'Admin',
+          'activity.eyebrow': 'Your device · private view',
+          'activity.title': 'Track your submissions',
+          'activity.line1': 'See the review status of reports, student proposals and support offers submitted from this browser.',
+          'activity.line2': 'This page does not require your name or phone number. Activity stays linked only to this browser.',
+          'activity.reportCount': '0',
+          'activity.solutionCount': '0',
+          'activity.offerCount': '0',
+          'activity.reportLabel': 'Reports',
+          'activity.solutionLabel': 'Solutions',
+          'activity.offerLabel': 'Offers',
+          'activity.empty': 'No reports submitted from this browser.',
+          'activity.button': 'Explore challenges',
+          'footer.track': 'Government of Jharkhand · Citizen services',
+          'footer.private': 'Private browser activity'
+        },
+        hi: {
+          'nav.home': 'मुख्य पृष्ठ',
+          'nav.activity': 'मेरी गतिविधि',
+          'nav.help': 'सहायता',
+          'nav.privacy': 'गोपनीयता',
+          'nav.admin': 'प्रशासन',
+          'activity.eyebrow': 'आपका डिवाइस · निजी दृश्य',
+          'activity.title': 'अपनी प्रस्तुतियाँ ट्रैक करें',
+          'activity.line1': 'इस ब्राउज़र से सबमिट की गई रिपोर्टों, छात्र प्रस्तावों और सहायता ऑफरों की समीक्षा स्थिति देखें।',
+          'activity.line2': 'इस पेज के लिए आपका नाम या फोन नंबर आवश्यक नहीं है। गतिविधि केवल इसी ब्राउज़र से जुड़ी रहती है।',
+          'activity.reportCount': '0',
+          'activity.solutionCount': '0',
+          'activity.offerCount': '0',
+          'activity.reportLabel': 'रिपोर्ट्स',
+          'activity.solutionLabel': 'समाधान',
+          'activity.offerLabel': 'ऑफर',
+          'activity.empty': 'इस ब्राउज़र से कोई रिपोर्ट सबमिट नहीं हुई है।',
+          'activity.button': 'चुनौतियाँ देखें',
+          'footer.track': 'झारखंड सरकार · नागरिक सेवाएँ',
+          'footer.private': 'निजी ब्राउज़र गतिविधि'
+        }
+      };
+
+      function applyLanguage(lang) {
+        const data = translations[lang] || translations.en;
+        document.querySelectorAll('[data-i18n]').forEach((node) => {
+          const key = node.getAttribute('data-i18n');
+          if (data[key]) {
+            node.textContent = data[key];
+          }
+        });
+
+        const toggle = document.getElementById('langToggle');
+        if (toggle) {
+          toggle.value = lang;
+        }
+        localStorage.setItem('lang', lang);
+      }
+
+      function updateActivityList() {
+        const list = document.getElementById('activityList');
+        const count = document.getElementById('reportCount');
+        const reports = JSON.parse(localStorage.getItem('india_gov_reports') || '[]');
+        if (count) count.textContent = String(reports.length);
+
+        if (!list) return;
+        if (!reports.length) {
+          list.innerHTML = `
+            <div class="empty-box">${localStorage.getItem('lang') === 'hi' ? 'इस ब्राउज़र से कोई रिपोर्ट सबमिट नहीं हुई है।' : 'No reports submitted from this browser.'}</div>
+          `;
+          return;
+        }
+
+        list.innerHTML = reports.slice(0, 6).map((report) => {
+          const locationText = report.location ? `<div><strong>${localStorage.getItem('lang') === 'hi' ? 'स्थान:' : 'Location:'}</strong> ${report.location}</div>` : '';
+          const photoMarkup = report.photoData ? `<img src="${report.photoData}" alt="Problem reference image" />` : '';
+          const dateText = report.createdAt ? new Date(report.createdAt).toLocaleString() : '';
+          return `
+            <article class="report-card">
+              <div class="report-header">
+                <h3>${localStorage.getItem('lang') === 'hi' ? 'समस्या रिपोर्ट' : 'Problem report'}</h3>
+                <span class="status-pill">${localStorage.getItem('lang') === 'hi' ? 'पेंडिंग' : 'Pending'}</span>
+              </div>
+              <div class="report-meta">
+                <div><strong>${localStorage.getItem('lang') === 'hi' ? 'विवरण:' : 'Details:'}</strong> ${report.description}</div>
+                ${locationText}
+                ${report.photoName ? `<div><strong>${localStorage.getItem('lang') === 'hi' ? 'फोटो:' : 'Photo:'}</strong> ${report.photoName}</div>` : ''}
+                ${dateText ? `<div><strong>${localStorage.getItem('lang') === 'hi' ? 'भेजा गया:' : 'Submitted:'}</strong> ${dateText}</div>` : ''}
+              </div>
+              ${photoMarkup}
+            </article>
+          `;
+        }).join('');
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const lang = translations[localStorage.getItem('lang')] ? localStorage.getItem('lang') : 'en';
+        applyLanguage(lang);
+        updateActivityList();
+        document.getElementById('langToggle')?.addEventListener('change', (event) => {
+          applyLanguage(event.target.value);
+          updateActivityList();
+        });
+      });
+    </script>
+
+    <footer class="footer">
+      <div class="shell footer-inner">
+        <span data-i18n="footer.track">Government of Jharkhand · Citizen services</span>
+        <span data-i18n="footer.private">Private browser activity</span>
+      </div>
+    </footer>
+  </body>
+</html>

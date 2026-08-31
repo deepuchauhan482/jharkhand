@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Government of jharkhand | Admin</title>
+    <style>
+      :root {
+        --bg: #f7f4ee;
+        --panel: #fff;
+        --primary: #16463c;
+        --primary-soft: #e6f3ee;
+        --text: #1d2a29;
+        --muted: #586867;
+        --line: #dfe9e6;
+        --shadow: 0 18px 45px rgba(22, 70, 60, 0.12);
+        --success: #176c3d;
+        --warning: #b85a00;
+        --danger: #b42318;
+        --saffron: #ff9933;
+        --green: #138808;
+        --navy: #0d2f5d;
+        --teal: #0e6b5d;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        min-height: 100vh;
+        background:
+          url('../jharkhand-map.svg') fixed center/cover no-repeat,
+          radial-gradient(circle at top left, rgba(255,153,51,0.05), transparent 22%),
+          radial-gradient(circle at top right, rgba(19,136,8,0.05), transparent 24%),
+          linear-gradient(180deg, #f7f4ef 0%, #f1fbf7 100%);
+        background-attachment: fixed, scroll, scroll, scroll;
+        color: var(--text);
+      }
+      a { color: inherit; text-decoration: none; }
+      button, input { font: inherit; }
+
+      .gov-topbar {
+        background: linear-gradient(90deg, #ff9933 0%, #ff9933 33.33%, #fff 33.33%, #fff 66.66%, #138808 66.66%, #138808 100%);
+        height: 8px;
+      }
+      .gov-banner {
+        text-align: center;
+        background: linear-gradient(90deg, rgba(255,153,51,0.14), rgba(255,255,255,0.9), rgba(19,136,8,0.14));
+        color: #184333;
+        padding: 9px 12px;
+        letter-spacing: 0.12em;
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+      .lang-strip {
+        width: min(1100px, calc(100% - 30px));
+        margin: 14px auto 0;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .lang-strip select {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+        color: var(--primary);
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .shell { width: min(1100px, calc(100% - 30px)); margin: 0 auto; }
+      .page {
+        min-height: calc(100vh - 120px);
+        display: grid;
+        place-items: center;
+        padding: 40px 0 60px;
+      }
+      .panel {
+        width: min(500px, 100%);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        padding: 32px 28px;
+      }
+      .dashboard {
+        width: min(1000px, 100%);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 22px 24px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(135deg, rgba(255,153,51,0.10), rgba(255,255,255,0.85) 35%, rgba(19,136,8,0.10));
+      }
+      .dashboard-header h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        color: var(--primary);
+      }
+      .logout-btn {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        color: var(--primary);
+        padding: 0.7rem 1rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0,1fr));
+        gap: 16px;
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--line);
+      }
+      .stat-card {
+        background: linear-gradient(180deg, #fffaf4 0%, #f7faf8 100%);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px 18px;
+      }
+      .stat-card:nth-child(2) { background: linear-gradient(180deg, #f2fbf5 0%, #f7faf8 100%); }
+      .stat-card:nth-child(3) { background: linear-gradient(180deg, #eef6ff 0%, #f7faf8 100%); }
+      .stat-card small {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+      }
+      .stat-card strong {
+        font-size: 2rem;
+        color: var(--primary);
+      }
+      .reports-wrap {
+        padding: 24px;
+      }
+      .report-item {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(180deg, #ffffff, #f8fbf9);
+        padding: 18px 18px 16px;
+        margin-bottom: 16px;
+        border-left: 4px solid var(--saffron);
+      }
+      .report-item:nth-child(even) { border-left-color: var(--green); }
+      .report-topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .report-badge {
+        display: inline-flex;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .report-badge.pending { background: #fff4de; color: var(--warning); }
+      .report-badge.accepted { background: #e7f7ee; color: var(--success); }
+      .report-date { color: var(--muted); font-size: 0.82rem; font-weight: 700; }
+      .report-item h3 {
+        margin: 0 0 10px;
+        color: var(--primary);
+        font-size: 1.2rem;
+      }
+      .report-item p {
+        margin: 0 0 14px;
+        color: var(--text);
+        line-height: 1.7;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+      .meta span {
+        background: #f2f7f5;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+      }
+      .report-image {
+        max-width: 220px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        display: block;
+        margin-bottom: 14px;
+      }
+      .report-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .action-btn {
+        border: none;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .action-btn.accept {
+        background: var(--primary);
+        color: white;
+      }
+      .action-btn.reject {
+        background: #f5f1ee;
+        color: var(--danger);
+      }
+      .action-btn.delete {
+        background: #f5f1ee;
+        color: var(--primary);
+      }
+      .eyebrow {
+        color: var(--primary);
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        margin-bottom: 12px;
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        color: var(--primary);
+      }
+      .sub {
+        margin: 0 0 22px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: url('../jharkhand-seal.svg') center/cover no-repeat;
+        position: relative;
+        border: 1px solid rgba(19, 136, 8, 0.3);
+        display: inline-block;
+        box-shadow: 0 0 8px rgba(19, 136, 8, 0.2);
+        overflow: hidden;
+      }
+      .brand-mark::before {
+        content: "";
+      }
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.2) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: var(--primary);
+      }
+      input {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fafcfb;
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+      .button {
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.9rem 1rem;
+        border: none;
+        border-radius: 12px;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .password-note {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .back {
+        margin-top: 18px;
+        display: inline-block;
+        color: var(--primary);
+        font-weight: 700;
+      }
+      @media (max-width: 700px) {
+        .stats { grid-template-columns: 1fr; }
+        .dashboard-header { flex-direction: column; align-items: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gov-topbar" aria-hidden="true"></div>
+    <div class="gov-banner">Public service portal for citizen problem solving</div>
+    <div class="lang-strip">
+      <select id="langToggle" aria-label="Select language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="ta">தமிழ்</option>
+        <option value="te">తెలుగు</option>
+        <option value="mr">मराठी</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="ml">മലയാളം</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+        <option value="ur">اردو</option>
+        <option value="as">অসমীয়া</option>
+      </select>
+    </div>
+
+    <main class="page">
+      <div class="shell" id="appShell"></div>
+    </main>
+
+    <script>
+      const REPORT_STORAGE_KEY = 'india_gov_reports';
+      const ADMIN_PASSWORD = 'admin123';
+      const translations = {
+        en: {
+          'brand.gov': 'Government of India',
+          'admin.restricted': 'Restricted access',
+          'admin.title': 'Administrator sign in',
+          'admin.subtitle': 'This review dashboard is restricted to the Government of India administrator.',
+          'admin.passwordLabel': 'Administrator password',
+          'admin.placeholder': 'Enter password',
+          'admin.button': 'Sign in',
+          'admin.demo': 'Demo admin password:',
+          'admin.back': 'Return to Government of Jharkhand',
+          'admin.queue': 'Review dashboard',
+          'admin.heading': 'Problem review queue',
+          'admin.logout': 'Log out',
+          'admin.pending': 'Pending',
+          'admin.accepted': 'Accepted',
+          'admin.rejected': 'Rejected',
+          'admin.empty': 'No reports submitted yet.',
+          'admin.reportTitle': 'Citizen problem report',
+          'admin.noDesc': 'No description provided',
+          'admin.location': 'Location:',
+          'admin.accept': 'Accept',
+          'admin.reject': 'Reject',
+          'admin.delete': 'Delete',
+          'admin.incorrect': 'Incorrect password',
+          'admin.unknownDate': 'Unknown date'
+        },
+        hi: {
+          'brand.gov': 'झारखंड सरकार',
+          'admin.restricted': 'सीमित पहुँच',
+          'admin.title': 'प्रशासक साइन इन',
+          'admin.subtitle': 'यह समीक्षा डैशबोर्ड केवल झारखंड सरकार के प्रशासक के लिए है.',
+          'admin.passwordLabel': 'प्रशासक पासवर्ड',
+          'admin.placeholder': 'पासवर्ड दर्ज करें',
+          'admin.button': 'साइन इन',
+          'admin.demo': 'डेमो प्रशासक पासवर्ड:',
+          'admin.back': 'झारखंड सरकार पर वापस जाएँ',
+          'admin.queue': 'समीक्षा डैशबोर्ड',
+          'admin.heading': 'समस्या समीक्षा कतार',
+          'admin.logout': 'लॉग आउट',
+          'admin.pending': 'लंबित',
+          'admin.accepted': 'स्वीकृत',
+          'admin.rejected': 'अस्वीकृत',
+          'admin.empty': 'अभी तक कोई रिपोर्ट सबमिट नहीं हुई है।',
+          'admin.reportTitle': 'नागरिक समस्या रिपोर्ट',
+          'admin.noDesc': 'कोई विवरण नहीं दिया गया',
+          'admin.location': 'स्थान:',
+          'admin.accept': 'स्वीकार करें',
+          'admin.reject': 'अस्वीकार करें',
+          'admin.delete': 'मिटाएँ',
+          'admin.incorrect': 'गलत पासवर्ड',
+          'admin.unknownDate': 'अज्ञात तिथि'
+        },
+        bn: {
+          'brand.gov': 'ভারত সরকার',
+          'admin.restricted': 'সীমিত প্রবেশাধিकার',
+          'admin.title': 'প্রশাসক সাইন ইন',
+          'admin.subtitle': 'এই পর্যালোচনা ড্যাশবোর্ড ভারত সরকারের প্রশাসকদের জন্য সীমাবদ্ধ।',
+          'admin.passwordLabel': 'প্রশাসক পাসওয়ার্ড',
+          'admin.placeholder': 'পাসওয়ার্ড লিখুন',
+          'admin.button': 'সাইন ইন করুন',
+          'admin.demo': 'ডেমো অ্যাডমিন পাসওয়ার্ড:',
+          'admin.back': 'ভারত সরকারে ফিরে যান',
+          'admin.queue': 'পর্যালোচনা ড্যাশবোর্ড',
+          'admin.heading': 'সমস্যা পর্যালোচনা সারি',
+          'admin.logout': 'লগ আউট',
+          'admin.pending': 'অপেক্ষমাণ',
+          'admin.accepted': 'গৃহীত',
+          'admin.rejected': 'প্রত্যাখ্যাত',
+          'admin.empty': 'এখনও কোনও রিপোর্ট জমা দেওয়া হয়নি।',
+          'admin.reportTitle': 'নাগরিক সমস্যা রিপোর্ট',
+          'admin.noDesc': 'কোনও বর্ণনা প্রদান করা হয়নি',
+          'admin.location': 'অবস্থান:',
+          'admin.accept': 'গ্রহণ করুন',
+          'admin.reject': 'প্রত্যাখ্যান করুন',
+          'admin.delete': 'মুছে ফেলুন',
+          'admin.incorrect': 'ভুল পাসওয়ার্ড',
+          'admin.unknownDate': 'অজানা তারিখ'
+        },
+        ta: {
+          'brand.gov': 'இந்தியா அரசு',
+          'admin.restricted': 'தடைசெய்யப்பட்ட அணுகல்',
+          'admin.title': 'நிர்வாகக் கணக்கு புகுनపात',
+          'admin.subtitle': 'இந்த மதிப்பாய்வு டैশबோર்ड இந்திய அரசாங்கத்தின் நிர்வாகக்கர்த்தாக்களுக்கு மட்டுமே/',
+          'admin.passwordLabel': 'நिर्वाहक पासवर्ड',
+          'admin.placeholder': 'पासवर्ड दर्ज करें',
+          'admin.button': 'साइन इन',
+          'admin.demo': 'डेमो व्यवस्थापक पासवर्ड:',
+          'admin.back': 'झारखंड सरकार पर वापस लौटें',
+          'admin.queue': 'डैशबोर्ड की समीक्षा',
+          'admin.heading': 'समस्या समीक्षा कतार',
+          'admin.logout': 'लॉग आउट करें',
+          'admin.pending': 'लंबित',
+          'admin.accepted': 'स्वीकृत',
+          'admin.rejected': 'अस्वीकृत',
+          'admin.empty': 'अभी तक कोई रिपोर्ट जमा नहीं की गई।',
+          'admin.reportTitle': 'नागरिक समस्या रिपोर्ट',
+          'admin.noDesc': 'कोई विवरण प्रदान नहीं किया गया',
+          'admin.location': 'स्थान:',
+          'admin.accept': 'स्वीकार करें',
+          'admin.reject': 'अस्वीकार करें',
+          'admin.delete': 'हटाएं',
+          'admin.incorrect': 'गलत पासवर्ड',
+          'admin.unknownDate': 'अज्ञात तारीख'
+        }
+      };
+
+      function t(key) {
+        const lang = localStorage.getItem('lang') || 'en';
+        const dict = translations[lang] || translations.en;
+        return dict[key] || translations.en[key] || key;
+      }
+
+      function getReports() {
+        try {
+          return JSON.parse(localStorage.getItem(REPORT_STORAGE_KEY) || '[]');
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function saveReports(reports) {
+        localStorage.setItem(REPORT_STORAGE_KEY, JSON.stringify(reports));
+      }
+
+      function formatDate(dateString) {
+        if (!dateString) return t('admin.unknownDate');
+        const date = new Date(dateString);
+        return isNaN(date.getTime()) ? t('admin.unknownDate') : date.toLocaleString();
+      }
+
+      function renderLoginScreen() {
+        appShell.innerHTML = `
+          <section class="panel">
+            <div class="brand" aria-label="Government of Jharkhand home">
+              <span class="brand-mark" aria-hidden="true"></span>
+              <span style="font-size: 1.1rem; color: var(--primary);"><strong>${t('brand.gov')}</strong></span>
+            </div>
+            <div class="eyebrow">${t('admin.restricted')}</div>
+            <h1>${t('admin.title')}</h1>
+            <p class="sub">${t('admin.subtitle')}</p>
+
+            <form id="adminLoginForm">
+              <label for="password">${t('admin.passwordLabel')}</label>
+              <input id="password" type="password" name="password" placeholder="${t('admin.placeholder')}" />
+              <button class="button" type="submit">${t('admin.button')}</button>
+            </form>
+
+            <p class="password-note">${t('admin.demo')} <strong>${ADMIN_PASSWORD}</strong></p>
+
+            <div style="margin-top: 18px;">
+              <a class="back" href="/">${t('admin.back')}</a>
+            </div>
+          </section>
+        `;
+
+        const form = document.getElementById('adminLoginForm');
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const input = document.getElementById('password');
+          if ((input.value || '').trim() === ADMIN_PASSWORD) {
+            localStorage.setItem('adminLoggedIn', 'yes');
+            renderDashboard();
+          } else {
+            input.focus();
+            input.value = '';
+            input.placeholder = t('admin.incorrect');
+            input.style.borderColor = 'var(--danger)';
+          }
+        });
+      }
+
+      function renderDashboard() {
+        const reports = getReports();
+        const pending = reports.filter((report) => !report.status || report.status === 'pending').length;
+        const accepted = reports.filter((report) => report.status === 'accepted').length;
+        const rejected = reports.filter((report) => report.status === 'rejected').length;
+
+        appShell.innerHTML = `
+          <section class="dashboard">
+            <div class="dashboard-header">
+              <div>
+                <div class="eyebrow">${t('admin.queue')}</div>
+                <h1>${t('admin.heading')}</h1>
+              </div>
+              <button type="button" class="logout-btn" id="logoutBtn">${t('admin.logout')}</button>
+            </div>
+
+            <div class="stats">
+              <div class="stat-card">
+                <small>${t('admin.pending')}</small>
+                <strong>${pending}</strong>
+              </div>
+              <div class="stat-card">
+                <small>${t('admin.accepted')}</small>
+                <strong>${accepted}</strong>
+              </div>
+              <div class="stat-card">
+                <small>${t('admin.rejected')}</small>
+                <strong>${rejected}</strong>
+              </div>
+            </div>
+
+            <div class="reports-wrap">
+              ${reports.length === 0 ? `<p class="sub">${t('admin.empty')}</p>` : reports.map((report) => `
+                <article class="report-item">
+                  <div class="report-topline">
+                    <span class="report-badge ${report.status || 'pending'}">${(report.status || 'pending') === 'accepted' ? t('admin.accepted') : (report.status || 'pending') === 'rejected' ? t('admin.rejected') : t('admin.pending')}</span>
+                    <span class="report-date">${formatDate(report.createdAt)}</span>
+                  </div>
+                  <h3>${t('admin.reportTitle')}</h3>
+                  <p>${(report.description || t('admin.noDesc')).replace(/\n/g, '<br>')}</p>
+
+                  ${report.location ? `<div class="meta"><span>${t('admin.location')} ${report.location}</span></div>` : ''}
+                  ${report.photoData ? `<img class="report-image" src="${report.photoData}" alt="Problem evidence" />` : ''}
+
+                  <div class="report-actions">
+                    <button type="button" class="action-btn accept" data-action="accept" data-id="${report.id}">${t('admin.accept')}</button>
+                    <button type="button" class="action-btn reject" data-action="reject" data-id="${report.id}">${t('admin.reject')}</button>
+                    <button type="button" class="action-btn delete" data-action="delete" data-id="${report.id}">${t('admin.delete')}</button>
+                  </div>
+                </article>
+              `).join('')}
+            </div>
+          </section>
+        `;
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+          localStorage.removeItem('adminLoggedIn');
+          renderLoginScreen();
+        });
+
+        document.querySelectorAll('[data-action]').forEach((button) => {
+          button.addEventListener('click', () => {
+            const id = button.getAttribute('data-id');
+            const action = button.getAttribute('data-action');
+            const nextReports = getReports().map((report) => {
+              if (report.id !== id) return report;
+              if (action === 'accept') return { ...report, status: 'accepted' };
+              if (action === 'reject') return { ...report, status: 'rejected' };
+              return null;
+            }).filter(Boolean);
+
+            if (action === 'delete') {
+              const remaining = getReports().filter((report) => report.id !== id);
+              saveReports(remaining);
+              renderDashboard();
+              return;
+            }
+
+            saveReports(nextReports);
+            renderDashboard();
+          });
+        });
+      }
+
+      const appShell = document.getElementById('appShell');
+      const langToggle = document.getElementById('langToggle');
+
+      function renderCurrentView() {
+        const adminLoggedIn = (() => {
+          try {
+            return localStorage.getItem('adminLoggedIn') === 'yes';
+          } catch (error) {
+            return false;
+          }
+        })();
+
+        if (adminLoggedIn) {
+          renderDashboard();
+        } else {
+          renderLoginScreen();
+        }
+      }
+
+      if (langToggle) {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        langToggle.value = translations[savedLang] ? savedLang : 'en';
+        langToggle.addEventListener('change', (event) => {
+          localStorage.setItem('lang', event.target.value);
+          renderCurrentView();
+        });
+      }
+
+      renderCurrentView();
+    </script>
+  </body>
+</html>

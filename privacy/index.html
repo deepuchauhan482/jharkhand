@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Government of Jharkhand | Privacy & Community Rules</title>
+    <style>
+      :root {
+        --bg: #f4f3ee;
+        --panel: #ffffff;
+        --panel-alt: #eef8f5;
+        --primary: #16463c;
+        --primary-soft: #e0efe9;
+        --accent: #2f7d69;
+        --text: #1c2b2a;
+        --muted: #546765;
+        --line: #dfe9e6;
+        --shadow: 0 18px 45px rgba(22, 70, 60, 0.12);
+        --saffron: #ff9933;
+        --green: #138808;
+        --navy: #0d2f5d;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+          url('../jharkhand-map.svg') fixed center/cover no-repeat,
+          radial-gradient(circle at top left, rgba(255,153,51,0.04), transparent 22%),
+          radial-gradient(circle at top right, rgba(19,136,8,0.04), transparent 25%),
+          linear-gradient(180deg, #f8f4ef 0%, #f2faf7 100%);
+        background-attachment: fixed, scroll, scroll, scroll;
+        color: var(--text);
+      }
+      a { color: inherit; text-decoration: none; }
+      .shell { width: min(1080px, calc(100% - 30px)); margin: 0 auto; }
+      .site-header {
+        background: rgba(255,255,255,0.85);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        min-height: 80px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+      }
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: url('../jharkhand-seal.svg') center/cover no-repeat;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border: 1px solid rgba(19, 136, 8, 0.3);
+        box-shadow: 0 0 8px rgba(19, 136, 8, 0.2);
+        overflow: hidden;
+      }
+      .brand-mark::before {
+        content: "";
+      }
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle at 70% 70%, rgba(255,255,255,0.2) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .gov-topbar {
+        background: linear-gradient(90deg, #ff9933 0%, #ff9933 33.33%, #fff 33.33%, #fff 66.66%, #138808 66.66%, #138808 100%);
+        height: 8px;
+      }
+      .gov-banner {
+        text-align: center;
+        background: linear-gradient(90deg, rgba(255,153,51,0.14), rgba(255,255,255,0.9), rgba(19,136,8,0.14));
+        color: #184333;
+        padding: 9px 12px;
+        letter-spacing: 0.12em;
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+      .brand strong { display: block; }
+      .brand small {
+        display: block;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .nav a:hover { color: var(--primary); }
+      .page {
+        padding: 52px 0 80px;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      .section-box {
+        background: linear-gradient(135deg, rgba(255,153,51,0.05), rgba(255,255,255,1) 30%, rgba(19,136,8,0.04));
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        padding: 32px;
+      }
+      .policy-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 14px;
+      }
+      .policy-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #edf6f1;
+        color: var(--primary);
+        border: 1px solid rgba(22, 70, 60, 0.12);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+      }
+      .policy-tag .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #138808;
+        box-shadow: 0 0 0 4px rgba(19,136,8,0.10);
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(2.1rem, 5vw, 3.1rem);
+        color: var(--primary);
+        letter-spacing: -0.04em;
+      }
+      .intro {
+        margin: 0 0 26px;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.8;
+        max-width: 820px;
+      }
+      .content {
+        display: grid;
+        gap: 18px;
+      }
+      .item {
+        background: linear-gradient(180deg, #f7faf8 0%, #eef8f4 100%);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 22px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(180deg, #ff9933 0%, #ffcc66 50%, #138808 100%);
+      }
+      .item h2 {
+        margin: 0 0 10px;
+        font-size: 1.25rem;
+        color: var(--primary);
+      }
+      .item p, .item li {
+        color: var(--muted);
+        line-height: 1.8;
+        font-size: 0.98rem;
+      }
+      .item ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+      .warning-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 10px;
+      }
+      .warning-list li {
+        position: relative;
+        padding-left: 28px;
+        margin-bottom: 10px;
+      }
+      .warning-list li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        color: #b35a00;
+        font-weight: 700;
+      }
+      .footer {
+        padding: 30px 0 60px;
+        color: var(--muted);
+      }
+      .footer-inner {
+        border-top: 1px solid var(--line);
+        padding-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 720px) {
+        .header-inner { flex-wrap: wrap; padding: 14px 0; }
+        .nav { width: 100%; justify-content: center; }
+        .section-box { padding: 22px 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gov-topbar" aria-hidden="true"></div>
+    <div class="gov-banner">Public service portal for citizen problem solving</div>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a href="/" class="brand" aria-label="Government of Jharkhand home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>
+            <strong>झारखंड सरकार</strong>
+            <small>Government of Jharkhand</small>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="/" data-i18n="nav.home">Home</a>
+          <a href="/track" data-i18n="nav.activity">My activity</a>
+          <a href="/help" data-i18n="nav.help">Help</a>
+          <a href="/privacy" data-i18n="nav.privacy">Privacy</a>
+          <a href="/admin" data-i18n="nav.admin">Admin</a>
+          <label class="language-wrap" aria-label="Select language" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #dfe9e6;border-radius:999px;padding:8px 12px;">
+            <span aria-hidden="true">🌐</span>
+            <select id="langToggle" class="language-toggle" aria-label="Select language" style="border:none;background:transparent;font-weight:700;color:#16463c;cursor:pointer;">
+              <option value="en">English</option>
+              <option value="hi">हिंदी</option>
+              <option value="bn">বাংলা</option>
+              <option value="ta">தமிழ்</option>
+              <option value="te">తెలుగు</option>
+              <option value="mr">मराठी</option>
+              <option value="gu">ગુજરાતી</option>
+              <option value="kn">ಕನ್ನಡ</option>
+              <option value="ml">മലയാളം</option>
+              <option value="pa">ਪੰਜਾਬੀ</option>
+              <option value="ur">اردو</option>
+              <option value="as">অসমীয়া</option>
+            </select>
+          </label>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="wrap">
+        <section class="section-box">
+          <div class="policy-header">
+            <div>
+              <div class="policy-tag"><span class="dot"></span> Official notice</div>
+            </div>
+          </div>
+          <h1 data-i18n="privacy.title">Your safety comes before visibility.</h1>
+          <p class="intro" data-i18n="privacy.intro">This platform follows a citizen-first privacy standard: we collect only what is needed for review, moderation, and public participation, and we protect personal information before any public visibility.</p>
+
+          <div class="content">
+            <div class="item">
+              <h2 data-i18n="privacy.storeTitle">Information we store</h2>
+              <p data-i18n="privacy.storeText">When you submit something, this portal stores the text you provide, its review status, an anonymous browser key and the submission time. A problem report may also contain an optional photo and rounded approximate coordinates.</p>
+            </div>
+
+            <div class="item">
+              <h2 data-i18n="privacy.publicTitle">What becomes public</h2>
+              <p data-i18n="privacy.publicText">Only administrator-approved challenges, student solutions, industry offers and progress updates become visible. The anonymous browser key is never shown publicly.</p>
+            </div>
+
+            <div class="item">
+              <h2 data-i18n="privacy.neverTitle">What you should never submit</h2>
+              <ul class="warning-list">
+                <li data-i18n="privacy.item1">Passwords</li>
+                <li data-i18n="privacy.item2">Phone numbers</li>
+                <li data-i18n="privacy.item3">Personal email addresses</li>
+                <li data-i18n="privacy.item4">Government ID numbers</li>
+                <li data-i18n="privacy.item5">Private home addresses</li>
+                <li data-i18n="privacy.item6">Confidential institutional information</li>
+              </ul>
+            </div>
+
+            <div class="item">
+              <h2 data-i18n="privacy.locationTitle">Location and photos</h2>
+              <p data-i18n="privacy.locationText">Location sharing is optional. Coordinates are rounded to reduce precision. Photos are limited by file type and size and are shown only after the related challenge is approved.</p>
+            </div>
+
+            <div class="item">
+              <h2 data-i18n="privacy.moderationTitle">Moderation</h2>
+              <p data-i18n="privacy.moderationText">Administrators may approve or reject submissions to reduce spam, unsafe content, false claims and personal-data exposure. An approval means the item is suitable for collaboration; it is not a government certification of every claim.</p>
+            </div>
+
+            <div class="item">
+              <h2 data-i18n="privacy.trackingTitle">Browser-based tracking</h2>
+              <p data-i18n="privacy.trackingText">“My activity” works using an anonymous key saved in your browser. If browser storage is cleared or another device is used, the old tracking history cannot be recovered through this prototype.</p>
+            </div>
+
+            <div class="item">
+              <h2 data-i18n="privacy.prototypeTitle">Prototype status</h2>
+              <p data-i18n="privacy.prototypeText">This is an educational civic platform. It does not process payments, create legal partnerships, provide emergency services or replace official government complaint channels.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-inner">
+        <span data-i18n="footer.privacy">Government of Jharkhand · Privacy & community rules</span>
+        <span><a href="/" data-i18n="footer.home">Back to home</a></span>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        en: {
+          'nav.home': 'Home',
+          'nav.activity': 'My activity',
+          'nav.help': 'Help',
+          'nav.privacy': 'Privacy',
+          'nav.admin': 'Admin',
+          'privacy.title': 'Your safety comes before visibility.',
+          'privacy.intro': 'This platform follows a citizen-first privacy standard: we collect only what is needed for review, moderation, and public participation, and we protect personal information before any public visibility.',
+          'privacy.storeTitle': 'Information we store',
+          'privacy.storeText': 'When you submit something, this portal stores the text you provide, its review status, an anonymous browser key and the submission time. A problem report may also contain an optional photo and rounded approximate coordinates.',
+          'privacy.publicTitle': 'What becomes public',
+          'privacy.publicText': 'Only administrator-approved challenges, student solutions, industry offers and progress updates become visible. The anonymous browser key is never shown publicly.',
+          'privacy.neverTitle': 'What you should never submit',
+          'privacy.item1': 'Passwords',
+          'privacy.item2': 'Phone numbers',
+          'privacy.item3': 'Personal email addresses',
+          'privacy.item4': 'Government ID numbers',
+          'privacy.item5': 'Private home addresses',
+          'privacy.item6': 'Confidential institutional information',
+          'privacy.locationTitle': 'Location and photos',
+          'privacy.locationText': 'Location sharing is optional. Coordinates are rounded to reduce precision. Photos are limited by file type and size and are shown only after the related challenge is approved.',
+          'privacy.moderationTitle': 'Moderation',
+          'privacy.moderationText': 'Administrators may approve or reject submissions to reduce spam, unsafe content, false claims and personal-data exposure. An approval means the item is suitable for collaboration; it is not a government certification of every claim.',
+          'privacy.trackingTitle': 'Browser-based tracking',
+          'privacy.trackingText': '“My activity” works using an anonymous key saved in your browser. If browser storage is cleared or another device is used, the old tracking history cannot be recovered through this prototype.',
+          'privacy.prototypeTitle': 'Prototype status',
+          'privacy.prototypeText': 'This is an educational civic platform. It does not process payments, create legal partnerships, provide emergency services or replace official government complaint channels.',
+          'footer.privacy': 'Government of Jharkhand · Privacy & community rules',
+          'footer.home': 'Back to home'
+        },
+        hi: {
+          'nav.home': 'मुख्य पृष्ठ',
+          'nav.activity': 'मेरी गतिविधि',
+          'nav.help': 'सहायता',
+          'nav.privacy': 'गोपनीयता',
+          'nav.admin': 'प्रशासन',
+          'privacy.title': 'दृश्यता से पहले आपकी सुरक्षा।',
+          'privacy.intro': 'यह प्लेटफ़ॉर्म नागरिक-प्रथम गोपनीयता मानक का पालन करता है: हम केवल समीक्षा, मॉडरेशन और सार्वजनिक भागीदारी के लिए आवश्यक जानकारी एकत्र करते हैं, और सार्वजनिक दृश्यता से पहले व्यक्तिगत जानकारी की सुरक्षा करते हैं।',
+          'privacy.storeTitle': 'हम क्या संग्रहीत करते हैं',
+          'privacy.storeText': 'जब आप कुछ सबमिट करते हैं, तो यह पोर्टल आपके दिए गए टेक्स्ट, उसकी समीक्षा स्थिति, एक अज्ञात ब्राउज़र कुंजी और सबमिशन समय को संग्रहीत करता है। समस्या रिपोर्ट में वैकल्पिक फोटो और अनुमानित निर्देशांक भी हो सकते हैं।',
+          'privacy.publicTitle': 'क्या सार्वजनिक होता है',
+          'privacy.publicText': 'केवल प्रशासक द्वारा स्वीकृत चुनौतियाँ, छात्र समाधान, उद्योग प्रस्ताव और प्रगति अपडेट्स दिखाई देते हैं। अज्ञात ब्राउज़र कुंजी कभी सार्वजनिक नहीं दिखाई जाती।',
+          'privacy.neverTitle': 'आप कभी भी क्या सबमिट नहीं करना चाहिए',
+          'privacy.item1': 'पासवर्ड',
+          'privacy.item2': 'फोन नंबर',
+          'privacy.item3': 'व्यक्तिगत ईमेल पते',
+          'privacy.item4': 'सरकारी पहचान संख्या',
+          'privacy.item5': 'निजी घर का पता',
+          'privacy.item6': 'गोपनीय संस्थागत जानकारी',
+          'privacy.locationTitle': 'स्थान और फोटो',
+          'privacy.locationText': 'स्थान साझा करना वैकल्पिक है। सटीकता कम करने के लिए निर्देशांक गोल किए जाते हैं। फोटो फ़ाइल प्रकार और आकार के अनुसार सीमित होती हैं और संबंधित चुनौतियाँ स्वीकृत होने के बाद ही दिखाई देती हैं।',
+          'privacy.moderationTitle': 'मॉडरेशन',
+          'privacy.moderationText': 'प्रशासक स्पैम, असुरक्षित सामग्री, झूठे दावों और व्यक्तिगत डेटा उजागर होने को कम करने के लिए सबमिशन को मंजूरी या अस्वीकृति दे सकते हैं। मंजूरी का अर्थ है कि आइटम सहयोग के लिए उपयुक्त है; यह हर दावे की सरकारी प्रमाणिकता नहीं है।',
+          'privacy.trackingTitle': 'ब्राउज़र-आधारित ट्रैकिंग',
+          'privacy.trackingText': '“मेरी गतिविधि” आपके ब्राउज़र में सेव की गई एक अज्ञात कुंजी का उपयोग करती है। अगर ब्राउज़र स्टोरेज साफ़ हो जाता है या कोई अन्य डिवाइस उपयोग किया जाता है, तो पुरानी ट्रैकिंग हिस्ट्री इस प्रोटोटाइप में पुनर्प्राप्त नहीं की जा सकती।',
+          'privacy.prototypeTitle': 'प्रोटोटाइप स्थिति',
+          'privacy.prototypeText': 'यह एक शैक्षणिक नागरिक प्लेटफ़ॉर्म है। यह भुगतान 처리 नहीं करता, कानूनी साझेदारी नहीं बनाता, आपातकालीन सेवाएँ प्रदान नहीं करता और आधिकारिक सरकारी शिकायत चैनलों का विकल्प नहीं बनता है।',
+          'footer.privacy': 'झारखंड सरकार · गोपनीयता और सामुदायिक नियम',
+          'footer.home': 'मुख्य पृष्ठ पर वापस जाएँ'
+        },
+        bn: {
+          'nav.home': 'বাড়ি',
+          'nav.activity': 'আমার কার্যকলাপ',
+          'nav.help': 'সহায়তা',
+          'nav.privacy': 'গোপনীয়তা',
+          'nav.admin': 'প্রশাসক',
+          'privacy.title': 'দৃশ্যমানতার আগে আপনার নিরাপত্তা।',
+          'privacy.intro': 'এই প্ল্যাটফর্ম নাগরিক-প্রথম গোপনীয়তা মান অনুসরণ করে: আমরা শুধুমাত্র পর্যালোচনা, মধ্যস্থতা এবং জনসংযোগের জন্য প্রয়োজনীয় তথ্য সংগ্রহ করি এবং জনসাধারণের দৃশ্যমানতার আগে ব্যক্তিগত তথ্য রক্ষা করি।',
+          'privacy.storeTitle': 'আমরা যা সংরক্ষণ করি',
+          'privacy.storeText': 'যখন আপনি কিছু জমা দেন, এই পোর্টাল আপনার প্রদত্ত পাঠ, এর পর্যালোচনা অবস্থা, একটি অনামী ব্রাউজার কী এবং জমা দেওয়ার সময় সংরক্ষণ করে। একটি সমস্যার রিপোর্টে ঐচ্ছিক ফটো এবং গোলাকার আনুমানিক স্থানাঙ্কও থাকতে পারে।',
+          'privacy.publicTitle': 'কী জনসাধারণের হয়ে ওঠে',
+          'privacy.publicText': 'শুধুমাত্র প্রশাসক-অনুমোদিত চ্যালেঞ্জ, ছাত্র সমাধান, শিল্প অফার এবং অগ্রগতি আপডেট দৃশ্যমান হয়। অনামী ব্রাউজার কী কখনও জনসাধারণের কাছে প্রদর্শিত হয় না।',
+          'privacy.neverTitle': 'আপনি কখনও কী জমা করবেন না',
+          'privacy.item1': 'পাসওয়ার্ড',
+          'privacy.item2': 'ফোন নম্বর',
+          'privacy.item3': 'ব্যক্তিগত ইমেল ঠিকানা',
+          'privacy.item4': 'সরকারি পরিচয় সংখ্যা',
+          'privacy.item5': 'ব্যক্তিগত বাড়ির ঠিকানা',
+          'privacy.item6': 'গোপনীয় প্রাতিষ্ঠানিক তথ্য',
+          'privacy.locationTitle': 'অবস্থান এবং ফটো',
+          'privacy.locationText': 'অবস্থান ভাগ করে নেওয়া ঐচ্ছিক। নির্ভুলতা কমাতে স্থানাঙ্ক গোল করা হয়। ফটোগুলি ফাইল ধরণ এবং আকার দ্বারা সীমিত এবং সম্পর্কিত চ্যালেঞ্জ অনুমোদিত হওয়ার পরেই প্রদর্শিত হয়।',
+          'privacy.moderationTitle': 'মধ্যস্থতা',
+          'privacy.moderationText': 'প্রশাসকরা স্প্যাম, অনিরাপদ সামগ্রী, মিথ্যা দাবি এবং ব্যক্তিগত ডেটা এক্সপোজার হ্রাস করতে জমা গুলি অনুমোদন বা প্রত্যাখ্যান করতে পারেন। একটি অনুমোদন মানে আইটেম সহযোগিতার জন্য উপযুক্ত; এটি প্রতিটি দাবির সরকারী সার্টিফিকেশন নয়।',
+          'privacy.trackingTitle': 'ব্রাউজার-ভিত্তিক ট্র্যাকিং',
+          'privacy.trackingText': '\"আমার কার্যকলাপ\" আপনার ব্রাউজারে সংরক্ষিত একটি অনামী কী ব্যবহার করে। ব্রাউজার স্টোরেজ সাফ করা হলে বা অন্য ডিভাইস ব্যবহার করা হলে, এই প্রোটোটাইপে পুরানো ট্র্যাকিং ইতিহাস পুনরুদ্ধার করা যায় না।',
+          'privacy.prototypeTitle': 'প্রোটোটাইপ স্থিতি',
+          'privacy.prototypeText': 'এটি একটি শিক্ষামূলক নাগরিক প্ল্যাটফর্ম। এটি পেমেন্ট প্রক্রিয়া করে না, আইনি অংশীদারিত্ব তৈরি করে না, জরুরি সেবা প্রদান করে না বা অফিসিয়াল সরকারী অভিযোগ চ্যানেলের বিকল্প নয়।',
+          'footer.privacy': 'ভারত সরকার · গোপনীয়তা এবং সম্প্রদায়ের নিয়মাবলী',
+          'footer.home': 'বাড়িতে ফিরুন'
+        },
+        ta: {
+          'nav.home': 'முகப்பு',
+          'nav.activity': 'என் செயல்பாடு',
+          'nav.help': 'உதவி',
+          'nav.privacy': 'தனிமை',
+          'nav.admin': 'நிர்வாகம்',
+          'privacy.title': 'பார்வைக்கு முன் உங்கள் பாதுகாப்பு।',
+          'privacy.intro': 'இந்த மேடை பொதுமக்கள்-முதல் தனிமை தரநிலையைப் பின்பற்றுகிறது: நாங்கள் பর்যালোचনை, மத்தியஸ்থத்தம் மற்றும் பொதுமக்கள் பங்கேற்புக்கு தேவையான தகவல்களை மட்டுமே சேகரிக்கிறோம், மேலும் பொதுமக்களுக்கு பார்வைக்கு முன் தனிப்பட்ட தகவல்களைப் பாதுகாக்கிறோம்.',
+          'privacy.storeTitle': 'நாங்கள் சேமிக்கும் தகவல்',
+          'privacy.storeText': 'நீங்கள் ஏதாவது சமர்ப்பித்தபோது, இந்த போர்டல் நீங்கள் வழங்கிய உரை, அதன் மதிப்பாய்வு நிலை, ஒரு அநாமபெயரான உலாவி விசை மற்றும் சமர்ப்பணை நேரத்தைச் சேமிக்கிறது. ஒரு சிக்கல் அறிக்கையில் விரும்பத்தகுந்த புகைப்படம் மற்றும் வட்ட தோராய ஆயத்தொகுப்பு உள்ளடக்கிய் இருக்கலாம்.',
+          'privacy.publicTitle': 'என்ன பொதுமக்களுக்கு வருகிறது',
+          'privacy.publicText': 'நிர்வாகக் கண்டிப்புடைய சவால்கள், மாணவ தீர்வுகள், தொழில் சலுகைகள் மற்றும் முன்னேற்ற புதுப்பிப்புகள் மட்டுமே பார்வைக்கு வருகிறது। அநாமபெயரான உலாவி விசை பொதுமக்களுக்கு ஒருபோதும் வெளிப்படுத்தப்படுவதில்லை.',
+          'privacy.neverTitle': 'நீங்கள் ஒருபோதும் சமர்ப்பிக்க வேண்டிய தகவல்',
+          'privacy.item1': 'கடவுச்சொல்கள்',
+          'privacy.item2': 'தொலைபேசி எண்கள்',
+          'privacy.item3': 'ব்যক്তிগত ইமেல் ঠিकানा',
+          'privacy.item4': 'அரசு பहчान संख्या',
+          'privacy.item5': 'தனிப்பட்ட வீட்டு முறை',
+          'privacy.item6': 'গোপনীয় প्রাতिষ্ठানिक தথया',
+          'privacy.locationTitle': 'অবস্থান এবং ছবি',
+          'privacy.locationText': 'অবস্থান साझा करणे선택적 छ। निर्भुलता कम करने के लिए निर्देशांक गोल किए जाते हैं। फ़ोटो फ़ाइल प्रकार और आकार द्वारा सीमित हैं और संबंधित चुनौतियों को मंजूरी दिए जाने के बाद ही प्रदर्शित होते हैं।',
+          'privacy.moderationTitle': 'मध्यस्थता',
+          'privacy.moderationText': 'प्रशासक स्पैम, असुरक्षित सामग्री, मिथ्या दावों और व्यक्तिगत डेटा एक्सपोजर को कम करने के लिए जमा को मंजूरी दे सकते हैं या अस्वीकार कर सकते हैं। एक मंजूरी का अर्थ है कि आइटम सहयोग के लिए उपयुक्त है; यह हर दावे की सरकारी प्रमाणीकरण नहीं है।',
+          'privacy.trackingTitle': 'ब्राउज़र-आधारित ट्रैकिंग',
+          'privacy.trackingText': '\"मेरी गतिविधि\" आपके ब्राउज़र में सहेजी गई एक अनाम कुंजी का उपयोग करता है। यदि ब्राउज़र स्टोरेज साफ़ किया जाता है या कोई अन्य डिवाइस उपयोग किया जाता है, तो इस प्रोटोटाइप में पुरानी ट्रैकिंग इतिहास पुनर्प्राप्त नहीं किया जा सकता।',
+          'privacy.prototypeTitle': 'प्रोटोटाइप स्थिति',
+          'privacy.prototypeText': 'यह एक शैक्षणिक नागरिक मंच है। यह भुगतान प्रक्रिया नहीं करता, कानूनी भागीदारी नहीं बनाता, आपातकालीन सेवाएं प्रदान नहीं करता, या आधिकारिक सरकारी शिकायत चैनलों की जगह नहीं लेता।',
+          'footer.privacy': 'झारखंड सरकार · गोपनीयता और सामुदायिक नियम',
+          'footer.home': 'घर वापस जाएं'
+        }
+      };
+
+      function applyLanguage(lang) {
+        const data = translations[lang] || translations.en;
+        document.querySelectorAll('[data-i18n]').forEach((node) => {
+          const key = node.getAttribute('data-i18n');
+          if (data[key]) {
+            node.textContent = data[key];
+          }
+        });
+
+        const toggle = document.getElementById('langToggle');
+        if (toggle) {
+          toggle.value = lang;
+        }
+
+        localStorage.setItem('lang', lang);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const lang = translations[localStorage.getItem('lang')] ? localStorage.getItem('lang') : 'en';
+        applyLanguage(lang);
+        document.getElementById('langToggle')?.addEventListener('change', (event) => {
+          applyLanguage(event.target.value);
+        });
+      });
+    </script>
+  </body>
+</html>
