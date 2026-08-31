@@ -461,17 +461,47 @@
         return dict[key] || translations.en[key] || key;
       }
 
-      function getReports() {
-        try {
-          return JSON.parse(localStorage.getItem(REPORT_STORAGE_KEY) || '[]');
-        } catch (error) {
-          return [];
-        }
-      }
+     async function getReports() {
+  const { data, error } = await window.supabaseClient
+    .from('reports')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-      function saveReports(reports) {
-        localStorage.setItem(REPORT_STORAGE_KEY, JSON.stringify(reports));
-      }
+  if (error) {
+    console.error('Unable to load reports:', error);
+    return [];
+  }
+
+  return data || [];
+}
+
+async function updateReportStatus(id, status) {
+  const { error } = await window.supabaseClient
+    .from('reports')
+    .update({ status: status })
+    .eq('id', id);
+
+  if (error) {
+    console.error('Unable to update report:', error);
+    return false;
+  }
+
+  return true;
+}
+
+async function deleteReport(id) {
+  const { error } = await window.supabaseClient
+    .from('reports')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error('Unable to delete report:', error);
+    return false;
+  }
+
+  return true;
+}
 
       function formatDate(dateString) {
         if (!dateString) return t('admin.unknownDate');
@@ -520,8 +550,8 @@
         });
       }
 
-      function renderDashboard() {
-        const reports = getReports();
+     async function renderDashboard() {
+       const reports = await getReports();
         const pending = reports.filter((report) => !report.status || report.status === 'pending').length;
         const accepted = reports.filter((report) => report.status === 'accepted').length;
         const rejected = reports.filter((report) => report.status === 'rejected').length;
@@ -556,7 +586,7 @@
                 <article class="report-item">
                   <div class="report-topline">
                     <span class="report-badge ${report.status || 'pending'}">${(report.status || 'pending') === 'accepted' ? t('admin.accepted') : (report.status || 'pending') === 'rejected' ? t('admin.rejected') : t('admin.pending')}</span>
-                    <span class="report-date">${formatDate(report.createdAt)}</span>
+                    <span class="report-date">${formatDate(report.created_at)}</span>
                   </div>
                   <h3>${t('admin.reportTitle')}</h3>
                   <p>${(report.description || t('admin.noDesc')).replace(/\n/g, '<br>')}</p>
@@ -581,28 +611,31 @@
           window.location.replace('/login/');
         });
 
-        document.querySelectorAll('[data-action]').forEach((button) => {
-          button.addEventListener('click', () => {
-            const id = button.getAttribute('data-id');
-            const action = button.getAttribute('data-action');
-            const nextReports = getReports().map((report) => {
-              if (report.id !== id) return report;
-              if (action === 'accept') return { ...report, status: 'accepted' };
-              if (action === 'reject') return { ...report, status: 'rejected' };
-              return null;
-            }).filter(Boolean);
+    document.querySelectorAll('[data-action]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const id = button.getAttribute('data-id');
+    const action = button.getAttribute('data-action');
 
-            if (action === 'delete') {
-              const remaining = getReports().filter((report) => report.id !== id);
-              saveReports(remaining);
-              renderDashboard();
-              return;
-            }
+    button.disabled = true;
 
-            saveReports(nextReports);
-            renderDashboard();
-          });
-        });
+    if (action === 'accept') {
+      const success = await updateReportStatus(id, 'accepted');
+      if (success) await renderDashboard();
+      return;
+    }
+
+    if (action === 'reject') {
+      const success = await updateReportStatus(id, 'rejected');
+      if (success) await renderDashboard();
+      return;
+    }
+
+    if (action === 'delete') {
+      const success = await deleteReport(id);
+      if (success) await renderDashboard();
+    }
+  });
+});
       }
 
       const appShell = document.getElementById('appShell');
