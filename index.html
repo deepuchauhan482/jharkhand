@@ -2179,36 +2179,67 @@
         }
 
         const form = document.getElementById('reportForm');
-        if (form) {
-          form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const description = document.getElementById('problemText')?.value.trim() || '';
-            if (!description) {
-              showStatus('Please describe the problem before submitting.');
-              return;
-            }
+       if (form) {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-            const location = document.getElementById('problemLocation')?.value.trim() || '';
-            const photoFile = document.getElementById('problemPhoto')?.files?.[0];
-            const photoData = photoPreview && photoPreview.src && photoPreview.src.startsWith('data:') ? photoPreview.src : '';
-            const reports = getReports();
-            reports.unshift({
-              id: String(Date.now()),
-              description,
-              location,
-              photoName: photoFile ? photoFile.name : '',
-              photoData,
-              createdAt: new Date().toISOString()
-            });
-            localStorage.setItem(REPORT_STORAGE_KEY, JSON.stringify(reports));
-            const trackUrl = '/track';
-            if (window.location.pathname !== trackUrl) {
-              window.location.href = trackUrl;
-            }
-            showStatus('Your problem has been saved for review.');
-            closeReportModal();
-          });
-        }
+    const description =
+      document.getElementById('problemText')?.value.trim() || '';
+
+    if (!description) {
+      showStatus('Please describe the problem before submitting.');
+      return;
+    }
+
+    const location =
+      document.getElementById('problemLocation')?.value.trim() || '';
+
+    try {
+      const { data: sessionData, error: sessionError } =
+        await window.supabaseClient.auth.getSession();
+
+      if (sessionError || !sessionData.session?.user) {
+        window.location.href = '/login/';
+        return;
+      }
+
+      const user = sessionData.session.user;
+
+      const title =
+        description.length > 60
+          ? description.slice(0, 60) + '...'
+          : description;
+
+      const { error } = await window.supabaseClient
+        .from('reports')
+        .insert({
+          user_id: user.id,
+          title: title,
+          description: description,
+          category: 'General',
+          location: location,
+          image_url: null,
+          status: 'pending'
+        });
+
+      if (error) {
+        console.error('Report submission error:', error);
+        showStatus('Unable to submit report. Please try again.');
+        return;
+      }
+
+      showStatus('Your problem has been submitted for admin review.');
+
+      setTimeout(() => {
+        window.location.href = '/track/';
+      }, 1000);
+
+    } catch (error) {
+      console.error('Report submission error:', error);
+      showStatus('Something went wrong. Please try again.');
+    }
+  });
+}
       }
 
       function initLanguageToggle() {
