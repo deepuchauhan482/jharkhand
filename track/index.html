@@ -366,37 +366,71 @@
         localStorage.setItem('lang', lang);
       }
 
-      function updateActivityList() {
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function statusLabel(status, hindi) {
+        const labels = hindi
+          ? { pending: 'पेंडिंग', accepted: 'स्वीकृत', rejected: 'अस्वीकृत' }
+          : { pending: 'Pending', accepted: 'Accepted', rejected: 'Rejected' };
+        return labels[status] || labels.pending;
+      }
+
+      async function updateActivityList() {
         const list = document.getElementById('activityList');
         const count = document.getElementById('reportCount');
-        const reports = JSON.parse(localStorage.getItem('india_gov_reports') || '[]');
-        if (count) count.textContent = String(reports.length);
-
         if (!list) return;
-        if (!reports.length) {
+
+        const { data: sessionData, error: sessionError } = await window.supabaseClient.auth.getSession();
+        const user = sessionData?.session?.user;
+        if (sessionError || !user) {
+          window.location.replace('/login/?next=/track/');
+          return;
+        }
+
+        const { data: reports, error } = await window.supabaseClient
+          .from('reports')
+          .select('id,title,description,location,status,created_at')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Unable to load your reports:', error);
+          if (count) count.textContent = '0';
+          list.innerHTML = '<div class="empty-box">Unable to load your reports. Please refresh the page.</div>';
+          return;
+        }
+
+        const rows = reports || [];
+        if (count) count.textContent = String(rows.length);
+        if (!rows.length) {
           list.innerHTML = `
-            <div class="empty-box">${localStorage.getItem('lang') === 'hi' ? 'इस ब्राउज़र से कोई रिपोर्ट सबमिट नहीं हुई है।' : 'No reports submitted from this browser.'}</div>
+            <div class="empty-box">${localStorage.getItem('lang') === 'hi' ? 'आपने अभी तक कोई रिपोर्ट सबमिट नहीं की है।' : 'You have not submitted any reports yet.'}</div>
           `;
           return;
         }
 
-        list.innerHTML = reports.slice(0, 6).map((report) => {
-          const locationText = report.location ? `<div><strong>${localStorage.getItem('lang') === 'hi' ? 'स्थान:' : 'Location:'}</strong> ${report.location}</div>` : '';
-          const photoMarkup = report.photoData ? `<img src="${report.photoData}" alt="Problem reference image" />` : '';
-          const dateText = report.createdAt ? new Date(report.createdAt).toLocaleString() : '';
+        list.innerHTML = rows.slice(0, 6).map((report) => {
+          const hindi = localStorage.getItem('lang') === 'hi';
+          const locationText = report.location ? `<div><strong>${hindi ? 'स्थान:' : 'Location:'}</strong> ${escapeHtml(report.location)}</div>` : '';
+          const dateText = report.created_at ? new Date(report.created_at).toLocaleString() : '';
           return `
             <article class="report-card">
               <div class="report-header">
-                <h3>${localStorage.getItem('lang') === 'hi' ? 'समस्या रिपोर्ट' : 'Problem report'}</h3>
-                <span class="status-pill">${localStorage.getItem('lang') === 'hi' ? 'पेंडिंग' : 'Pending'}</span>
+                <h3>${escapeHtml(report.title || (hindi ? 'समस्या रिपोर्ट' : 'Problem report'))}</h3>
+                <span class="status-pill">${statusLabel(report.status, hindi)}</span>
               </div>
               <div class="report-meta">
-                <div><strong>${localStorage.getItem('lang') === 'hi' ? 'विवरण:' : 'Details:'}</strong> ${report.description}</div>
+                <div><strong>${hindi ? 'विवरण:' : 'Details:'}</strong> ${escapeHtml(report.description || '')}</div>
                 ${locationText}
-                ${report.photoName ? `<div><strong>${localStorage.getItem('lang') === 'hi' ? 'फोटो:' : 'Photo:'}</strong> ${report.photoName}</div>` : ''}
-                ${dateText ? `<div><strong>${localStorage.getItem('lang') === 'hi' ? 'भेजा गया:' : 'Submitted:'}</strong> ${dateText}</div>` : ''}
+                ${dateText ? `<div><strong>${hindi ? 'भेजा गया:' : 'Submitted:'}</strong> ${escapeHtml(dateText)}</div>` : ''}
               </div>
-              ${photoMarkup}
             </article>
           `;
         }).join('');

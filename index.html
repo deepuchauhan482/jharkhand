@@ -1353,14 +1353,14 @@
                 <div class="section-heading">
                     <div><span class="section-kicker" data-i18n="section.needs.kicker">NEEDS AROUND US</span>
                         <h2 data-i18n="section.needs.heading">Where your help can make a difference</h2>
-                    </div><span class="live-data-badge" data-i18n="section.needs.badge"><span></span>
+                    </div><span class="live-data-badge" id="challengeDataBadge" data-i18n="section.needs.badge"><span></span>
                     <!-- -->Showing examples until first approval</span>
                 </div>
                 <div class="filter-bar"><label class="search-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg><span class="sr-only" data-i18n="search.label">Search challenges</span><input data-slot="input" class="h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40" data-i18n-placeholder="search.placeholder" placeholder="Search by need or location…" value=""/></label>
                     <div
                         class="category-list" aria-label="Challenge categories"><button type="button" class="active" data-category="all" aria-pressed="true" data-i18n="category.all">All</button><button type="button" class="" data-category="water" aria-pressed="false" data-i18n="category.water">Water</button><button type="button" class="" data-category="agriculture" aria-pressed="false" data-i18n="category.agriculture">Agriculture</button><button type="button" class="" data-category="education" aria-pressed="false" data-i18n="category.education">Education</button><button type="button" class="" data-category="environment" aria-pressed="false" data-i18n="category.environment">Environment</button></div>
             </div>
-            <div class="challenge-grid">
+            <div class="challenge-grid" id="challengeGrid">
                 <article class="challenge-card" data-category="water">
                     <div class="challenge-visual water"><span class="challenge-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-waves-horizontal" aria-hidden="true"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0"></path><path d="M2 19q2.5 2 5 0t5 0 5 0 5 0"></path><path d="M2 5q2.5 2 5 0t5 0 5 0 5 0"></path></svg></span>
                         <span
@@ -2033,16 +2033,6 @@
         });
       }
 
-      const REPORT_STORAGE_KEY = 'india_gov_reports';
-
-      function getReports() {
-        try {
-          return JSON.parse(localStorage.getItem(REPORT_STORAGE_KEY) || '[]');
-        } catch (error) {
-          return [];
-        }
-      }
-
       function showStatus(message) {
         const status = document.getElementById('reportStatus');
         if (!status) return;
@@ -2256,13 +2246,85 @@
         }
       }
 
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function normalizeChallengeCategory(value) {
+        const category = String(value || '').toLowerCase();
+        return ['water', 'agriculture', 'education', 'environment'].includes(category)
+          ? category
+          : 'general';
+      }
+
+      async function loadAcceptedReports() {
+        const grid = document.getElementById('challengeGrid');
+        if (!grid || !window.supabaseClient) return;
+
+        const { data: reports, error } = await window.supabaseClient
+          .from('reports')
+          .select('id,title,description,category,location,created_at')
+          .eq('status', 'accepted')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Unable to load approved challenges:', error);
+          return;
+        }
+
+        if (!reports || reports.length === 0) return;
+
+        grid.innerHTML = reports.map((report) => {
+          const category = normalizeChallengeCategory(report.category);
+          const categoryLabel = category === 'general'
+            ? 'Community'
+            : category.charAt(0).toUpperCase() + category.slice(1);
+          const title = report.title || report.description || 'Community challenge';
+          const location = report.location || 'Jharkhand';
+
+          return `
+            <article class="challenge-card" data-category="${category}">
+              <div class="challenge-visual ${category === 'general' ? 'environment' : category}">
+                <span class="challenge-icon" aria-hidden="true">✓</span>
+                <span class="priority"><span></span><span>Approved challenge</span></span>
+                <span class="category-tag">${escapeHtml(categoryLabel)}</span>
+              </div>
+              <div class="challenge-body">
+                <div class="location"><span aria-hidden="true">📍</span><span>${escapeHtml(location)}</span></div>
+                <h3>${escapeHtml(title)}</h3>
+                <p>${escapeHtml(report.description || 'No description provided.')}</p>
+                <div class="challenge-meta"><span>Verified by admin</span><span>Open for solutions</span></div>
+                <div class="card-actions">
+                  <button class="support" type="button">I support this</button>
+                  <button class="open-challenge" type="button" disabled aria-label="Approved challenge">›</button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        const badge = document.getElementById('challengeDataBadge');
+        if (badge) {
+          badge.removeAttribute('data-i18n');
+          badge.innerHTML = '<span></span>Showing approved community challenges';
+        }
+
+        const verifiedMetric = document.querySelector('.trust-grid > div:first-child strong');
+        if (verifiedMetric) verifiedMetric.textContent = String(reports.length);
+      }
+
       function initChallengeFilters() {
         const filterButtons = document.querySelectorAll('.category-list button[data-category]');
-        const cards = document.querySelectorAll('.challenge-card');
 
         filterButtons.forEach((button) => {
           button.addEventListener('click', () => {
             const selected = button.dataset.category || 'all';
+            const cards = document.querySelectorAll('.challenge-card');
 
             filterButtons.forEach((item) => {
               const active = item === button;
@@ -2285,12 +2347,14 @@
           initMobileMenu();
           initChallengeFilters();
           initReportFlow();
+          loadAcceptedReports();
         });
       } else {
         initLanguageToggle();
         initMobileMenu();
         initChallengeFilters();
         initReportFlow();
+        loadAcceptedReports();
       }
     </script></body>
 
